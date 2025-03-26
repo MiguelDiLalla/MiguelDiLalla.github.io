@@ -8,19 +8,19 @@ It is designed as a clean, aesthetic landing site to:
 - Provide links to GitHub, LinkedIn, resume, and contact methods
 
 ## 🔧 Technologies and Stack
-- **Static HTML5 + CSS3** (with optional Tailwind or Bootstrap)
-- **Vanilla JavaScript** for interactivity (optional)
+- **Static HTML5 + Tailwind CSS** (utility-first framework)
+- **Vanilla JavaScript** for interactivity and animations
 - **GitHub Pages** for deployment
 - **[MIT License](https://opensource.org/licenses/MIT)**
-- Optional: Favicon, OpenGraph tags, responsive layout
+- No dark mode toggle (colorful palette instead)
 
 ## 🤖 GitHub Copilot Usage
 Copilot should:
-- Help generate HTML components, landing pages, and content sections
-- Suggest semantic, accessible HTML5 markup
-- Recommend professional, minimalist layout components
-- Follow responsive design best practices
-- Maintain code readability and separation (e.g., clean class names, avoid inline CSS)
+- Generate clean and responsive Tailwind-based HTML components
+- Provide utility class suggestions for layout, spacing, and color
+- Assist with building a **single-page scroll layout**
+- Recommend semantic, accessible HTML5 structure
+- Support animated text intro logic via JavaScript
 
 ## 🧩 Project Structure (initial)
 ```
@@ -30,58 +30,68 @@ MiguelDiLalla.github.io/
 │   ├── css/
 │   └── images/
 ├── projects/
-│   ├── lego-ml-vision.html
-│   └── other-projects.html
-├── resume.pdf
+│   ├── lego-ml-vision.html (optional placeholder)
+│   └── other-projects.html (optional placeholder)
+├── resume.pdf (will be added)
 ├── README.md
 └── LICENSE
 ```
 
-## 📌 Placeholder Sections
-The website should include the following components:
-- 🧠 **About Section** — career transition story + ML interests
-- 🔬 **Projects Section** — highlights, with links to GitHub repos
-- 📎 **Links Panel** — GitHub, LinkedIn, Email, Resume
-- 🧑‍💻 **Featured Project**: LEGO Bricks ML Vision
-- 🌐 **Contact / CTA** — invitation to connect or collaborate
+## 📌 Content & Layout Requirements
+
+### ✅ Hero Section
+- Yellow background (`#ffcf00`), bold black text, red accent buttons/links
+- Typing effect animation:
+  1. Types: `Hola!`
+  2. Deletes
+  3. Types: `Hi! I'm Miguel Di Lalla. It's great that you are here.` (final message remains)
+- Fun, joyful but professional first impression
+
+### ✅ Navigation
+- Fixed top nav with links to scroll-to sections: About, Projects, Videos, Contact
+- No dark/light toggle
+
+### ✅ About Section
+- Short story of Miguel’s transition from hospitality to AI
+- Blend of professional bio and personal motivation
+
+### ✅ Projects Section
+- Primary: **LEGO Bricks ML Vision**
+- Others: Thumbnails with GIFs inside rectangular cards with rounded borders
+- Each links to its GitHub repo
+- Layout should be responsive, grid-based
+
+### ✅ Videos Section
+- Small GIF thumbnails linked to **YouTube vertical reels**
+- Titles overlaid on hover or under thumbnails
+- Emphasis on visual storytelling
+
+### ✅ Contact Section
+- Links to:
+  - **LinkedIn** profile
+  - **GitHub** account
+  - **Resume** (PDF download)
+- Optional: contact form or direct email button
 
 ## ✨ Style & Branding
 Miguel is:
 - A self-taught ML practitioner with a creative engineering mindset
 - Transitioning from hospitality into AI
-- Passionate about storytelling and visual clarity
-- Interested in human-centered AI, clean interfaces, and useful UX
+- Passionate about storytelling, colorful visuals, and joyful design
+- Inspired by LEGO, learning, and making ML human-friendly
 
-Copilot should reflect this in its suggestions.
-
----
-
-# 🚧 TODO — Preferences from Miguel
-
-Before finalizing this instructions file, please answer:
-
-### 1. 🖼️ Visual Style
-- Do you want a minimalist design, or something more colorful and creative?
-- Should we use Tailwind, Bootstrap, or hand-coded CSS?
-
-### 2. 🧭 Navigation & Sections
-- Should the site be single-page (scroll) or multi-page?
-- Do you want an animated intro or typing effect for your tagline?
-- Would you like a light/dark mode toggle?
-
-### 3. 🔗 Social Links
-- Which links should appear in the top navigation bar?
-- Should we include a resume download button or embedded preview?
-
-### 4. 📸 Visual Media
-- Do you have a headshot or logo you'd like to include?
-- Should project previews include screenshots or GIFs?
-
-### 5. 🧠 Content Voice
-- Professional and concise, or more casual and personal?
-- Would you like to embed part of your LEGO ML project story on the homepage?
+The site should reflect:
+- Bold **colorful design** (yellow/red/black)
+- Rounded containers and friendly layout
+- Clear professional messaging
+- Animated, human touches (typing intro, hover effects, transitions)
 
 ---
 
-Once Miguel answers these, update this file to guide GitHub Copilot's future code completions accurately.
+## 🧠 Final Notes for Copilot
+- Use **Tailwind CSS classes** and semantic HTML5
+- Animate the typing text using **JavaScript** or minimal libraries
+- Suggest file structure with organized assets (GIFs, images, CSS, videos)
+- Offer suggestions for embedding **YouTube links from GIF thumbnails**
+- Prioritize responsiveness and UX clarity
 

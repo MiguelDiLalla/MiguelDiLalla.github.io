@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miguel Di Lalla | ML Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .cursor {
+      border-right: 2px solid black;
+      animation: blink 0.7s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 w-full bg-[#ffcf00] shadow-md z-50">
+    <nav class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-xl font-bold">Miguel Di Lalla</span>
+      <ul class="flex gap-6 font-semibold">
+        <li><a href="#about" class="hover:text-red-600">About</a></li>
+        <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
+        <li><a href="#videos" class="hover:text-red-600">Videos</a></li>
+        <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="h-screen flex items-center justify-center text-center px-4" id="hero">
+    <h1 id="typewriter" class="text-4xl md:text-5xl font-bold max-w-2xl leading-tight cursor"></h1>
+  </section>
+
+  <!-- Placeholder Sections -->
+  <section id="about" class="min-h-screen px-6 py-24">[About Section Here]</section>
+  <section id="projects" class="min-h-screen px-6 py-24">[Projects Section Here]</section>
+  <section id="videos" class="min-h-screen px-6 py-24">[Videos Section Here]</section>
+  <section id="contact" class="min-h-screen px-6 py-24">[Contact Section Here]</section>
+
+  <!-- Typing Animation Script -->
+  <script>
+    const textElement = document.getElementById("typewriter");
+    const sequence = ["Hola!", "Hi! I'm Miguel Di Lalla. It's great that you are here."];
+    let index = 0, char = 0, deleting = false;
+
+    function typeEffect() {
+      let currentText = sequence[index];
+
+      if (!deleting) {
+        textElement.textContent = currentText.substring(0, char + 1);
+        char++;
+        if (char === currentText.length) {
+          if (index === 0) {
+            setTimeout(() => {
+              deleting = true;
+              typeEffect();
+            }, 1000);
+            return;
+          }
+          return; // stop here on final message
+        }
+      } else {
+        textElement.textContent = currentText.substring(0, char - 1);
+        char--;
+        if (char === 0) {
+          deleting = false;
+          index++;
+        }
+      }
+
+      setTimeout(typeEffect, deleting ? 50 : 100);
+    }
+
+    document.addEventListener("DOMContentLoaded", typeEffect);
+  </script>
+</body>
+</html>

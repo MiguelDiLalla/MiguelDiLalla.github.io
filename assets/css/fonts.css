@@ -1,7 +1,13 @@
-/* Google Fonts import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* Font family base styles */
+h1, h2, h3, h4, h5, h6, 
+blockquote,
+.nav-link, 
+.font-title {
+  font-family: 'Montagu Slab', serif;
+}
 
-/* Font family utilities */
-body {
-  font-family: 'Inter', sans-serif;
+body,
+p,
+.font-text {
+  font-family: 'Lexend Deca', sans-serif;
 }

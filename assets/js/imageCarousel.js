@@ -30,7 +30,7 @@ class ImageCarousel {
   }
 }
 
-// Initialize carousel when DOM is loaded
+// Initialize carousel and typewriter when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const carousel = new ImageCarousel('hero-images', {
     interval: 3000,
@@ -38,11 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   carousel.start();
 
-  // Initialize typewriter
-  const typewriter = new Typewriter(
-    document.getElementById('typewriter'),
-    ['Hola!', "Hi! I'm Miguel. It's great that you are here."],
-    { speed: 100, delay: 1000 }
-  );
-  typewriter.start();
+  // Ensure typewriter initialization
+  const typewriterElement = document.getElementById('typewriter');
+  if (typewriterElement) {
+    const typewriter = new Typewriter(
+      typewriterElement,
+      ['Hola!', "Hi! I'm Miguel. It's great that you are here."],
+      { speed: 100, delay: 1000 }
+    );
+    typewriter.start();
+  } else {
+    console.error('Typewriter element not found.');
+  }
 });

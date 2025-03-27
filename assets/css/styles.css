@@ -1,0 +1,12 @@
+:root {
+  --primary-yellow: #ffcf00;
+  --text-black: #000000;
+  --accent-red: #ff0000;
+}
+
+/* Base styles and layout utilities */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add more base styles as needed */

@@ -22,6 +22,10 @@ html {
     2% 35%,
     39% 35%
   );
+  border-radius: 12px;         /* soften edges */
+  transform: rotate(-12deg);   /* playful tilt */
+  transition: transform 0.3s ease-in-out;
 }
+
 
 /* Add more base styles as needed */

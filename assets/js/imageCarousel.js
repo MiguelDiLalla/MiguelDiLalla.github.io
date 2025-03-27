@@ -36,7 +36,7 @@ class ImageCarousel {
   }
 }
 
-// Initialize typewriter when DOM is loaded
+// Initialize carousels when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize carousels for other sections if needed
   // For example, we might still use it for the collage in the about section
@@ -45,18 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Will initialize once collage content is added
     // const carousel = new ImageCarousel('collage-carousel', { interval: 4000 });
     // carousel.start();
-  }
-
-  // Initialize typewriter
-  const typewriterElement = document.getElementById('typewriter');
-  if (typewriterElement) {
-    const typewriter = new Typewriter(
-      typewriterElement,
-      ['Hola!', "Hi! I'm Miguel. It's great that you are here."],
-      { speed: 100, delay: 1000 }
-    );
-    typewriter.start();
-  } else {
-    console.error('Typewriter element not found.');
   }
 });

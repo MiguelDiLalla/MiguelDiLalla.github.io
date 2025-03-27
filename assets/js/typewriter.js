@@ -1,44 +1,204 @@
 class Typewriter {
-  constructor(element, texts, options = {}) {
+  constructor(element, options = {}) {
     this.element = element;
-    this.texts = texts;
     this.speed = options.speed || 100;
-    this.delay = options.delay || 1000;
-    this.index = 0;
-    this.char = 0;
-    this.deleting = false;
+    this.lineDelay = options.lineDelay || 1000;
+    this.emoticonsDelay = options.emoticonsDelay || 400;
+    this.queue = [];
+    this.isRunning = false;
+    
+    // Actions that can be scheduled
+    this.actions = {
+      TYPE: 'type',
+      DELETE: 'delete',
+      WAIT: 'wait',
+      NEXT_LINE: 'next_line',
+      REPLACE_LINE: 'replace_line',
+      SET_EMOTICON: 'set_emoticon'
+    };
   }
 
-  type() {
-    const currentText = this.texts[this.index];
+  // Add text typing to the queue
+  type(text) {
+    this.queue.push({
+      action: this.actions.TYPE,
+      value: text
+    });
+    return this;
+  }
 
-    if (!this.deleting) {
-      this.element.textContent = currentText.substring(0, this.char + 1);
-      this.char++;
+  // Add text deletion to the queue (can specify number of characters)
+  delete(charCount = null) {
+    this.queue.push({
+      action: this.actions.DELETE,
+      value: charCount
+    });
+    return this;
+  }
 
-      if (this.char === currentText.length) {
-        if (this.index === 0) {
-          setTimeout(() => {
-            this.deleting = true;
-            this.type();
-          }, this.delay);
-          return;
-        }
-        return; // stop on final message
-      }
-    } else {
-      this.element.textContent = currentText.substring(0, this.char - 1);
-      this.char--;
-      if (this.char === 0) {
-        this.deleting = false;
-        this.index++;
-      }
+  // Add a wait period to the queue
+  wait(ms) {
+    this.queue.push({
+      action: this.actions.WAIT,
+      value: ms
+    });
+    return this;
+  }
+
+  // Add a new line
+  nextLine() {
+    this.queue.push({
+      action: this.actions.NEXT_LINE
+    });
+    return this;
+  }
+
+  // Delete current line and replace with another
+  replaceLine(text) {
+    this.queue.push({
+      action: this.actions.REPLACE_LINE,
+      value: text
+    });
+    return this;
+  }
+
+  // Display a specific emoticon
+  setEmoticon(emoticon) {
+    this.queue.push({
+      action: this.actions.SET_EMOTICON,
+      value: emoticon
+    });
+    return this;
+  }
+
+  // Execute the next action in the queue
+  async executeNextAction() {
+    if (!this.queue.length) {
+      this.isRunning = false;
+      return;
     }
 
-    setTimeout(() => this.type(), this.deleting ? this.speed / 2 : this.speed);
+    const action = this.queue.shift();
+    const lines = this.element.innerHTML.split('<br>');
+    let currentLine = lines.length - 1;
+
+    switch (action.action) {
+      case this.actions.TYPE:
+        await this.executeTypeAction(action, lines, currentLine);
+        break;
+      case this.actions.DELETE:
+        await this.executeDeleteAction(action, lines, currentLine);
+        break;
+      case this.actions.WAIT:
+        await new Promise(resolve => setTimeout(resolve, action.value));
+        break;
+      case this.actions.NEXT_LINE:
+        lines.push('');
+        this.element.innerHTML = lines.join('<br>');
+        break;
+      case this.actions.REPLACE_LINE:
+        if (lines.length > 0) {
+          lines.pop();
+          lines.push(action.value);
+          this.element.innerHTML = lines.join('<br>');
+        }
+        break;
+      case this.actions.SET_EMOTICON:
+        if (lines.length > 0) {
+          if (lines[lines.length - 1].includes('(„•')) {
+            const textWithoutEmoticon = lines[lines.length - 1].replace(/\s*\(„•.*?„\)$/, '');
+            lines[lines.length - 1] = textWithoutEmoticon + ' ' + action.value;
+          } else {
+            lines[lines.length - 1] += ' ' + action.value;
+          }
+          this.element.innerHTML = lines.join('<br>');
+        }
+        break;
+    }
+
+    // Continue with the next action in the queue
+    this.executeNextAction();
   }
 
+  // Execute a TYPE action
+  async executeTypeAction(action, lines, currentLine) {
+    const text = action.value;
+    for (let i = 0; i < text.length; i++) {
+      // Use setTimeout inside a promise to create delay between characters
+      await new Promise(resolve => {
+        setTimeout(() => {
+          if (lines[currentLine]) {
+            lines[currentLine] += text[i];
+          } else {
+            lines[currentLine] = text[i];
+          }
+          this.element.innerHTML = lines.join('<br>');
+          resolve();
+        }, this.speed);
+      });
+    }
+  }
+
+  // Execute a DELETE action
+  async executeDeleteAction(action, lines, currentLine) {
+    const charCount = action.value === null ? lines[currentLine].length : action.value;
+    
+    for (let i = 0; i < charCount; i++) {
+      await new Promise(resolve => {
+        setTimeout(() => {
+          if (lines[currentLine] && lines[currentLine].length > 0) {
+            lines[currentLine] = lines[currentLine].substring(0, lines[currentLine].length - 1);
+            this.element.innerHTML = lines.join('<br>');
+          }
+          resolve();
+        }, this.speed / 2); // Deleting is typically faster
+      });
+    }
+  }
+
+  // Start the typewriter animation
   start() {
-    this.type();
+    if (!this.isRunning) {
+      this.isRunning = true;
+      this.executeNextAction();
+    }
+    return this;
   }
 }
+
+// Initialize typewriter when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const typewriterElement = document.getElementById('typewriter');
+  
+  if (typewriterElement) {
+    // Create typewriter with the custom animation sequence
+    const typewriter = new Typewriter(typewriterElement, {
+      speed: 70
+    });
+    
+    // Define the animation sequence
+    typewriter
+      .type('Hola!')
+      .wait(600)
+      .delete()
+      .wait(100)
+      .type('This is Miguel,')
+      .nextLine()
+      .wait(400)
+      .type('He is glad that you got here')
+      .wait(600)
+      .delete(28) // Delete the second line
+      .type('Welcome... take a look')
+      .wait(400)
+      .setEmoticon('(„• ᴗ •„)')
+      .wait(600)
+      .setEmoticon('(„• ᴗ ᵔ„)')
+      .wait(600)
+      .setEmoticon('(„• ᴗ •„)')
+      .wait(700)
+      .delete(10) // Delete the emoticon
+      .start();
+  } else {
+    console.error('Typewriter element not found.');
+  }
+});

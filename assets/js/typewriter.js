@@ -188,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .type('He is glad that you got here')
       .wait(600)
       .delete(28) // Delete the second line
-      .type('Welcome... take a look')
+      .nextLine()
+      .type('Please, take a look... ')
       .wait(400)
       .setEmoticon('(„• ᴗ •„)')
       .wait(600)

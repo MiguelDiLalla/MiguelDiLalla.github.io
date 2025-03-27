@@ -16,6 +16,32 @@
   }
 }
 
+/* Floating animation for profile image */
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Exaggerated floating-tilting animation for collage */
+@keyframes floatingTilting {
+  0% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-15px) rotate(2deg); 
+  }
+  50% { 
+    transform: translateY(-8px) rotate(-1deg); 
+  }
+  75% { 
+    transform: translateY(-12px) rotate(1deg); 
+  }
+  100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+}
+
 /* Utility classes */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in;
@@ -23,4 +49,25 @@
 
 .animate-slide-up {
   animation: slideUp 0.6s ease-out;
+}
+
+/* Floating 3D effect for profile image */
+.floating-3d {
+  animation: floating 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Exaggerated floating and tilting for collages */
+.floating-tilting-container {
+  animation: floatingTilting 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease-out;
+  perspective: 1000px;
+}
+
+.floating-tilting-container:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(5deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }

@@ -1,92 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miguel Di Lalla | ML Engineer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miguel Di Lalla | Aspiring Data Scientist</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/fonts.css">
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="/assets/css/fonts.css" rel="stylesheet" />
+  <link href="/assets/css/styles.css" rel="stylesheet" />
+  <link href="/assets/css/animations.css" rel="stylesheet" />
 </head>
-<body class="bg-[#ffcf00] text-black scroll-smooth font-['Inter']">
+<body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
   <!-- Navigation -->
   <header class="fixed top-0 left-0 w-full bg-[#ffcf00] shadow-md z-50">
     <nav class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#hero" class="text-xl font-['Space_Grotesk'] font-bold">Miguel Di Lalla</a>
+      <a href="#hero" class="text-xl font-bold hover:text-red-600">Miguel Di Lalla</a>
       <ul class="flex gap-6 font-semibold">
-        <li><a href="#about" class="hover:text-red-600 transition-colors">About</a></li>
-        <li><a href="#projects" class="hover:text-red-600 transition-colors">Projects</a></li>
-        <li><a href="#skills" class="hover:text-red-600 transition-colors">Skills</a></li>
-        <li><a href="#contact" class="hover:text-red-600 transition-colors">Contact</a></li>
+        <li><a href="#about" class="hover:text-red-600">About</a></li>
+        <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
+        <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
+        <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="h-screen flex flex-col items-center justify-center text-center px-4" id="hero">
-    <h1 id="typewriter" class="text-4xl md:text-5xl font-['Space_Grotesk'] font-bold max-w-2xl leading-tight cursor"></h1>
-    <p class="mt-8 text-xl italic max-w-lg opacity-0 transition-opacity duration-1000" id="slogan">
-      "The mind is a LEGO set waiting for its model." — Miguel Di Lalla
-    </p>
-    <div class="mt-12 flex gap-8 justify-center" id="image-carousel">
-      <!-- Image carousel will be populated by JS -->
+  <!-- Home (Hero Section) -->
+  <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
+    <h1 id="typewriter" class="text-4xl md:text-5xl font-bold leading-tight max-w-2xl"></h1>
+    <blockquote class="mt-6 text-lg md:text-xl italic">
+      <span id="quote-animation">"The mind is a LEGO set waiting for its model."</span><br />
+      <cite class="not-italic">— Miguel Di Lalla, Aspiring Junior Data Scientist</cite>
+    </blockquote>
+    <div id="hero-images" class="mt-10 flex gap-4">
+      <!-- Image placeholders with unique shapes -->
+      <img src="/assets/images/profile/photo1.jpg" class="w-32 h-32 object-cover rounded-xl" alt="Miguel portrait 1" />
+      <img src="/assets/images/profile/photo2.jpg" class="w-32 h-32 object-cover rounded-full" alt="Miguel portrait 2" />
+      <img src="/assets/images/profile/photo3.jpg" class="w-32 h-32 object-cover clip-star" alt="Miguel portrait 3" />
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="visual-collage">
-        <!-- Animated visual collage -->
+  <!-- About -->
+  <section id="about" class="min-h-screen px-6 py-24 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
+      <!-- Left: collage carousel -->
+      <div id="collage-carousel" class="w-full md:w-1/3">[Collage Placeholder]</div>
+      <!-- Center: bio with audio player -->
+      <div class="w-full md:w-1/3">
+        <div id="bio-text" class="overflow-y-auto h-80 p-4 bg-gray-100 rounded-md">[Biography Text Placeholder]</div>
+        <div class="mt-4 flex gap-4">
+          <button id="playBtn">▶️ Play</button>
+          <button id="speedBtn">⏩ x2</button>
+        </div>
+        <audio id="bioAudio" src="/audio/bio_intro.mp3"></audio>
       </div>
-      <div class="biography-panel">
-        <!-- Scrollable text and audio player -->
+      <!-- Right: logos -->
+      <div class="w-full md:w-1/3 flex flex-col justify-center items-center gap-4">
+        <img src="/assets/images/org_logos/logo1.png" class="h-12" alt="Logo 1" />
+        <img src="/assets/images/org_logos/logo2.png" class="h-12" alt="Logo 2" />
+        <img src="/assets/images/org_logos/logo3.png" class="h-12" alt="Logo 3" />
       </div>
-      <div class="institutional-logos">
-        <!-- Vertical stack of logos -->
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="min-h-screen px-6 py-24">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-10">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Main Project -->
+        <div class="relative rounded-lg overflow-hidden shadow-lg">
+          <a href="/projects/lego-ml-vision.html">
+            <img src="/assets/images/projects/lego.gif" class="w-full object-cover" />
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-semibold opacity-0 hover:opacity-100 transition">LEGO ML Vision</div>
+          </a>
+        </div>
+        <!-- Other Projects -->
+        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
+        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
+        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
+        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
-    <div class="featured-project mb-12">
-      <!-- LEGO Bricks ML Vision Project -->
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Secondary project cards -->
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
-    <div class="word-cloud">
-      <!-- Skills word cloud -->
+  <!-- Skills -->
+  <section id="skills" class="min-h-screen px-6 py-24 bg-white">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-10">Skills</h2>
+      <div id="word-cloud" class="flex flex-wrap justify-center gap-4">[Word Cloud Here]</div>
+      <p class="mt-6 max-w-2xl mx-auto">I'm passionate about learning and expanding my abilities in data science, automation, and AI-powered tools.</p>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="min-h-screen bg-black text-white px-6 py-24">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl md:text-6xl font-['Space_Grotesk'] font-bold mb-12">Thanks for reading...</h2>
-      <!-- Contact links will go here -->
+  <!-- Contact -->
+  <section id="contact" class="min-h-screen px-6 py-24 bg-black text-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6 animate-pulse">Thanks for reading...</h2>
+      <p class="mb-4">Feel free to reach out or follow me!</p>
+      <div class="flex justify-center gap-6">
+        <a href="https://github.com/yourusername" class="hover:underline">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" class="hover:underline">LinkedIn</a>
+        <a href="mailto:youremail@example.com" class="hover:underline">Email</a>
+      </div>
     </div>
   </section>
 
   <!-- Scripts -->
-  <script src="assets/js/typewriter.js"></script>
-  <script src="assets/js/scrollspy.js"></script>
-  <script src="assets/js/gifHover.js"></script>
-  <script src="assets/js/audioControl.js"></script>
-  <script>
-    // Show slogan after typing animation completes
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        document.getElementById('slogan').classList.remove('opacity-0');
-      }, 4000); // Adjust timing based on typing animation duration
-    });
-  </script>
+  <script src="/assets/js/typewriter.js"></script>
+  <script src="/assets/js/audioControl.js"></script>
+  <script src="/assets/js/gifHover.js"></script>
+  <script src="/assets/js/scrollspy.js"></script>
 </body>
 </html>

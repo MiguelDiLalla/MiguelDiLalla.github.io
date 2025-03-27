@@ -5,76 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miguel Di Lalla | ML Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .cursor {
-      border-right: 2px solid black;
-      animation: blink 0.7s steps(1) infinite;
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
+<body class="bg-[#ffcf00] text-black scroll-smooth font-['Inter']">
   <!-- Navigation -->
   <header class="fixed top-0 left-0 w-full bg-[#ffcf00] shadow-md z-50">
     <nav class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <span class="text-xl font-bold">Miguel Di Lalla</span>
+      <a href="#hero" class="text-xl font-['Space_Grotesk'] font-bold">Miguel Di Lalla</a>
       <ul class="flex gap-6 font-semibold">
-        <li><a href="#about" class="hover:text-red-600">About</a></li>
-        <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
-        <li><a href="#videos" class="hover:text-red-600">Videos</a></li>
-        <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
+        <li><a href="#about" class="hover:text-red-600 transition-colors">About</a></li>
+        <li><a href="#projects" class="hover:text-red-600 transition-colors">Projects</a></li>
+        <li><a href="#skills" class="hover:text-red-600 transition-colors">Skills</a></li>
+        <li><a href="#contact" class="hover:text-red-600 transition-colors">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="h-screen flex items-center justify-center text-center px-4" id="hero">
-    <h1 id="typewriter" class="text-4xl md:text-5xl font-bold max-w-2xl leading-tight cursor"></h1>
+  <section class="h-screen flex flex-col items-center justify-center text-center px-4" id="hero">
+    <h1 id="typewriter" class="text-4xl md:text-5xl font-['Space_Grotesk'] font-bold max-w-2xl leading-tight cursor"></h1>
+    <p class="mt-8 text-xl italic max-w-lg opacity-0 transition-opacity duration-1000" id="slogan">
+      "The mind is a LEGO set waiting for its model." — Miguel Di Lalla
+    </p>
+    <div class="mt-12 flex gap-8 justify-center" id="image-carousel">
+      <!-- Image carousel will be populated by JS -->
+    </div>
   </section>
 
-  <!-- Placeholder Sections -->
-  <section id="about" class="min-h-screen px-6 py-24">[About Section Here]</section>
-  <section id="projects" class="min-h-screen px-6 py-24">[Projects Section Here]</section>
-  <section id="videos" class="min-h-screen px-6 py-24">[Videos Section Here]</section>
-  <section id="contact" class="min-h-screen px-6 py-24">[Contact Section Here]</section>
+  <!-- About Section -->
+  <section id="about" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="visual-collage">
+        <!-- Animated visual collage -->
+      </div>
+      <div class="biography-panel">
+        <!-- Scrollable text and audio player -->
+      </div>
+      <div class="institutional-logos">
+        <!-- Vertical stack of logos -->
+      </div>
+    </div>
+  </section>
 
-  <!-- Typing Animation Script -->
+  <!-- Projects Section -->
+  <section id="projects" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
+    <div class="featured-project mb-12">
+      <!-- LEGO Bricks ML Vision Project -->
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Secondary project cards -->
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="min-h-screen px-6 py-24 max-w-6xl mx-auto">
+    <div class="word-cloud">
+      <!-- Skills word cloud -->
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="min-h-screen bg-black text-white px-6 py-24">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-6xl font-['Space_Grotesk'] font-bold mb-12">Thanks for reading...</h2>
+      <!-- Contact links will go here -->
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="assets/js/typewriter.js"></script>
+  <script src="assets/js/scrollspy.js"></script>
+  <script src="assets/js/gifHover.js"></script>
+  <script src="assets/js/audioControl.js"></script>
   <script>
-    const textElement = document.getElementById("typewriter");
-    const sequence = ["Hola!", "Hi! I'm Miguel Di Lalla. It's great that you are here."];
-    let index = 0, char = 0, deleting = false;
-
-    function typeEffect() {
-      let currentText = sequence[index];
-
-      if (!deleting) {
-        textElement.textContent = currentText.substring(0, char + 1);
-        char++;
-        if (char === currentText.length) {
-          if (index === 0) {
-            setTimeout(() => {
-              deleting = true;
-              typeEffect();
-            }, 1000);
-            return;
-          }
-          return; // stop here on final message
-        }
-      } else {
-        textElement.textContent = currentText.substring(0, char - 1);
-        char--;
-        if (char === 0) {
-          deleting = false;
-          index++;
-        }
-      }
-
-      setTimeout(typeEffect, deleting ? 50 : 100);
-    }
-
-    document.addEventListener("DOMContentLoaded", typeEffect);
+    // Show slogan after typing animation completes
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('slogan').classList.remove('opacity-0');
+      }, 4000); // Adjust timing based on typing animation duration
+    });
   </script>
 </body>
 </html>

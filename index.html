@@ -39,17 +39,32 @@
   </header>
 
   <!-- Home (Hero Section) -->
-  <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
-    <h1 id="typewriter" class="text-4xl md:text-5xl font-bold leading-tight max-w-2xl"></h1>
-    <blockquote class="mt-6 text-lg md:text-xl italic">
-      <span id="quote-animation">"The mind is a LEGO set waiting for its model."</span><br />
-      <cite class="not-italic">— Miguel Di Lalla, Aspiring Junior Data Scientist</cite>
-    </blockquote>
-    <div id="hero-images" class="mt-10 flex gap-4">
-      <!-- Image placeholders with unique shapes -->
-      <img src="/assets/images/profile/photo1.jpg" class="w-32 h-32 object-cover rounded-xl" alt="Miguel portrait 1" />
-      <img src="/assets/images/profile/photo2.jpg" class="w-32 h-32 object-cover rounded-full" alt="Miguel portrait 2" />
-      <img src="/assets/images/profile/photo3.jpg" class="w-32 h-32 object-cover clip-star" alt="Miguel portrait 3" />
+  <section id="hero" class="min-h-screen flex items-center px-4 pt-20">
+    <div class="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-12">
+      <!-- Left Column: Text Content -->
+      <div class="w-full md:w-1/2 text-center md:text-left space-y-8">
+        <h1 id="typewriter" class="font-title text-4xl md:text-5xl font-bold leading-tight"></h1>
+        <blockquote class="text-lg md:text-xl">
+          <p id="quote-animation" class="italic">"The mind is a LEGO set waiting for its model."</p>
+          <cite class="block mt-4">— Miguel Di Lalla</cite>
+        </blockquote>
+        <h2 class="text-2xl font-title">Aspiring Junior Data Scientist</h2>
+      </div>
+      
+      <!-- Right Column: Image Carousel -->
+      <div class="w-full md:w-1/2 flex justify-center">
+        <div id="hero-images" class="relative w-full max-w-md aspect-square">
+          <div class="absolute inset-0 transition-opacity duration-500">
+            <img src="/assets/images/profile/photo1.jpg" class="w-full h-full object-cover rounded-xl transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 1" />
+          </div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-500">
+            <img src="/assets/images/profile/photo2.jpg" class="w-full h-full object-cover rounded-full transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 2" />
+          </div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-500">
+            <img src="/assets/images/profile/photo3.jpg" class="w-full h-full object-cover clip-star transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 3" />
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -121,6 +136,7 @@
 
   <!-- Scripts -->
   <script src="/assets/js/typewriter.js"></script>
+  <script src="/assets/js/imageCarousel.js"></script>
   <script src="/assets/js/audioControl.js"></script>
   <script src="/assets/js/gifHover.js"></script>
   <script src="/assets/js/scrollspy.js"></script>

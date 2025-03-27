@@ -10,6 +10,13 @@ html {
 }
 
 .clip-star {
+  /* Add these required properties */
+  width: 300px;  /* or your desired width */
+  height: 300px; /* height should match width for symmetrical star */
+  background-color: var(--text-black); /* or any color/image */
+  display: block; /* ensure it's a block element */
+  
+  /* Existing properties */
   clip-path: polygon(
     50% 0%,
     61% 35%,

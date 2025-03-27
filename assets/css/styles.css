@@ -9,19 +9,60 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Floating 3D image animation */
+@keyframes floatAndRotate {
+  0%   { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  25%  { transform: translateY(-5px) rotateX(3deg) rotateY(-3deg); }
+  50%  { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  75%  { transform: translateY(5px) rotateX(-2deg) rotateY(2deg); }
+  100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+}
+
+.floating-3d {
+  animation: floatAndRotate 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.floating-3d:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.floating-image-wrapper {
+  perspective: 1000px;
+  padding: 15px;
+}
+
 .clip-star {
-  clip-path: polygon(
-    50% 0%,
-    100% 38%,
-    82% 100%,
-    18% 100%,
-    0% 38%
-  );
-  border-radius: 8px; /* soften pentagon edges */
+  /* Option 1: Using clip-path with the inline SVG */
+  clip-path: url(#pentagon-clip);
+  
+  /* Option 2: Using mask with the external SVG file */
+  /* Uncomment this and comment the clip-path above to use the SVG file directly */
+  /* mask-image: url('/assets/svg/CuteStarPath.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center; */
+  
+  /* Ensure same height as circle by centering and maintaining aspect ratio */
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  
   transform: rotate(-12deg);
   transition: transform 0.3s ease-in-out;
 }
 
 .clip-star:hover {
   transform: rotate(-12deg) scale(1.05);
+}
+
+/* Hidden SVG for clip path */
+svg.clip-paths {
+  position: absolute;
+  width: 0;
+  height: 0;
 }

@@ -1,6 +1,10 @@
 class ImageCarousel {
   constructor(containerId, options = {}) {
     this.container = document.getElementById(containerId);
+    if (!this.container) {
+      console.error(`Container with ID ${containerId} not found.`);
+      return;
+    }
     this.images = Array.from(this.container.children);
     this.currentIndex = 0;
     this.interval = options.interval || 3000;
@@ -25,20 +29,25 @@ class ImageCarousel {
   }
 
   start() {
-    this.showImage(0);
-    setInterval(() => this.next(), this.interval);
+    if (this.images && this.images.length > 0) {
+      this.showImage(0);
+      setInterval(() => this.next(), this.interval);
+    }
   }
 }
 
-// Initialize carousel and typewriter when DOM is loaded
+// Initialize typewriter when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  const carousel = new ImageCarousel('hero-images', {
-    interval: 3000,
-    transitionDuration: 500
-  });
-  carousel.start();
+  // Initialize carousels for other sections if needed
+  // For example, we might still use it for the collage in the about section
+  const collageCarousel = document.getElementById('collage-carousel');
+  if (collageCarousel) {
+    // Will initialize once collage content is added
+    // const carousel = new ImageCarousel('collage-carousel', { interval: 4000 });
+    // carousel.start();
+  }
 
-  // Ensure typewriter initialization
+  // Initialize typewriter
   const typewriterElement = document.getElementById('typewriter');
   if (typewriterElement) {
     const typewriter = new Typewriter(

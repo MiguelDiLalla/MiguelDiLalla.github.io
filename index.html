@@ -25,6 +25,13 @@
   <link href="/assets/css/animations.css" rel="stylesheet" />
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
+  <!-- Hidden SVG definitions for clip paths -->
+  <svg class="clip-paths" aria-hidden="true">
+    <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
+      <path d="M0.422,1 c-0.014,0-0.029-0.004-0.042-0.011 c-0.026-0.014-0.044-0.039-0.046-0.069 l-0.062-0.16 c-0.005-0.012-0.013-0.023-0.021-0.031 l-0.151-0.083 c-0.026-0.014-0.042-0.041-0.042-0.071 c0-0.029,0.016-0.057,0.042-0.071 l0.135-0.074 c0.009-0.005,0.017-0.011,0.024-0.018 c0.01-0.01,0.017-0.023,0.02-0.037 l0.034-0.168 c0.006-0.027,0.024-0.05,0.05-0.061 c0.025-0.011,0.053-0.01,0.076,0.003 l0.147,0.093 c0.012,0.008,0.026,0.013,0.041,0.013 c0.005,0,0.009-0.001,0.014-0.001 l0.174-0.021 c0.029-0.004,0.058,0.007,0.076,0.03 c0.019,0.022,0.023,0.052,0.011,0.079 l-0.045,0.165 c-0.003,0.013-0.003,0.026,0.000,0.039 c0.003,0.012,0.01,0.023,0.019,0.033 l0.073,0.155 c0.015,0.032,0.011,0.069-0.01,0.096 c-0.021,0.027-0.056,0.04-0.09,0.033 l-0.175-0.009 c-0.014-0.001-0.028,0.001-0.041,0.005 c-0.013,0.004-0.024,0.011-0.034,0.020 l-0.13,0.117 c-0.019,0.017-0.045,0.026-0.071,0.024 Z" />
+    </clipPath>
+  </svg>
+  
   <!-- Navigation -->
   <header class="fixed top-0 left-0 w-full bg-[#ffcf00] shadow-md z-50">
     <nav class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -51,18 +58,14 @@
         <h2 class="text-2xl font-title">Aspiring Junior Data Scientist</h2>
       </div>
       
-      <!-- Right Column: Image Carousel -->
+      <!-- Right Column: Floating 3D Image -->
       <div class="w-full md:w-1/2 flex justify-center">
-        <div id="hero-images" class="relative w-full max-w-md aspect-square">
-          <div class="absolute inset-0 transition-opacity duration-500">
-            <img src="/assets/images/profile/photo1.jpg" class="w-full h-full object-cover rounded-xl transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 1" />
-          </div>
-          <div class="absolute inset-0 opacity-0 transition-opacity duration-500">
-            <img src="/assets/images/profile/photo2.jpg" class="w-full h-full object-cover rounded-full transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 2" />
-          </div>
-          <div class="absolute inset-0 opacity-0 transition-opacity duration-500">
-            <img src="/assets/images/profile/photo3.jpg" class="w-full h-full object-cover clip-star transform hover:scale-105 transition-transform duration-300" alt="Miguel portrait 3" />
-          </div>
+        <div class="floating-image-wrapper">
+          <img
+            src="/assets/images/profile/photo1.jpg"
+            alt="Miguel Di Lalla"
+            class="rounded-xl w-60 h-60 object-cover shadow-lg floating-3d"
+          />
         </div>
       </div>
     </div>

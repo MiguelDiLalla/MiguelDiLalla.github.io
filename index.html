@@ -225,23 +225,59 @@
     </section>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="min-h-screen px-6 py-24">
+  <!-- 🔴 Projects Section -->
+  <section id="projects" class="min-h-screen bg-red-600 px-6 py-24 text-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold mb-10">Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Main Project -->
-        <div class="relative rounded-lg overflow-hidden shadow-lg">
-          <a href="/projects/lego-ml-vision.html">
-            <img src="/assets/images/projects/lego.gif" class="w-full object-cover" />
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-semibold opacity-0 hover:opacity-100 transition">LEGO ML Vision</div>
-          </a>
+      <h2 class="text-4xl font-bold mb-12 text-white">Current Projects</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6">
+        <!-- Main Project Card (Vertical - Aureo) -->
+        <a href="#" class="md:row-span-2 rounded-xl overflow-hidden relative group block h-full aspect-[0.65/1]">
+          <img src="/assets/images/projects/lego.gif" alt="LEGO Bricks" class="w-full h-full object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+            <h3 class="text-xl font-bold">LEGO Bricks Classification</h3>
+            <p class="text-sm">Full ML pipeline for visual brick identification</p>
+          </div>
+        </a>
+
+        <!-- Secondary Project Cards (Horizontal) - Wrapped in flex column to match main card height -->
+        <div class="md:col-span-2 flex flex-col gap-6 h-full">
+          <!-- Top row of cards -->
+          <div class="flex flex-col md:flex-row gap-6 flex-1">
+            <a href="#" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
+              <img src="/assets/images/projects/not-pomodoro.gif" alt="Not Pomodoro" class="w-full h-full object-cover" />
+              <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                <h3 class="text-lg font-bold">Not-Pomodoro App</h3>
+                <p class="text-sm">Reframing productivity with intention</p>
+              </div>
+            </a>
+            <a href="#" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
+              <img src="/assets/images/projects/podcast-nlp.gif" alt="Podcast NLP" class="w-full h-full object-cover" />
+              <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                <h3 class="text-lg font-bold">CoffeeBreak NLP</h3>
+                <p class="text-sm">Linguistic pattern study from podcast</p>
+              </div>
+            </a>
+          </div>
+          
+          <!-- Bottom row of cards -->
+          <div class="flex flex-col md:flex-row gap-6 flex-1">
+            <a href="#" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
+              <img src="/assets/images/projects/roller-scrape.gif" alt="Roller WebScraping" class="w-full h-full object-cover" />
+              <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                <h3 class="text-lg font-bold">Roller Rinks Scraper</h3>
+                <p class="text-sm">Web scraped skate spaces across cities</p>
+              </div>
+            </a>
+            <a href="#" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
+              <img src="/assets/images/projects/youtube-career.gif" alt="Career YouTube" class="w-full h-full object-cover" />
+              <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                <h3 class="text-lg font-bold">Transition YouTube Channel</h3>
+                <p class="text-sm">Narrating my leap into tech and data</p>
+              </div>
+            </a>
+          </div>
         </div>
-        <!-- Other Projects -->
-        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
-        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
-        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
-        <div class="relative rounded-lg overflow-hidden shadow-md">[Project Card]</div>
       </div>
     </div>
   </section>

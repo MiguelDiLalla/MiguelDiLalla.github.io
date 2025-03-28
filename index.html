@@ -25,6 +25,61 @@
   <link href="/assets/css/fonts.css" rel="stylesheet" />
   <link href="/assets/css/styles.css" rel="stylesheet" />
   <link href="/assets/css/animations.css" rel="stylesheet" />
+  
+  <!-- Parallax scrolling gallery styles -->
+  <style>
+    /* Animation keyframes */
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-right {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    
+    .collage-row {
+      overflow: hidden;
+      width: 100%;
+      height: 100px;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .scroll-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      /* Animation will be applied via JavaScript with random durations */
+    }
+    
+    /* Pausable effect */
+    .collage-row:hover .scroll-track {
+      animation-play-state: paused !important;
+    }
+    
+    .collage-img {
+      height: 80px;
+      width: auto;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease;
+    }
+    
+    .collage-img:hover {
+      transform: scale(1.15);
+      z-index: 10;
+    }
+    
+    #role-models {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 400px;
+    }
+  </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
   <!-- Hidden SVG definitions for clip paths -->
@@ -92,23 +147,25 @@
 
   <!-- About -->
   <section id="about" class="min-h-screen px-6 py-24 bg-[#ffcf00]">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
-      <!-- Left: collage carousel with Role Models header (2/5 width) -->
-      <div id="collage-carousel" class="w-full md:w-2/5 hidden md:flex md:-mt-4 flex-col">
-        <h3 class="font-title text-2xl font-bold mb-4">Role Models</h3>
-        <!-- Collage carousel container with proper positioning -->
-        <div class="flex-grow flex flex-col justify-center">
-          <!-- Carousel with enhanced styling and animations -->
-          <div class="relative h-[320px] w-full md:w-4/5 mx-auto mt-12 overflow-hidden rounded-xl shadow-lg floating-tilting-container">
-            <img src="/assets/images/collage/collage1.jpg" alt="Collage 1" class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000">
-            <img src="/assets/images/collage/collage2.jpg" alt="Collage 2" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
-            <img src="/assets/images/collage/collage3.jpg" alt="Collage 3" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-center">
+      <!-- Left: role models with parallax scrolling gallery (2/5 width) -->
+      <section id="role-models" class="hidden md:block w-full md:w-2/5 flex flex-col md:self-stretch md:flex-grow md:justify-center">
+        <h3 class="font-title text-2xl font-bold mb-6">Role Models</h3>
+        <div id="collage-stripes" class="space-y-6 overflow-hidden my-auto py-4">
+          <div class="collage-row animate-scroll-left" data-direction="left">
+            <div class="scroll-track"></div>
+          </div>
+          <div class="collage-row animate-scroll-right" data-direction="right">
+            <div class="scroll-track"></div>
+          </div>
+          <div class="collage-row animate-scroll-left" data-direction="left">
+            <div class="scroll-track"></div>
           </div>
         </div>
-      </div>
+      </section>
       
-      <!-- Center: bio panel with audio player (3/5 width on desktop, with negative margin) -->
-      <div class="w-full md:w-3/5 md:-mt-4">
+      <!-- Center: bio panel with audio player (3/5 width on desktop) -->
+      <div class="w-full md:w-3/5">
         <div class="flex flex-col">
           <!-- Bio Header with Audio Controls positioned at right corner -->
           <div class="flex justify-between items-center mb-2">

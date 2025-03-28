@@ -39,7 +39,6 @@ class ImageCarousel {
 // Initialize carousels when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize carousels for other sections if needed
-  // For example, we might still use it for the collage in the about section
   const collageCarousel = document.getElementById('collage-carousel');
   if (collageCarousel) {
     // Will initialize once collage content is added
@@ -49,42 +48,94 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Image Carousel for Biography Section
- * Manages the carousel animation for the collage images
+ * Dynamic Parallax Scrolling Gallery for Role Models Section
+ * Loads all images from the /assets/images/collage/ directory
+ * and displays them in horizontally scrolling rows with random speeds
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Find the collage carousel container
-  const carousel = document.getElementById('collage-carousel');
-  if (!carousel) return;
+  // Constants for the collage
+  const IMAGE_PATH = '/assets/images/collage/';
+  const TOTAL_IMAGES = 42;
+  const ROWS = 3;
+  
+  // Speed ranges for animations (in seconds)
+  const MIN_SPEED = 30;  // Fastest animation (seconds)
+  const MAX_SPEED = 70;  // Slowest animation (seconds)
 
-  // Get all collage images within the carousel
-  const collages = carousel.querySelectorAll('img');
-  if (collages.length <= 1) return;
+  // Find the collage rows
+  const rows = document.querySelectorAll('.collage-row');
+  if (!rows.length) return;
 
-  let currentIndex = 0;
-  let nextIndex = 1;
-
-  /**
-   * Transition to the next collage in the sequence with a fade effect
-   */
-  function rotateCollages() {
-    // Hide the current collage
-    collages[currentIndex].style.opacity = '0';
-    
-    // Show the next collage
-    collages[nextIndex].style.opacity = '1';
-    
-    // Update indices for next transition
-    currentIndex = nextIndex;
-    nextIndex = (nextIndex + 1) % collages.length;
+  // Create array of all available image paths (image_01.jpg to image_42.jpg)
+  const imagePaths = [];
+  for (let i = 1; i <= TOTAL_IMAGES; i++) {
+    // Format the number with leading zero if needed (01, 02, ... 42)
+    const imageNumber = i.toString().padStart(2, '0');
+    imagePaths.push(`image_${imageNumber}.jpg`);
   }
 
-  // Start the carousel rotation - change every 3.5 seconds (faster than before)
-  const intervalId = setInterval(rotateCollages, 3500);
-
-  // Cleanup on page unload to avoid memory leaks
-  window.addEventListener('beforeunload', () => {
-    clearInterval(intervalId);
+  // Shuffle the image array to get random distribution
+  const shuffledImages = [...imagePaths].sort(() => 0.5 - Math.random());
+  
+  // Split images into roughly equal groups for each row
+  const imagesPerRow = Math.ceil(shuffledImages.length / ROWS);
+  const rowImages = [];
+  
+  for (let i = 0; i < ROWS; i++) {
+    const startIdx = i * imagesPerRow;
+    const endIdx = Math.min(startIdx + imagesPerRow, shuffledImages.length);
+    rowImages.push(shuffledImages.slice(startIdx, endIdx));
+  }
+  
+  /**
+   * Generate a random animation duration within specified range
+   * @returns {number} Random duration in seconds
+   */
+  const getRandomDuration = () => {
+    return Math.floor(Math.random() * (MAX_SPEED - MIN_SPEED + 1)) + MIN_SPEED;
+  };
+  
+  // For each row, add the images to the scroll-track (duplicating them for seamless looping)
+  rows.forEach((row, idx) => {
+    // Get the scroll track container
+    const track = row.querySelector('.scroll-track');
+    if (!track) {
+      console.error('Scroll track not found in row', idx);
+      return;
+    }
+    
+    // Get the track direction
+    const direction = row.getAttribute('data-direction') || 'left';
+    
+    // Generate random animation duration
+    const duration = getRandomDuration();
+    
+    // Apply the animation with random duration
+    track.style.animation = `scroll-${direction} ${duration}s linear infinite`;
+    
+    // Log the animation details
+    console.log(`Row ${idx + 1}: scrolling ${direction} at ${duration}s duration`);
+    
+    // Get images for this row
+    const images = rowImages[idx];
+    
+    // Double the images for seamless infinite scrolling
+    const allImages = [...images, ...images];
+    
+    // Create image elements and add to track
+    allImages.forEach(imgPath => {
+      const img = document.createElement('img');
+      img.src = `${IMAGE_PATH}${imgPath}`;
+      img.alt = 'Role model';
+      img.className = 'collage-img';
+      img.loading = 'lazy'; // Add lazy loading for better performance
+      
+      // Add image to the scroll track
+      track.appendChild(img);
+    });
   });
+
+  // Log success message
+  console.log(`Role models gallery initialized with ${TOTAL_IMAGES} images in ${ROWS} rows`);
 });

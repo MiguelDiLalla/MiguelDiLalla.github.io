@@ -211,15 +211,15 @@
     <!-- Mobile: Role models section below bio -->
     <section id="role-models-mobile" class="md:hidden w-full flex flex-col mt-8">
       <h3 class="font-title text-2xl font-bold mb-6">Role Models</h3>
-      <div id="collage-stripes" class="space-y-6 overflow-hidden my-auto py-4">
+      <div class="space-y-6 overflow-hidden my-auto py-4">
         <div class="collage-row animate-scroll-left" data-direction="left">
-          <div class="scroll-track"></div>
+          <div class="scroll-track mobile-track-1"></div>
         </div>
         <div class="collage-row animate-scroll-right" data-direction="right">
-          <div class="scroll-track"></div>
+          <div class="scroll-track mobile-track-2"></div>
         </div>
         <div class="collage-row animate-scroll-left" data-direction="left">
-          <div class="scroll-track"></div>
+          <div class="scroll-track mobile-track-3"></div>
         </div>
       </div>
     </section>
@@ -328,6 +328,78 @@
       
       // Check on initial load too
       setTimeout(checkScroll, 500);
+      
+      // Ensure mobile role models carousel is populated
+      function populateRoleModelsMobile() {
+        // Get all the collage images
+        const images = Array.from({ length: 42 }, (_, i) => {
+          const num = (i + 1).toString().padStart(2, '0');
+          return `/assets/images/collage/image_${num}.jpg`;
+        }).filter(img => img);
+
+        // Shuffle the images array
+        const shuffleArray = arr => {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        };
+        
+        const shuffledImages = shuffleArray([...images]);
+        
+        // Populate mobile tracks
+        const mobileTrack1 = document.querySelector('.mobile-track-1');
+        const mobileTrack2 = document.querySelector('.mobile-track-2');
+        const mobileTrack3 = document.querySelector('.mobile-track-3');
+        
+        if (mobileTrack1 && mobileTrack2 && mobileTrack3) {
+          // Split images into 3 groups for the 3 tracks
+          const group1 = shuffledImages.slice(0, 14);
+          const group2 = shuffledImages.slice(14, 28);
+          const group3 = shuffledImages.slice(28, 42);
+          
+          // Populate the tracks
+          populateTrack(mobileTrack1, group1);
+          populateTrack(mobileTrack2, group2);
+          populateTrack(mobileTrack3, group3);
+          
+          // Setup animations
+          setupScrollAnimation(mobileTrack1.parentElement, 'left', 60 + Math.random() * 40);
+          setupScrollAnimation(mobileTrack2.parentElement, 'right', 60 + Math.random() * 40);
+          setupScrollAnimation(mobileTrack3.parentElement, 'left', 60 + Math.random() * 40);
+        }
+      }
+      
+      function populateTrack(track, images) {
+        // Clear existing content
+        track.innerHTML = '';
+        
+        // Add images twice to create continuous effect
+        const allImages = [...images, ...images];
+        
+        allImages.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Role model';
+          img.className = 'collage-img';
+          track.appendChild(img);
+        });
+      }
+      
+      function setupScrollAnimation(row, direction, duration) {
+        const track = row.querySelector('.scroll-track');
+        if (!track) return;
+        
+        track.style.animation = direction === 'left' 
+          ? `scroll-left ${duration}s linear infinite`
+          : `scroll-right ${duration}s linear infinite`;
+      }
+      
+      // Initialize mobile carousels
+      if (window.innerWidth < 768) {
+        populateRoleModelsMobile();
+      }
     });
   </script>
 </body>

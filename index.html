@@ -22,6 +22,8 @@
   </script>
   <!-- Markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Anime.js for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <link href="/assets/css/fonts.css" rel="stylesheet" />
   <link href="/assets/css/styles.css" rel="stylesheet" />
   <link href="/assets/css/animations.css" rel="stylesheet" />
@@ -283,11 +285,17 @@
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="min-h-screen px-6 py-24 bg-white">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-10">Skills</h2>
-      <div id="word-cloud" class="flex flex-wrap justify-center gap-4">[Word Cloud Here]</div>
-      <p class="mt-6 max-w-2xl mx-auto">I'm passionate about learning and expanding my abilities in data science, automation, and AI-powered tools.</p>
+  <section id="skills" class="min-h-screen bg-red-600 px-6 py-24 text-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12 text-white drop-shadow">Skills</h2>
+
+      <!-- Panel blanco con borde redondeado -->
+      <div class="bg-white rounded-xl p-6">
+        <div id="skills-container" class="grid grid-cols-3 gap-2 md:gap-4">
+          <!-- Skills will be loaded here from JSON -->
+        </div>
+      </div>
+      <p class="text-sm text-gray-200 italic mt-3 text-right">*Skill I aim to develop</p>
     </div>
   </section>
 
@@ -311,6 +319,7 @@
   <script src="/assets/js/bioLoader.js"></script>
   <script src="/assets/js/gifHover.js"></script>
   <script src="/assets/js/scrollspy.js"></script>
+  <script src="/assets/js/skills.js"></script>
   <script>
     // Add typewriter effect for the bio subtitle, only when scrolled into view
     document.addEventListener('DOMContentLoaded', () => {

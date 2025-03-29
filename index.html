@@ -174,6 +174,12 @@
       animation: card-appear 1s ease-out calc(var(--typing-delay) + 5.5s) forwards;
     }
     
+    .contact-form {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: card-appear 1s ease-out calc(var(--typing-delay) + 7.5s) forwards;
+    }
+    
     @keyframes card-appear {
       from { 
         opacity: 0;
@@ -193,13 +199,66 @@
       transform: translateY(-3px);
       color: #ffcf00;
     }
+    
+    /* 3D Perspective container for quote flipper */
+    .perspective {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Quote animation styles */
+    #quote-inner {
+      position: relative;
+      animation: slide-up 0.5s ease-out;
+    }
+
+    .quote-marks {
+      font-family: "Montagu Slab", serif;
+      color: #dc2626; /* Tailwind red-600 */
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    #quote-text {
+      color: #1e40af; /* Tailwind indigo-900 */
+    }
+
+    @keyframes slide-up {
+      0% {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Sequential animations for home elements - modified for fixed timing */
+    #quote-flipper {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    
+    #quote-flipper.visible {
+      opacity: 1;
+    }
+    
+    .role-subtitle {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    
+    .role-subtitle.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
   <!-- Hidden SVG definitions for clip paths -->
   <svg class="clip-paths" aria-hidden="true">
     <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.422,1 c-0.014,0-0.029-0.004-0.042-0.011 c-0.026-0.014-0.044-0.039-0.046-0.069 l-0.062-0.16 c-0.005-0.012-0.013-0.023-0.021-0.031 l-0.151-0.083 c-0.026-0.014-0.042-0.041-0.042-0.071 c0-0.029,0.016-0.057,0.042-0.071 l0.135-0.074 c0.009-0.005,0.017-0.011,0.024-0.018 c0.01-0.01,0.017-0.023,0.02-0.037 l0.034-0.168 c0.006-0.027,0.024-0.05,0.05-0.061 c0.025-0.011,0.053-0.01,0.076,0.003 l0.147,0.093 c0.012,0.008,0.026,0.013,0.041,0.013 c0.005,0,0.009-0.001,0.014-0.001 l0.174-0.021 c0.029-0.004,0.058,0.007,0.076,0.03 c0.019,0.022,0.023,0.052,0.011,0.079 l-0.045,0.165 c-0.003,0.013-0.003,0.026,0.000,0.039 c0.003,0.012,0.01,0.023,0.019,0.033 l0.073,0.155 c0.015,0.032,0.011,0.069-0.01,0.096 c-0.021,0.027-0.056,0.04-0.09,0.033 l-0.175-0.009 c-0.014-0.001-0.028,0.001-0.041,0.005 c-0.013,0.004-0.024,0.011-0.034,0.020 l-0.13,0.117 c-0.019,0.017-0.045,0.026-0.071,0.024 Z" />
+      <path d="M0.422,1 c-0.014,0-0.029-0.004-0.042-0.011 c-0.026-0.014-0.044-0.039-0.046-0.069 l-0.062-0.16 c-0.005-0.012-0.013-0.023-0.021-0.031 l-0.151-0.083 c-0.026-0.014-0.042-0.041-0.042-0.071 c0-0.029,0.016-0.057,0.042-0.071 l0.135-0.074 c0.009-0.005,0.017-0.011,0.024-0.018 c0.01-0.01,0.017-0.023,0.02-0.037 l0.034-0.168 c0.006-0.027,0.024-0.05,0.05-0.061 c0.025-0.011,0.053-0.01,0.076,0.003 l0.147,0.093 c0.012,0.008,0.026,0.013,0.041,0.013 c0.005,0,0.009-0.001,0.014-0.001 l0.174-0.021 c0.029-0.004,0.058,0.007,0.076,0.03 c0.019,0.022,0.023,0.052,0.011,0.079 l-0.045,0.165 c-0.003-0.013-0.003-0.026,0.000-0.039 c0.003-0.012,0.01-0.023,0.019-0.033 l0.073,0.155 c0.015,0.032,0.011,0.069-0.01,0.096 c-0.021,0.027-0.056,0.04-0.09,0.033 l-0.175-0.009 c-0.014-0.001-0.028,0.001-0.041,0.005 c-0.013,0.004-0.024,0.011-0.034,0.020 l-0.13,0.117 c-0.019,0.017-0.045,0.026-0.071,0.024 Z" />
     </clipPath>
   </svg>
   
@@ -249,11 +308,20 @@
         <!-- Text Content: Below image on mobile, on left for desktop -->
         <div class="w-full order-2 md:order-1 md:w-1/2 text-center md:text-left space-y-6 md:space-y-8">
           <h1 id="typewriter" class="font-title text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"></h1>
-          <blockquote class="text-md md:text-lg lg:text-xl">
-            <p id="quote-animation" class="italic">"The mind is a LEGO set waiting for its model."</p>
-            <cite class="block mt-3 md:mt-4">— Miguel Di Lalla</cite>
-          </blockquote>
-          <h2 class="text-xl md:text-2xl font-title">Aspiring Junior Data Scientist</h2>
+          
+          <!-- Quote slider with updated structure and styling - initially hidden -->
+          <div id="quote-flipper" class="relative w-full h-24 mt-4 perspective overflow-hidden">
+            <div id="quote-inner" class="absolute w-full h-full flex items-center justify-start">
+              <p class="px-4 font-title text-xl">
+                <span class="quote-marks">"</span>
+                <span id="quote-text" class="font-bold">AI will supercharge humanity.</span>
+                <span class="quote-marks">"</span>
+              </p>
+            </div>
+          </div>
+          
+          <!-- Role subtitle - initially hidden -->
+          <h2 class="text-xl md:text-2xl font-title role-subtitle">Aspiring Junior Data Scientist</h2>
         </div>
       </div>
     </div>
@@ -483,11 +551,11 @@
       <!-- 📨 Contact Feedback Block -->
       <div class="mt-24">
         <div id="contact-feedback" class="bg-black text-white py-8">
-          <div class="max-w-3xl mx-auto bg-[#FFCF00] text-black rounded-xl p-6 shadow-lg">
+          <div class="contact-card max-w-3xl mx-auto bg-[#FFCF00] text-black rounded-xl p-6 shadow-lg floating-still contact-form">
             <h3 class="text-2xl font-bold mb-4 font-title">Share your thoughts</h3>
             <p class="text-sm mb-6">Send advice, encouragement, or feedback – anything that could help me grow!</p>
 
-            <form action="https://formsubmit.co/migueljdilallap@gmail.com" method="POST" class="space-y-4">
+            <form action="https://formsubmit.co/1a2710c05bdcb0e2b62d4158d0d728e9" method="POST" class="space-y-4">
               <!-- Hidden setup fields -->
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="box">
@@ -529,7 +597,18 @@
       const peekingCharacterMobile = document.getElementById('peekingCharacterMobile');
       const emoticonContainer = document.getElementById('emoticon-container');
       
-      if (!bioSubtitle || !aboutSection) return;
+      // Home section sequential animations with fixed timing
+      const quoteFlipperElem = document.getElementById('quote-flipper');
+      const roleSubtitleElem = document.querySelector('.role-subtitle');
+      
+      // Set fixed timing for quotes and job title to appear (11 seconds)
+      setTimeout(() => {
+        quoteFlipperElem.classList.add('visible');
+        roleSubtitleElem.classList.add('visible');
+        
+        // Start quote rotation immediately after they're visible
+        startQuoteRotation();
+      }, 12000);
       
       // Flag to track if animation has played
       let hasAnimationPlayed = false;
@@ -614,10 +693,10 @@
           }
         }
         
-        // Start the animation after the main typing text completes
+        // Start the animation after the profile card appears (plus 1 second)
         setTimeout(() => {
           animateEmoticons();
-        }, 3500); // Delay to allow "Thanks for reading!" to complete first
+        }, 6500); // Profile card appears at 5.5s + typing delay, we add 1s more
       }
       
       // Check on scroll if we should start the animations
@@ -655,7 +734,7 @@
 
         // Shuffle the images array
         const shuffleArray = arr => {
-          for (let i = arr.length - 1; i > 0; i--) {
+          for (let i = arr.length - 1; i > 0; i++) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]];
           }
@@ -720,6 +799,32 @@
       // Start emoticon animation
       if (emoticonContainer) {
         startEmoticonAnimation();
+      }
+
+      // Quote Slider Animation - updated to use slide-up effect
+      const quotes = [
+        "AI will supercharge humanity.",
+        "Can I teach a machine to do what I do instinctively?",
+        "Presentation is as important as execution."
+      ];
+
+      let currentQuote = 0;
+      const quoteText = document.getElementById("quote-text");
+      const quoteInner = document.getElementById("quote-inner");
+
+      // Function to start quote rotation
+      function startQuoteRotation() {
+        setInterval(() => {
+          currentQuote = (currentQuote + 1) % quotes.length;
+          
+          // Trigger slide-up animation by removing and re-adding
+          quoteInner.style.animation = 'none';
+          void quoteInner.offsetWidth; // Force reflow
+          quoteInner.style.animation = 'slide-up 0.5s ease-out';
+          
+          // Update the quote text
+          quoteText.textContent = quotes[currentQuote];
+        }, 4500);
       }
     });
   </script>

@@ -438,7 +438,7 @@
               We humans grow with each conversation... reach out!
             </p>
             <p class="typing-text tertiary text-lg md:text-xl italic">
-              Si mi proyecto resonó en ti... hablemos!
+              Si mi historia resonó contigo... hablemos!
             </p>
             
             <!-- Added cursor that appears after all text is displayed -->
@@ -476,6 +476,36 @@
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 📨 Contact Feedback Block -->
+      <div class="mt-24">
+        <div id="contact-feedback" class="bg-black text-white py-8">
+          <div class="max-w-3xl mx-auto bg-[#FFCF00] text-black rounded-xl p-6 shadow-lg">
+            <h3 class="text-2xl font-bold mb-4 font-title">Share your thoughts</h3>
+            <p class="text-sm mb-6">Send advice, encouragement, or feedback – anything that could help me grow!</p>
+
+            <form action="https://formsubmit.co/migueljdilallap@gmail.com" method="POST" class="space-y-4">
+              <!-- Hidden setup fields -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="box">
+              <input type="hidden" name="_subject" value="New message from your portfolio site">
+
+              <!-- Visible fields -->
+              <div>
+                <label for="name" class="block text-sm font-medium">Name</label>
+                <input type="text" id="name" name="name" required class="w-full px-3 py-2 border rounded-md" placeholder="John Doe">
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium">Message</label>
+                <textarea id="message" name="message" required rows="4" class="w-full px-3 py-2 border rounded-md" placeholder="What would you like to say?"></textarea>
+              </div>
+
+              <button type="submit" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-900 transition">Send</button>
+            </form>
           </div>
         </div>
       </div>

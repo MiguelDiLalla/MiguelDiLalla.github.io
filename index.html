@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Montagu+Slab:opsz,wght@16..144,100..700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -80,6 +82,116 @@
       flex-direction: column;
       justify-content: center;
       min-height: 400px;
+    }
+    
+    /* Contact section styles */
+    :root {
+      --typing-speed-main: 60ms;
+      --typing-speed-secondary: 35ms;
+      --typing-delay: 1200ms;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating-card {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .floating-still {
+      animation: float 4s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+    
+    .floating-still:hover {
+      animation-play-state: running;
+    }
+    
+    .typing-text {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+    }
+    
+    .typing-cursor {
+      border-right: 3px solid transparent;
+      animation: blink-caret 0.75s step-end infinite;
+    }
+    
+    .typing-text.main {
+      animation: typing-main 2.5s steps(30, end) var(--typing-delay) forwards;
+    }
+    
+    .typing-text.secondary {
+      opacity: 0;
+      animation: typing-secondary 3s steps(45, end) calc(var(--typing-delay) + 2.5s) forwards,
+                fade-in 0.5s ease calc(var(--typing-delay) + 2.5s) forwards;
+    }
+    
+    .typing-text.tertiary {
+      opacity: 0;
+      color: #ffcf00;
+      animation: typing-tertiary 3s steps(40, end) calc(var(--typing-delay) + 2.5s) forwards,
+                fade-in 0.5s ease calc(var(--typing-delay) + 2.5s) forwards;
+    }
+    
+    .typing-text.call-to-action {
+      opacity: 0;
+      animation: fade-in 0.5s ease calc(var(--typing-delay) + 6s) forwards;
+    }
+    
+    @keyframes typing-main {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes typing-secondary {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes typing-tertiary {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .contact-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: card-appear 1s ease-out calc(var(--typing-delay) + 5.5s) forwards;
+    }
+    
+    @keyframes card-appear {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .social-icons a {
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-3px);
+      color: #ffcf00;
     }
   </style>
 </head>
@@ -165,6 +277,10 @@
             <div class="scroll-track"></div>
           </div>
         </div>
+        <!-- Changing peaking character from typewriter animation to fade-in -->
+        <div class="text-right mt-3 h-6">
+          <p id="peekingCharacter" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">	( ͡ᵔ ͜ʖ ͡ᵔ) does any of them look familiar?</p>
+        </div>
       </section>
       
       <!-- Center: bio panel with audio player (3/5 width on desktop) -->
@@ -223,6 +339,10 @@
         <div class="collage-row animate-scroll-left" data-direction="left">
           <div class="scroll-track mobile-track-3"></div>
         </div>
+      </div>
+      <!-- Changing peaking character from typewriter animation to fade-in for mobile -->
+      <div class="text-right mt-3 h-6">
+        <p id="peekingCharacterMobile" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">┬┴┬┴┤･ω･)ﾉ does any of them look familiar?</p>
       </div>
     </section>
   </section>
@@ -301,13 +421,63 @@
 
   <!-- Contact -->
   <section id="contact" class="min-h-screen px-6 py-24 bg-black text-white">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6 animate-pulse">Thanks for reading...</h2>
-      <p class="mb-4">Feel free to reach out or follow me!</p>
-      <div class="flex justify-center gap-6">
-        <a href="https://github.com/yourusername" class="hover:underline">GitHub</a>
-        <a href="https://linkedin.com/in/yourusername" class="hover:underline">LinkedIn</a>
-        <a href="mailto:youremail@example.com" class="hover:underline">Email</a>
+    <div class="max-w-6xl mx-auto">
+      <!-- Desktop layout: side by side -->
+      <div class="flex flex-col md:flex-row gap-12 md:gap-16 items-center justify-between">
+        <!-- Left: Animated typing text -->
+        <div class="w-full md:w-1/2 space-y-8">
+          <div>
+            <h2 class="typing-text main text-3xl md:text-4xl lg:text-5xl font-title font-bold">
+              Thanks for reading!
+            </h2>
+            <div id="emoticon-container" class="h-8 mt-2 text-xl md:text-2xl text-[#ffcf00]"></div>
+          </div>
+          
+          <div class="space-y-4">
+            <p class="typing-text secondary text-lg md:text-xl">
+              We humans grow with each conversation... reach out!
+            </p>
+            <p class="typing-text tertiary text-lg md:text-xl italic">
+              Si mi proyecto resonó en ti... hablemos!
+            </p>
+            
+            <!-- Added cursor that appears after all text is displayed -->
+            <p class="typing-text call-to-action pl-4 text-lg md:text-xl typing-cursor">
+              Let's connect and create something amazing together!
+            </p>
+          </div>
+        </div>
+        
+        <!-- Right: Floating profile card -->
+        <div class="w-full md:w-1/2 mt-16 md:mt-0 flex justify-center">
+          <div class="contact-card floating-still bg-[#ffcf00] text-black rounded-xl shadow-2xl p-6 max-w-xs w-full">
+            <div class="flex flex-col items-center">
+              <!-- Profile picture -->
+              <img 
+                src="/assets/images/profile/photo1.jpg" 
+                alt="Miguel Di Lalla" 
+                class="w-32 h-32 rounded-xl object-cover shadow-md mb-4"
+              >
+              
+              <!-- Name and Role -->
+              <h3 class="font-bold text-xl font-title mb-1">Miguel Di Lalla</h3>
+              <p class="text-sm mb-6">Aspiring Junior Data Scientist</p>
+              
+              <!-- Social Icons -->
+              <div class="social-icons flex gap-6 text-2xl">
+                <a href="https://github.com/MiguelDiLalla" target="_blank" title="GitHub Profile">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" title="LinkedIn Profile">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:migueldilalla@gmail.com" title="Email Miguel">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -325,11 +495,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       const bioSubtitle = document.getElementById('bio-subtitle');
       const aboutSection = document.getElementById('about');
+      const peekingCharacter = document.getElementById('peekingCharacter');
+      const peekingCharacterMobile = document.getElementById('peekingCharacterMobile');
+      const emoticonContainer = document.getElementById('emoticon-container');
       
       if (!bioSubtitle || !aboutSection) return;
       
       // Flag to track if animation has played
       let hasAnimationPlayed = false;
+      let hasPeekingAnimationPlayed = false;
       
       // Function to check if element is in viewport
       function isElementInViewport(el) {
@@ -340,7 +514,7 @@
         );
       }
       
-      // Typewriter animation function
+      // Typewriter animation function for bio subtitle
       function startTypewriter() {
         if (hasAnimationPlayed) return;
         
@@ -361,10 +535,77 @@
         typeWriter();
       }
       
-      // Check on scroll if we should start the animation
+      // Fade-in animation for the peeking character instead of typewriter
+      function startPeekingAnimation(element) {
+        if (hasPeekingAnimationPlayed) return;
+        
+        // Just fade in the element which already has the text
+        element.classList.add('opacity-100');
+        hasPeekingAnimationPlayed = true;
+      }
+      
+      // Emoticon animation with typing and backspacing effect
+      function startEmoticonAnimation() {
+        // The specific emoticons you requested
+        const emoticons = ['٩(◕‿◕｡)۶', '(๑˘︶˘๑)', '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧', '(⁀ᗢ⁀)'];
+        let currentEmoticon = '';
+        let currentIndex = 0;
+        let isTyping = true;
+        let charIndex = 0;
+        const typingSpeed = 50; // ms per character
+        
+        function animateEmoticons() {
+          if (isTyping) {
+            // Typing current emoticon
+            if (charIndex < emoticons[currentIndex].length) {
+              currentEmoticon += emoticons[currentIndex].charAt(charIndex);
+              emoticonContainer.textContent = currentEmoticon;
+              charIndex++;
+              setTimeout(animateEmoticons, typingSpeed);
+            } else {
+              // Finished typing, wait 3 seconds before backspacing
+              isTyping = false;
+              setTimeout(animateEmoticons, 2000);
+            }
+          } else {
+            // Backspacing
+            if (charIndex > 0) {
+              charIndex--;
+              currentEmoticon = emoticons[currentIndex].substring(0, charIndex);
+              emoticonContainer.textContent = currentEmoticon;
+              setTimeout(animateEmoticons, typingSpeed / 2);
+            } else {
+              // Move to next emoticon
+              isTyping = true;
+              currentEmoticon = '';
+              currentIndex = (currentIndex + 1) % emoticons.length;
+              setTimeout(animateEmoticons, 500); // Brief pause before typing next
+            }
+          }
+        }
+        
+        // Start the animation after the main typing text completes
+        setTimeout(() => {
+          animateEmoticons();
+        }, 3500); // Delay to allow "Thanks for reading!" to complete first
+      }
+      
+      // Check on scroll if we should start the animations
       function checkScroll() {
         if (!hasAnimationPlayed && isElementInViewport(aboutSection)) {
           startTypewriter();
+        }
+        
+        const roleModelsDesktop = document.getElementById('role-models-desktop');
+        const roleModelsMobile = document.getElementById('role-models-mobile');
+        
+        // Start peaking animation based on which role models section is visible
+        if (!hasPeekingAnimationPlayed) {
+          if (roleModelsDesktop && isElementInViewport(roleModelsDesktop) && window.innerWidth >= 768) {
+            startPeekingAnimation(peekingCharacter);
+          } else if (roleModelsMobile && isElementInViewport(roleModelsMobile) && window.innerWidth < 768) {
+            startPeekingAnimation(peekingCharacterMobile);
+          }
         }
       }
       
@@ -372,7 +613,7 @@
       window.addEventListener('scroll', checkScroll);
       
       // Check on initial load too
-      setTimeout(checkScroll, 500);
+      setTimeout(checkScroll, 800);
       
       // Ensure mobile role models carousel is populated
       function populateRoleModelsMobile() {
@@ -444,6 +685,11 @@
       // Initialize mobile carousels
       if (window.innerWidth < 768) {
         populateRoleModelsMobile();
+      }
+      
+      // Start emoticon animation
+      if (emoticonContainer) {
+        startEmoticonAnimation();
       }
     });
   </script>

@@ -19,10 +19,11 @@ class Typewriter {
   }
 
   // Add text typing to the queue
-  type(text) {
+  type(text, speedMultiplier = 1) {
     this.queue.push({
       action: this.actions.TYPE,
-      value: text
+      value: text,
+      speedMultiplier: speedMultiplier
     });
     return this;
   }
@@ -123,6 +124,8 @@ class Typewriter {
   // Execute a TYPE action
   async executeTypeAction(action, lines, currentLine) {
     const text = action.value;
+    const typingSpeed = this.speed / (action.speedMultiplier || 1);
+    
     for (let i = 0; i < text.length; i++) {
       // Use setTimeout inside a promise to create delay between characters
       await new Promise(resolve => {
@@ -134,7 +137,7 @@ class Typewriter {
           }
           this.element.innerHTML = lines.join('<br>');
           resolve();
-        }, this.speed);
+        }, typingSpeed);
       });
     }
   }
@@ -186,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .nextLine()
       .nextLine()
       .wait(400)
-      .type('He is glad that you got here')
-      .wait(600)
+      .type('He is glad that you got here', 3) // Type this text twice as fast
+      .wait(700)
       .delete(28) // Delete the second line
       .type('Please, take a look... ')
       .wait(400)

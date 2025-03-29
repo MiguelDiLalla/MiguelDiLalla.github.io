@@ -252,6 +252,86 @@
     .role-subtitle.visible {
       opacity: 1;
     }
+
+    /* Enhanced Markdown Styles */
+    .markdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .markdown-table th,
+    .markdown-table td {
+      padding: 0.5rem;
+      border: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    .markdown-table th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .task-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .task-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .task-list input[type="checkbox"] {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    #bio-text code {
+      background-color: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    #bio-text pre code {
+      display: block;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    #bio-text blockquote {
+      border-left: 4px solid #ffcf00;
+      padding-left: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: #4b5563;
+    }
+
+    /* Bio section headers (h2) styling */
+    #bio-text h2 {
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #ffcf00;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* Give extra space to first header too */
+    #bio-text h2:first-of-type {
+      margin-top: 1rem;
+    }
+
+    /* Ensure paragraphs after headers have proper spacing */
+    #bio-text h2 + p {
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
@@ -314,7 +394,7 @@
             <div id="quote-inner" class="absolute w-full h-full flex items-center justify-start">
               <p class="px-4 font-title text-xl">
                 <span class="quote-marks">"</span>
-                <span id="quote-text" class="font-bold">AI will supercharge humanity.</span>
+                <span id="quote-text" class="font-bold">Loading quotes...</span>
                 <span class="quote-marks">"</span>
               </p>
             </div>
@@ -372,7 +452,7 @@
           
           <!-- Bio Panel -->
           <div class="bg-white rounded-xl h-[400px] overflow-y-scroll p-6 shadow-lg">
-            <div id="bio-text" class="prose">[Biography Text Placeholder]</div>
+            <div id="bio-text" class="prose text-justify">[Biography Text Placeholder]</div>
           </div>
           
           <!-- Logos (horizontal container under bio on desktop) -->
@@ -607,7 +687,7 @@
         roleSubtitleElem.classList.add('visible');
         
         // Start quote rotation immediately after they're visible
-        startQuoteRotation();
+        fetchQuotesAndStartRotation();
       }, 12000);
       
       // Flag to track if animation has played
@@ -801,20 +881,33 @@
         startEmoticonAnimation();
       }
 
-      // Quote Slider Animation - updated to use slide-up effect
-      const quotes = [
-        "AI will supercharge humanity.",
-        "Can I teach a machine to do what I do instinctively?",
-        "Presentation is as important as execution."
-      ];
+      // Quote Slider Animation - updated to load from quotes.json file
+      function fetchQuotesAndStartRotation() {
+        fetch('/data/quotes.json')
+          .then(response => response.json())
+          .then(data => {
+            if (data.quotes && data.quotes.length > 0) {
+              startQuoteRotation(data.quotes);
+            } else {
+              console.error('No quotes found in the JSON file');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching quotes:', error);
+          });
+      }
 
       let currentQuote = 0;
       const quoteText = document.getElementById("quote-text");
       const quoteInner = document.getElementById("quote-inner");
 
       // Function to start quote rotation
-      function startQuoteRotation() {
+      function startQuoteRotation(quotes) {
+        // Set initial quote
+        updateQuoteDisplay(quotes[0]);
+        
         setInterval(() => {
+          // Move to next quote
           currentQuote = (currentQuote + 1) % quotes.length;
           
           // Trigger slide-up animation by removing and re-adding
@@ -823,8 +916,13 @@
           quoteInner.style.animation = 'slide-up 0.5s ease-out';
           
           // Update the quote text
-          quoteText.textContent = quotes[currentQuote];
+          updateQuoteDisplay(quotes[currentQuote]);
         }, 4500);
+      }
+      
+      // Function to update quote display with text
+      function updateQuoteDisplay(quote) {
+        quoteText.textContent = quote.text;
       }
     });
   </script>

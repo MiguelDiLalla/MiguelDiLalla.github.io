@@ -32,33 +32,108 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Simple markdown to HTML converter (fallback if marked.js isn't available)
- * Handles basic markdown syntax
+ * Enhanced markdown to HTML converter (fallback if marked.js isn't available)
+ * Handles rich markdown syntax
  */
 function convertMarkdownToHTML(markdown) {
-  return markdown
-    // Headers
-    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-    
-    // Emphasis
-    .replace(/\*\*(.*)\*\*/gm, '<strong>$1</strong>')
-    .replace(/\*(.*)\*/gm, '<em>$1</em>')
-    
-    // Lists
-    .replace(/^\- (.*$)/gm, '<li>$1</li>')
-    
-    // Blockquotes
-    .replace(/^\> (.*$)/gm, '<blockquote>$1</blockquote>')
-    
-    // Paragraphs
-    .replace(/^(?!<[a-z])/gm, '<p>$&')
-    .replace(/^(?!<[a-z].*>)(.*)$/gm, '$1</p>')
-    
-    // Clean up
-    .replace(/<\/p><p>/g, '</p>\n<p>')
-    .replace(/<\/li><li>/g, '</li>\n<li>')
-    .replace(/<\/li>(?!<li>)/g, '</li>\n</ul>')
-    .replace(/^<li>/gm, '<ul>\n<li>');
+  const blocks = markdown.split('\n\n');
+
+  return blocks.map(block => {
+    // Code blocks
+    if (block.startsWith('```')) {
+      const lines = block.split('\n');
+      const language = lines[0].replace('```', '');
+      const code = lines.slice(1, -1).join('\n');
+      return `<pre><code class="language-${language}">${escapeHTML(code)}</code></pre>`;
+    }
+
+    // Tables
+    if (block.includes('|')) {
+      const rows = block.split('\n');
+      if (rows.length > 2) {
+        const headers = rows[0].split('|').filter(cell => cell.trim());
+        const tableRows = rows.slice(2);
+
+        const tableHTML = `
+          <table class="markdown-table">
+            <thead>
+              <tr>${headers.map(h => `<th>${h.trim()}</th>`).join('')}</tr>
+            </thead>
+            <tbody>
+              ${tableRows.map(row => `
+                <tr>${row.split('|')
+                  .filter(cell => cell.trim())
+                  .map(cell => `<td>${cell.trim()}</td>`)
+                  .join('')}
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+        return tableHTML;
+      }
+    }
+
+    // Task Lists
+    if (block.match(/^- \[[ x]\]/m)) {
+      return `<ul class="task-list">
+        ${block.split('\n')
+          .map(line => {
+            const checked = line.includes('[x]');
+            const text = line.replace(/- \[[ x]\] /, '');
+            return `<li>
+              <input type="checkbox" ${checked ? 'checked' : ''} disabled>
+              <span>${text}</span>
+            </li>`;
+          })
+          .join('')}
+      </ul>`;
+    }
+
+    return block
+      // Headers with IDs for navigation
+      .replace(/^# (.*$)/gm, (_, h1) => `<h1 id="${slugify(h1)}">${h1}</h1>`)
+      .replace(/^## (.*$)/gm, (_, h2) => `<h2 id="${slugify(h2)}">${h2}</h2>`)
+      .replace(/^### (.*$)/gm, (_, h3) => `<h3 id="${slugify(h3)}" class="mt-8 mb-4">${h3}</h3>`)
+
+      // Links and Images
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/!\[([^\]]+)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
+
+      // Inline Code
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+
+      // Strikethrough
+      .replace(/~~(.*)~~/g, '<del>$1</del>')
+
+      // Basic formatting
+      .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*)\*/g, '<em>$1</em>')
+      .replace(/^\- (.*$)/gm, '<li>$1</li>')
+      .replace(/^\> (.*$)/gm, '<blockquote>$1</blockquote>')
+
+      // Paragraphs
+      .replace(/^(?!<[a-z])/gm, '<p>$&')
+      .replace(/^(?!<[a-z].*>)(.*)$/gm, '$1</p>')
+
+      // Lists cleanup
+      .replace(/<\/li><li>/g, '</li>\n<li>')
+      .replace(/<\/li>(?!<li>)/g, '</li>\n</ul>')
+      .replace(/^<li>/gm, '<ul>\n<li>');
+  }).join('');
+}
+
+function slugify(text) {
+  return text.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }

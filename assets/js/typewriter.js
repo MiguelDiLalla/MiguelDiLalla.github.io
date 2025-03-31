@@ -169,6 +169,19 @@ class Typewriter {
   }
 }
 
+// Extend the Typewriter class to dispatch an event when the animation completes
+const typewriterComplete = new Event('typewriterComplete');
+
+const originalExecuteNextAction = Typewriter.prototype.executeNextAction;
+Typewriter.prototype.executeNextAction = async function () {
+  if (!this.queue.length) {
+    this.isRunning = false;
+    this.element.dispatchEvent(typewriterComplete); // Dispatch the event when the queue is empty
+    return;
+  }
+  await originalExecuteNextAction.call(this);
+};
+
 // Initialize typewriter when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const typewriterElement = document.getElementById('typewriter');
@@ -202,6 +215,19 @@ document.addEventListener('DOMContentLoaded', () => {
       .wait(700)
       .delete(10) // Delete the emoticon
       .start();
+
+    // Listen for the typewriter completion event
+    typewriterElement.addEventListener('typewriterComplete', () => {
+      // Show quotes and subtitle when typewriter animation completes
+      const quoteFlipperElem = document.getElementById('quote-flipper');
+      const roleSubtitleElem = document.querySelector('.role-subtitle');
+      
+      quoteFlipperElem.classList.add('visible');
+      roleSubtitleElem.classList.add('visible');
+      
+      // This function will now be called from the main index.html script
+      // where quotes are preloaded - no need to fetch quotes here
+    });
   } else {
     console.error('Typewriter element not found.');
   }

@@ -332,6 +332,35 @@
     #bio-text h2 + p {
       margin-top: 1rem;
     }
+
+    /* Audio control button transition */
+    #nav-audio-control {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    #nav-audio-control.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating audio control button */
+    #floating-audio-control {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 40;
+      opacity: 0;
+      transform: translateY(1rem);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    
+    #floating-audio-control.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
@@ -348,23 +377,35 @@
       <!-- Mobile Navigation (stacked) -->
       <div class="flex flex-col md:hidden items-center gap-2">
         <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title mb-2">Miguel Di Lalla</a>
-        <ul class="flex gap-4 font-semibold text-sm">
-          <li><a href="#about" class="hover:text-red-600">About</a></li>
-          <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
-          <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
-          <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
-        </ul>
+        <div class="flex items-center justify-between w-full">
+          <ul class="flex gap-4 font-semibold text-sm">
+            <li><a href="#about" class="hover:text-red-600">About</a></li>
+            <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
+            <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
+            <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
+          </ul>
+          <!-- Mobile Audio Mute Button (initially hidden) -->
+          <button id="nav-audio-control" class="p-2 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-sm hidden">
+            <i class="fas fa-volume-mute"></i>
+          </button>
+        </div>
       </div>
       
       <!-- Desktop Navigation (side by side) -->
       <div class="hidden md:flex justify-between items-center">
         <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title">Miguel Di Lalla</a>
-        <ul class="flex gap-6 font-semibold">
-          <li><a href="#about" class="hover:text-red-600">About</a></li>
-          <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
-          <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
-          <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
-        </ul>
+        <div class="flex items-center gap-6">
+          <ul class="flex gap-6 font-semibold">
+            <li><a href="#about" class="hover:text-red-600">About</a></li>
+            <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
+            <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
+            <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
+          </ul>
+          <!-- Desktop Audio Mute Button (initially hidden) -->
+          <button id="nav-audio-control" class="p-2 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-sm hidden">
+            <i class="fas fa-volume-mute"></i>
+          </button>
+        </div>
       </div>
     </nav>
   </header>
@@ -394,7 +435,7 @@
             <div id="quote-inner" class="absolute w-full h-full flex items-center justify-start">
               <p class="px-4 font-title text-xl">
                 <span class="quote-marks">"</span>
-                <span id="quote-text" class="font-bold">Loading quotes...</span>
+                <span id="quote-text" class="font-bold"></span>
                 <span class="quote-marks">"</span>
               </p>
             </div>
@@ -426,8 +467,8 @@
           </div>
         </div>
         <!-- Changing peaking character from typewriter animation to fade-in -->
-        <div class="text-right mt-3 h-6">
-          <p id="peekingCharacter" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">	( ͡ᵔ ͜ʖ ͡ᵔ) does any of them look familiar?</p>
+        <div class="text-left mt-3 h-6">
+          <p id="peekingCharacter" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">	( ͡ᵔ ͜ʖ ͡ᵔ) If I had a photo of all the teachers I've had in my life, they would go here.</p>
         </div>
       </section>
       
@@ -441,10 +482,13 @@
               <p id="bio-subtitle" class="text-sm font-sans italic mt-1 h-5"></p>
             </div>
             <div class="flex gap-2">
-              <button id="audio-play" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center">
-                <span>Play</span>
+              <button id="audio-rewind" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Rewind 10 seconds">
+                <i class="fas fa-backward-step"></i>
               </button>
-              <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center">
+              <button id="audio-play" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Play/Pause">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Toggle playback speed">
                 <span>x1</span>
               </button>
             </div>
@@ -488,10 +532,7 @@
           <div class="scroll-track mobile-track-3"></div>
         </div>
       </div>
-      <!-- Changing peaking character from typewriter animation to fade-in for mobile -->
-      <div class="text-right mt-3 h-6">
-        <p id="peekingCharacterMobile" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">┬┴┬┴┤･ω･)ﾉ does any of them look familiar?</p>
-      </div>
+      <!-- This section can be safely removed as it is not visible -->
     </section>
   </section>
 
@@ -503,10 +544,10 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6">
         <!-- Main Project Card (Vertical - Aureo) -->
         <a href="#" class="md:row-span-2 rounded-xl overflow-hidden relative group block h-full aspect-[0.65/1]">
-          <img src="/assets/images/projects/lego.gif" alt="LEGO Bricks" class="w-full h-full object-cover" />
+          <img src="/assets/images/projects/lego.webp" alt="LEGO Bricks" class="w-full h-full object-cover" />
           <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-            <h3 class="text-xl font-bold">LEGO Bricks Classification</h3>
-            <p class="text-sm">Full ML pipeline for visual brick identification</p>
+            <h3 class="text-xl font-bold">Brickssifier Studwise</h3>
+            <p class="text-sm">LEGO Bricks Classification pipeline</p>
           </div>
         </a>
 
@@ -660,6 +701,11 @@
     </div>
   </section>
 
+  <!-- Floating audio control button (initially hidden) -->
+  <button id="floating-audio-control" class="p-3 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-lg flex items-center justify-center w-12 h-12">
+    <i class="fas fa-volume-mute text-lg"></i>
+  </button>
+
   <!-- Scripts -->
   <script src="/assets/js/typewriter.js"></script>
   <script src="/assets/js/imageCarousel.js"></script>
@@ -681,13 +727,34 @@
       const quoteFlipperElem = document.getElementById('quote-flipper');
       const roleSubtitleElem = document.querySelector('.role-subtitle');
       
+      // Preload quotes as soon as the page loads
+      let preloadedQuotes = [];
+      
+      // Fetch quotes immediately when page loads
+      fetch('/data/quotes.json')
+        .then(response => response.json())
+        .then(data => {
+          if (data.quotes && data.quotes.length > 0) {
+            preloadedQuotes = data.quotes;
+            // Pre-populate the first quote (still hidden)
+            document.getElementById('quote-text').textContent = preloadedQuotes[0].text;
+          } else {
+            console.error('No quotes found in the JSON file');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching quotes:', error);
+        });
+      
       // Set fixed timing for quotes and job title to appear (11 seconds)
       setTimeout(() => {
         quoteFlipperElem.classList.add('visible');
         roleSubtitleElem.classList.add('visible');
         
         // Start quote rotation immediately after they're visible
-        fetchQuotesAndStartRotation();
+        if (preloadedQuotes.length > 0) {
+          startQuoteRotation(preloadedQuotes);
+        }
       }, 12000);
       
       // Flag to track if animation has played
@@ -881,29 +948,14 @@
         startEmoticonAnimation();
       }
 
-      // Quote Slider Animation - updated to load from quotes.json file
-      function fetchQuotesAndStartRotation() {
-        fetch('/data/quotes.json')
-          .then(response => response.json())
-          .then(data => {
-            if (data.quotes && data.quotes.length > 0) {
-              startQuoteRotation(data.quotes);
-            } else {
-              console.error('No quotes found in the JSON file');
-            }
-          })
-          .catch(error => {
-            console.error('Error fetching quotes:', error);
-          });
-      }
-
+      // Quote Slider Animation - updated to use preloaded quotes
       let currentQuote = 0;
       const quoteText = document.getElementById("quote-text");
       const quoteInner = document.getElementById("quote-inner");
 
       // Function to start quote rotation
       function startQuoteRotation(quotes) {
-        // Set initial quote
+        // Set initial quote (should already be set by preload)
         updateQuoteDisplay(quotes[0]);
         
         setInterval(() => {

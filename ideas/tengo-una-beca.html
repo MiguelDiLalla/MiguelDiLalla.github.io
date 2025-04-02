@@ -130,7 +130,7 @@
             <li><a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="hover:text-rose-500">LinkedIn</a></li>
             <li><a href="https://github.com/MiguelDiLalla" target="_blank" class="hover:text-rose-500">GitHub</a></li>
             <li><a href="/resume.pdf" target="_blank" class="hover:text-rose-500">CV</a></li>
-            <li><a href="/" class="hover:text-rose-500">Home</a></li>
+            <li><a href="/" class="hover:text-rose-500">Portfolio</a></li>
           </ul>
         </div>
       </div>
@@ -143,7 +143,7 @@
             <li><a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="hover:text-rose-500">LinkedIn</a></li>
             <li><a href="https://github.com/MiguelDiLalla" target="_blank" class="hover:text-rose-500">GitHub</a></li>
             <li><a href="/resume.pdf" target="_blank" class="hover:text-rose-500">CV</a></li>
-            <li><a href="/" class="hover:text-rose-500">Home</a></li>
+            <li><a href="/" class="hover:text-rose-500">Portfolio</a></li>
           </ul>
         </div>
       </div>
@@ -154,43 +154,46 @@
   <main class="pt-28 pb-16 px-4 md:px-8">
     <div class="max-w-4xl mx-auto">
       <!-- Project Header -->
-      <div class="mb-10 relative">
-        <div class="absolute right-0 top-0">
-          <a href="https://consiguecurroconponos.com/becas/" target="_blank" class="px-6 py-2 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition shadow-md animate-pulse">
-            <i class="fas fa-play-circle mr-2"></i> Visita la web de PONOS!
-          </a>
+      <div class="mb-10">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-title font-bold text-rose-500">Tengo una Beca!</h1>
+            <p class="text-xl mt-2">Programa PONOS</p>
+          </div>
+          <div class="mt-4 md:mt-0">
+            <a href="https://linktr.ee/MiguelDiLalla" target="_blank" class="px-6 py-2 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition shadow-md animate-pulse inline-block">
+              <i class="fas fa-play-circle mr-2"></i> Contacta conmigo para + información.
+            </a>
+          </div>
         </div>
-        <h1 class="text-4xl md:text-5xl font-title font-bold text-rose-500">Tengo una Beca!</h1>
-        <p class="text-xl mt-2">infórmate AQUI</p>
       </div>
       
       <!-- Project Content Container -->
       <div class="bg-white rounded-xl p-6 md:p-10 shadow-lg">
         <div id="project-content" class="project-content animate-fade-in">
-          <!-- Content will be loaded from README.md -->
-          <div class="flex justify-center">
-            <div class="animate-pulse flex space-x-4">
-              <div class="flex-1 space-y-6 py-1">
-                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div class="space-y-3">
-                  <div class="h-4 bg-gray-200 rounded"></div>
-                  <div class="h-4 bg-gray-200 rounded"></div>
-                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
-                </div>
-                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
-              </div>
+          <!-- Iframe content -->
+          <div class="w-full overflow-hidden rounded-lg">
+            <!-- <h2 class="text-2xl font-title font-bold mb-4">PONOS Scholarship Program</h2>
+            <p class="mb-4">Browse the official scholarship program website below:</p> -->
+            <div class="aspect-[16/9] w-full">
+              <iframe 
+                src="https://consiguecurroconponos.com/becas/" 
+                class="w-full h-[600px] border-0 rounded-lg shadow-md"
+                title="PONOS Scholarship Program"
+                loading="lazy" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
             </div>
+            <p class="mt-4 text-sm text-gray-500">If the content doesn't load properly, you can <a href="https://consiguecurroconponos.com/becas/" target="_blank" class="text-rose-500 hover:underline">visit the website directly</a>.</p>
           </div>
         </div>
       </div>
       
       <!-- Project Navigation -->
-      <div class="mt-10 flex flex-wrap justify-between gap-4">
+      <div class="mt-10 flex justify-center">
         <a href="/" class="px-6 py-2 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition shadow-md">
-          <i class="fas fa-arrow-left mr-2"></i> Back to Home
-        </a>
-        <a href="https://github.com/MiguelDiLalla/ponos-scholarship" target="_blank" class="px-6 py-2 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition shadow-md">
-          <i class="fab fa-github mr-2"></i> View on GitHub
+          <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
         </a>
       </div>
     </div>
@@ -202,35 +205,5 @@
       <p>© 2025 Miguel Di Lalla. All rights reserved.</p>
     </div>
   </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Load and render the README.md content
-      fetch('https://raw.githubusercontent.com/MiguelDiLalla/ponos-scholarship/main/README.md')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch README.md');
-          }
-          return response.text();
-        })
-        .then(markdown => {
-          document.getElementById('project-content').innerHTML = marked.parse(markdown);
-        })
-        .catch(error => {
-          console.error('Error loading project content:', error);
-          document.getElementById('project-content').innerHTML = `
-            <div class="p-6 text-center">
-              <h2 class="text-2xl font-bold text-blue-500 mb-4">Project README not available</h2>
-              <p>The project documentation is currently being updated. Please check back later or visit the GitHub repository for more information.</p>
-              <div class="mt-6">
-                <a href="https://github.com/MiguelDiLalla/ponos-scholarship" target="_blank" class="px-6 py-2 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition">
-                  <i class="fab fa-github mr-2"></i> View on GitHub
-                </a>
-              </div>
-            </div>
-          `;
-        });
-    });
-  </script>
 </body>
 </html>

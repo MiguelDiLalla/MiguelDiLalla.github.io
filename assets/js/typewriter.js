@@ -203,10 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .nextLine()
       .wait(400)
       .type('Él quiere trabajar!', 3) // Type this text twice as fast
-      .wait(900)
+      .wait(1200)
       .delete(19) // Delete the second line
       .type('Please, take a look... ')
       .wait(400)
+      .nextLine()
       .setEmoticon('(„• ᴗ •„)')
       .wait(600)
       .setEmoticon('(„• ᴗ ᵔ„)')

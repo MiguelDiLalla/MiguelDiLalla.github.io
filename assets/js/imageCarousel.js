@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Dynamic Parallax Scrolling Gallery for Role Models Section
  * Loads all images from the /assets/images/collage/ directory
  * and displays them in horizontally scrolling rows with random speeds
+ * Using WebP format for optimized performance
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -67,12 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const rows = document.querySelectorAll('.collage-row');
   if (!rows.length) return;
 
-  // Create array of all available image paths (image_01.jpg to image_42.jpg)
+  // Create array of all available image paths (image_01.webp to image_42.webp)
   const imagePaths = [];
   for (let i = 1; i <= TOTAL_IMAGES; i++) {
     // Format the number with leading zero if needed (01, 02, ... 42)
     const imageNumber = i.toString().padStart(2, '0');
-    imagePaths.push(`image_${imageNumber}.jpg`);
+    imagePaths.push(`image_${imageNumber}.webp`); // Changed to .webp extension
   }
 
   // Shuffle the image array to get random distribution
@@ -130,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.alt = 'Role model';
       img.className = 'collage-img';
       img.loading = 'lazy'; // Add lazy loading for better performance
+      img.decoding = 'async'; // Add async decoding for better performance
       
       // Add image to the scroll track
       track.appendChild(img);
@@ -137,5 +139,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Log success message
-  console.log(`Role models gallery initialized with ${TOTAL_IMAGES} images in ${ROWS} rows`);
+  console.log(`Role models gallery initialized with ${TOTAL_IMAGES} WebP images in ${ROWS} rows`);
 });

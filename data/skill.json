@@ -13,7 +13,6 @@
   { "skill": "Modular Design", "level": "intermedio", "category": "Engineering Practice", "visualize_as": "tech_skill" },
   { "skill": "Iterative Research", "level": "intermedio", "category": "Professional Practice", "visualize_as": "soft_skill" },
   { "skill": "Developer Accessibility", "level": "intermedio", "category": "UX / Culture", "visualize_as": "soft_skill" },
-  { "skill": "Object-Oriented Programming (OOP)", "level": "about_to_learn", "category": "Programming Paradigm", "visualize_as": "core_skill" },
   { "skill": "pytest", "level": "about_to_learn", "category": "Testing Framework", "visualize_as": "tech_skill" },
   { "skill": "Bash", "level": "about_to_learn", "category": "Scripting Language", "visualize_as": "tech_skill" },
   { "skill": "Docker", "level": "about_to_learn", "category": "Containerization", "visualize_as": "tech_skill" },

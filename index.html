@@ -362,6 +362,35 @@
       transform: translateY(0);
       pointer-events: auto;
     }
+    
+    /* Language toggle styles */
+    .language-toggle {
+      display: inline-flex;
+      margin-left: 1rem;
+    }
+    
+    .language-toggle button {
+      padding: 0.15rem 0.5rem;
+      font-size: 0.85rem;
+      color: #6b7280; /* gray-500 */
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .language-toggle button:first-child {
+      border-top-left-radius: 0.375rem;
+      border-bottom-left-radius: 0.375rem;
+      border-right: 1px solid #e5e7eb;
+    }
+    
+    .language-toggle button:last-child {
+      border-top-right-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+    }
+    
+    .language-toggle button.active {
+      background-color: #e5e7eb;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
@@ -377,14 +406,26 @@
     <nav class="max-w-5xl mx-auto px-6 py-4">
       <!-- Mobile Navigation (stacked) -->
       <div class="flex flex-col md:hidden items-center gap-2">
-        <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title mb-2">Miguel Di Lalla</a>
+        <!-- Title alone in its own container -->
+        <div class="flex items-center justify-center">
+          <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title mb-2">Miguel Di Lalla</a>
+        </div>
+        
+        <!-- Language toggle moved below and centered -->
+        <div class="flex justify-center w-full mb-2">
+          <div class="language-toggle mx-auto">
+            <button id="lang-en-mobile" onclick="changeLanguage('en')" class="text-gray-600 hover:bg-gray-100 transition-colors">EN</button>
+            <button id="lang-es-mobile" onclick="changeLanguage('es')" class="text-gray-600 hover:bg-gray-100 transition-colors">ES</button>
+          </div>
+        </div>
+        
         <div class="flex items-center justify-center w-full">
           <ul class="flex gap-4 font-semibold text-sm">
-            <li><a href="#about" class="hover:text-red-600">About</a></li>
-            <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
-            <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
-            <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
-            <li><a href="/content/resume.html" target="_blank" class="hover:text-red-600">CV</a></li>
+            <li><a href="#about" class="hover:text-red-600" data-i18n="nav_about">About</a></li>
+            <li><a href="#projects" class="hover:text-red-600" data-i18n="nav_projects">Projects</a></li>
+            <li><a href="#skills" class="hover:text-red-600" data-i18n="nav_skills">Skills</a></li>
+            <li><a href="#contact" class="hover:text-red-600" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="/content/resume.html" target="_blank" class="hover:text-red-600" data-i18n="nav_cv">CV</a></li>
           </ul>
           <!-- Mobile Audio Mute Button (initially hidden) -->
           <button id="nav-audio-control" class="p-2 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-sm hidden ml-4">
@@ -395,14 +436,23 @@
       
       <!-- Desktop Navigation (side by side) -->
       <div class="hidden md:flex justify-between items-center">
-        <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title">Miguel Di Lalla</a>
+        <div class="flex items-center">
+          <a href="#hero" class="text-xl font-bold hover:text-red-600 font-title">Miguel Di Lalla</a>
+          
+          <!-- Language toggle - desktop -->
+          <div class="language-toggle">
+            <button id="lang-en" onclick="changeLanguage('en')" class="text-gray-600 hover:bg-gray-100 transition-colors">EN</button>
+            <button id="lang-es" onclick="changeLanguage('es')" class="text-gray-600 hover:bg-gray-100 transition-colors">ES</button>
+          </div>
+        </div>
+        
         <div class="flex items-center gap-6">
           <ul class="flex gap-6 font-semibold">
-            <li><a href="#about" class="hover:text-red-600">About</a></li>
-            <li><a href="#projects" class="hover:text-red-600">Projects</a></li>
-            <li><a href="#skills" class="hover:text-red-600">Skills</a></li>
-            <li><a href="#contact" class="hover:text-red-600">Contact</a></li>
-            <li><a href="/content/resume.html" target="_blank" class="hover:text-red-600">CV</a></li>
+            <li><a href="#about" class="hover:text-red-600" data-i18n="nav_about">About</a></li>
+            <li><a href="#projects" class="hover:text-red-600" data-i18n="nav_projects">Projects</a></li>
+            <li><a href="#skills" class="hover:text-red-600" data-i18n="nav_skills">Skills</a></li>
+            <li><a href="#contact" class="hover:text-red-600" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="/content/resume.html" target="_blank" class="hover:text-red-600" data-i18n="nav_cv">CV</a></li>
           </ul>
           <!-- Desktop Audio Mute Button (initially hidden) -->
           <button id="nav-audio-control" class="p-2 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-sm hidden">
@@ -438,14 +488,14 @@
             <div id="quote-inner" class="absolute w-full h-full flex items-center justify-start">
               <p class="px-4 font-title text-xl">
                 <span class="quote-marks">"</span>
-                <span id="quote-text" class="font-bold"></span>
+                <span id="quote-text" class="font-bold" data-i18n="hero_quote">The mind is a LEGO set waiting for its model.</span>
                 <span class="quote-marks">"</span>
               </p>
             </div>
           </div>
           
           <!-- Role subtitle - initially hidden -->
-          <h2 class="text-xl md:text-2xl font-title role-subtitle">Data Enthusiast & Machine-Learning Explorer</h2>
+          <h2 class="text-xl md:text-2xl font-title role-subtitle" data-i18n="hero_role">Data Enthusiast & Machine-Learning Explorer</h2>
         </div>
       </div>
     </div>
@@ -456,7 +506,7 @@
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-center">
       <!-- Role models with parallax scrolling gallery (hidden on small screens, shown on desktop) -->
       <section id="role-models" class="w-full md:w-2/5 flex flex-col md:self-stretch md:flex-grow md:justify-center order-2 md:order-1 mt-8 md:mt-0">
-        <h3 class="font-title text-2xl font-bold mb-6">Role Models</h3>
+        <h3 class="font-title text-2xl font-bold mb-6" data-i18n="role_models_title">Role Models</h3>
         <div id="collage-stripes" class="space-y-6 overflow-hidden my-auto py-4">
           <div class="collage-row animate-scroll-left" data-direction="left">
             <div class="scroll-track"></div>
@@ -470,7 +520,7 @@
         </div>
         <!-- Peeking character with fade-in animation -->
         <div class="text-left mt-3 h-6">
-          <p id="peekingCharacter" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000">	( ͡ᵔ ͜ʖ ͡ᵔ) If I had a photo of all the teachers I've had in my life, they would go here.</p>
+          <p id="peekingCharacter" class="text-sm italic font-sans opacity-0 transition-opacity duration-1000" data-i18n="peekingCharacter">( ͡ᵔ ͜ʖ ͡ᵔ) If I had a photo of all the teachers I've had in my life, they would go here.</p>
         </div>
       </section>
       
@@ -480,8 +530,8 @@
           <!-- Bio Header with Audio Controls positioned at right corner -->
           <div class="flex justify-between items-center mb-2">
             <div>
-              <h3 class="font-title text-2xl font-bold">Bio</h3>
-              <p id="bio-subtitle" class="text-sm font-sans italic mt-1 h-5"></p>
+              <h3 class="font-title text-2xl font-bold" data-i18n="about_title">Bio</h3>
+              <p id="bio-subtitle" class="text-sm font-sans italic mt-1 h-5" data-i18n="bio_subtitle">Also available as podcast (o˘◡˘o)</p>
             </div>
             <div class="flex gap-2">
               <button id="audio-rewind" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Rewind 10 seconds">
@@ -490,9 +540,7 @@
               <button id="audio-play" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Play/Pause">
                 <i class="fas fa-play"></i>
               </button>
-              <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Toggle playback speed">
-                <span>x1</span>
-              </button>
+              <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Toggle playback speed" data-i18n="bio_speed">x1</button>
             </div>
           </div>
           
@@ -522,16 +570,16 @@
   <!-- 🔴 Projects Section -->
   <section id="projects" class="min-h-screen bg-red-600 px-6 py-24 text-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12 text-white">Current Projects</h2>
+      <h2 class="text-4xl font-bold mb-12 text-white" data-i18n="projects_title">Current Projects</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6">
         <!-- Main Project Card (Vertical - Aureo) -->
         <a href="/ideas/lego-detectron.html" class="md:row-span-2 rounded-xl overflow-hidden relative group block h-full aspect-[0.65/1]">
           <img src="/assets/images/projects/lego.webp" alt="LEGO Bricks" class="w-full h-full object-cover" />
           <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-            <h3 class="text-xl font-bold">Brickssifier Studwise</h3>
-            <p class="text-sm">LEGO Bricks Classification pipeline</p>
-            <p class="text-sm">DEMO Available Now!</p>
+            <h3 class="text-xl font-bold" data-i18n="lego_project_title">Brickssifier Studwise</h3>
+            <p class="text-sm" data-i18n="lego_project_desc">LEGO Bricks Classification pipeline</p>
+            <p class="text-sm" data-i18n="lego_project_status">DEMO Available Now!</p>
           </div>
         </a>
 
@@ -542,16 +590,16 @@
             <a href="/ideas/time-teller-app.html" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
               <img src="/assets/images/projects/not-pomodoro.gif" alt="Not Pomodoro" class="w-full h-full object-cover" />
               <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-                <h3 class="text-lg font-bold">FlowLoops</h3>
-                <p class="text-sm">TimeTeller productivity WebApp</p>
-                <p class="text-sm">DEMO Available Now!</p>
+                <h3 class="text-lg font-bold" data-i18n="flowloops_title">FlowLoops</h3>
+                <p class="text-sm" data-i18n="flowloops_desc">TimeTeller productivity WebApp</p>
+                <p class="text-sm" data-i18n="flowloops_status">DEMO Available Now!</p>
               </div>
             </a>
             <a href="/ideas/coffe-break-podcast-sql-database.html" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
               <img src="/assets/images/projects/podcast-nlp.gif" alt="Podcast NLP" class="w-full h-full object-cover" />
               <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-                <h3 class="text-lg font-bold">CoffeeBreak Podcast Database</h3>
-                <p class="text-sm">WebScrapping, Language Processing, SQL Database project</p>
+                <h3 class="text-lg font-bold" data-i18n="podcast_title">CoffeeBreak Podcast Database</h3>
+                <p class="text-sm" data-i18n="podcast_desc">WebScrapping, Language Processing, SQL Database project</p>
               </div>
             </a>
           </div>
@@ -561,15 +609,15 @@
             <a href="/ideas/tengo-una-beca.html" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
               <img src="/assets/images/projects/roller-scrape.gif" alt="Roller WebScraping" class="w-full h-full object-cover" />
               <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-                <h3 class="text-lg font-bold">Tengo una Beca!</h3>
-                <p class="text-sm">infórmate AQUI</p>
+                <h3 class="text-lg font-bold" data-i18n="beca_title">Tengo una Beca!</h3>
+                <p class="text-sm" data-i18n="beca_desc">infórmate AQUI</p>
               </div>
             </a>
             <a href="/ideas/my-ai-tutoring-experience.html" class="rounded-xl overflow-hidden relative group block aspect-video flex-1">
               <img src="/assets/images/projects/youtube-career.gif" alt="Career YouTube" class="w-full h-full object-cover" />
               <div class="absolute bottom-0 left-0 right-0 w-full p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-                <h3 class="text-lg font-bold">How do I make use of AI?</h3>
-                <p class="text-sm">... todos queremos saber!</p>
+                <h3 class="text-lg font-bold" data-i18n="ai_title">How do I make use of AI?</h3>
+                <p class="text-sm" data-i18n="ai_desc">... everyone wants to know!</p>
               </div>
             </a>
           </div>
@@ -581,7 +629,7 @@
   <!-- Skills -->
   <section id="skills" class="min-h-screen bg-red-600 px-6 py-24 text-gray-800">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12 text-white drop-shadow">Skills</h2>
+      <h2 class="text-4xl font-bold mb-12 text-white drop-shadow" data-i18n="skills_title">Skills</h2>
 
       <!-- Panel blanco con borde redondeado -->
       <div class="bg-white rounded-xl p-6">
@@ -589,7 +637,7 @@
           <!-- Skills will be loaded here from JSON -->
         </div>
       </div>
-      <p class="text-sm text-gray-200 italic mt-3 text-right">*Skill I aim to develop</p>
+      <p class="text-sm text-gray-200 italic mt-3 text-right" data-i18n="skills_note">*Skill I aim to develop</p>
     </div>
   </section>
 
@@ -601,22 +649,22 @@
         <!-- Left: Animated typing text -->
         <div class="w-full md:w-1/2 space-y-8">
           <div>
-            <h2 class="typing-text main text-3xl md:text-4xl lg:text-5xl font-title font-bold">
+            <h2 class="typing-text main text-3xl md:text-4xl lg:text-5xl font-title font-bold" data-i18n="contact_thanks">
               Thanks for reading!
             </h2>
             <div id="emoticon-container" class="h-8 mt-2 text-xl md:text-2xl text-[#ffcf00]"></div>
           </div>
           
           <div class="space-y-4">
-            <p class="typing-text secondary text-lg md:text-xl">
+            <p class="typing-text secondary text-lg md:text-xl" data-i18n="contact_line1">
               We humans grow with each conversation... reach out!
             </p>
-            <p class="typing-text tertiary text-lg md:text-xl italic">
+            <p class="typing-text tertiary text-lg md:text-xl italic" data-i18n="contact_line2">
               Si mi historia resonó contigo... hablemos!
             </p>
             
             <!-- Added cursor that appears after all text is displayed -->
-            <p class="typing-text call-to-action pl-4 text-lg md:text-xl typing-cursor">
+            <p class="typing-text call-to-action pl-4 text-lg md:text-xl typing-cursor" data-i18n="contact_cta">
               Let's connect and create something amazing together!
             </p>
           </div>
@@ -635,7 +683,7 @@
               
               <!-- Name and Role -->
               <h3 class="font-bold text-xl font-title mb-1">Miguel Di Lalla</h3>
-              <p class="text-sm mb-6">Data Enthusiast & ML Explorer</p>
+              <p class="text-sm mb-6" data-i18n="contact_role">Data Enthusiast & ML Explorer</p>
               
               <!-- Social Icons -->
               <div class="social-icons flex gap-6 text-2xl">
@@ -658,8 +706,8 @@
       <div class="mt-24">
         <div id="contact-feedback" class="bg-black text-white py-8">
           <div class="contact-card max-w-3xl mx-auto bg-[#FFCF00] text-black rounded-xl p-6 shadow-lg floating-still contact-form">
-            <h3 class="text-2xl font-bold mb-4 font-title">Share your thoughts</h3>
-            <p class="text-sm mb-6">Send advice, encouragement, or feedback – anything that could help me grow!</p>
+            <h3 class="text-2xl font-bold mb-4 font-title" data-i18n="contact_form_title">Share your thoughts</h3>
+            <p class="text-sm mb-6" data-i18n="contact_form_desc">Send advice, encouragement, or feedback – anything that could help me grow!</p>
 
             <form action="https://formsubmit.co/1a2710c05bdcb0e2b62d4158d0d728e9" method="POST" class="space-y-4">
               <!-- Hidden setup fields -->
@@ -669,16 +717,16 @@
 
               <!-- Visible fields -->
               <div>
-                <label for="name" class="block text-sm font-medium">Name</label>
+                <label for="name" class="block text-sm font-medium" data-i18n="contact_form_name">Name</label>
                 <input type="text" id="name" name="name" required class="w-full px-3 py-2 border rounded-md" placeholder="John Doe">
               </div>
 
               <div>
-                <label for="message" class="block text-sm font-medium">Message</label>
-                <textarea id="message" name="message" required rows="4" class="w-full px-3 py-2 border rounded-md" placeholder="What would you like to say?"></textarea>
+                <label for="message" class="block text-sm font-medium" data-i18n="contact_form_message">Message</label>
+                <textarea id="message" name="message" required rows="4" class="w-full px-3 py-2 border rounded-md" data-i18n-attr="placeholder:contact_form_placeholder" placeholder="What would you like to say?"></textarea>
               </div>
 
-              <button type="submit" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-900 transition">Send</button>
+              <button type="submit" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-900 transition" data-i18n="contact_form_send">Send</button>
             </form>
           </div>
         </div>
@@ -692,6 +740,26 @@
   </button>
 
   <!-- Scripts -->
+  <script src="/assets/js/languageManager.js"></script>
+  <script>
+    // Pre-init typewriter check to ensure translations are available
+    document.addEventListener('DOMContentLoaded', () => {
+      // Make sure translations object is globally available before other scripts run
+      if (!window.translations) {
+        console.error('Translations not available. Creating fallback.');
+        window.translations = {
+          en: {
+            "hero_greeting_initial": "Hola!",
+            "hero_greeting_final": "Hi! I'm Miguel. It's great that you are here."
+          },
+          es: {
+            "hero_greeting_initial": "Hola!",
+            "hero_greeting_final": "¡Hola! Soy Miguel. Me alegra que estés aquí."
+          }
+        };
+      }
+    });
+  </script>
   <script src="/assets/js/typewriter.js"></script>
   <script src="/assets/js/imageCarousel.js"></script>
   <script src="/assets/js/audioControl.js"></script>
@@ -700,8 +768,13 @@
   <script src="/assets/js/scrollspy.js"></script>
   <script src="/assets/js/skills.js"></script>
   <script>
-    // Add typewriter effect for the bio subtitle, only when scrolled into view
+    // Main page initialization and animations
     document.addEventListener('DOMContentLoaded', () => {
+      // Variables for quote rotation
+      let currentQuoteIndex = 0;
+      let translatedQuotes = [];
+      
+      // Get elements for animations
       const bioSubtitle = document.getElementById('bio-subtitle');
       const aboutSection = document.getElementById('about');
       const peekingCharacter = document.getElementById('peekingCharacter');
@@ -710,36 +783,6 @@
       // Home section sequential animations with fixed timing
       const quoteFlipperElem = document.getElementById('quote-flipper');
       const roleSubtitleElem = document.querySelector('.role-subtitle');
-      
-      // Preload quotes as soon as the page loads
-      let preloadedQuotes = [];
-      
-      // Fetch quotes immediately when page loads
-      fetch('/data/quotes.json')
-        .then(response => response.json())
-        .then(data => {
-          if (data.quotes && data.quotes.length > 0) {
-            preloadedQuotes = data.quotes;
-            // Pre-populate the first quote (still hidden)
-            document.getElementById('quote-text').textContent = preloadedQuotes[0].text;
-          } else {
-            console.error('No quotes found in the JSON file');
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching quotes:', error);
-        });
-      
-      // Set fixed timing for quotes and job title to appear (11 seconds)
-      setTimeout(() => {
-        quoteFlipperElem.classList.add('visible');
-        roleSubtitleElem.classList.add('visible');
-        
-        // Start quote rotation immediately after they're visible
-        if (preloadedQuotes.length > 0) {
-          startQuoteRotation(preloadedQuotes);
-        }
-      }, 12000);
       
       // Flag to track if animation has played
       let hasAnimationPlayed = false;
@@ -758,7 +801,9 @@
       function startTypewriter() {
         if (hasAnimationPlayed) return;
         
-        const text = "Also available as podcast (o˘◡˘o)";
+        // Get text based on current language
+        const lang = document.documentElement.lang || 'en';
+        const text = window.translations[lang]["bio_subtitle"] || "Also available as podcast (o˘◡˘o)";
         let i = 0;
         
         function typeWriter() {
@@ -929,19 +974,36 @@
         startEmoticonAnimation();
       }
 
-      // Quote Slider Animation - updated to use preloaded quotes
-      let currentQuote = 0;
+      // Quote Slider Animation - updated to use translated quotes from language manager
       const quoteText = document.getElementById("quote-text");
       const quoteInner = document.getElementById("quote-inner");
+      
+      // Get quotes based on current language
+      function loadTranslatedQuotes() {
+        const lang = document.documentElement.lang || 'en';
+        
+        // Use quotes from language manager
+        if (window.translations && window.translations[lang] && window.translations[lang].quotes) {
+          translatedQuotes = window.translations[lang].quotes;
+          
+          // Set initial quote
+          if (translatedQuotes.length > 0) {
+            updateQuoteDisplay(translatedQuotes[0]);
+          }
+        }
+      }
 
       // Function to start quote rotation
-      function startQuoteRotation(quotes) {
-        // Set initial quote (should already be set by preload)
-        updateQuoteDisplay(quotes[0]);
+      function startQuoteRotation() {
+        // Set initial quote
+        if (translatedQuotes.length > 0) {
+          updateQuoteDisplay(translatedQuotes[0]);
+        }
         
+        // Start rotation with interval
         setInterval(() => {
           // Move to next quote
-          currentQuote = (currentQuote + 1) % quotes.length;
+          currentQuoteIndex = (currentQuoteIndex + 1) % translatedQuotes.length;
           
           // Trigger slide-up animation by removing and re-adding
           quoteInner.style.animation = 'none';
@@ -949,14 +1011,46 @@
           quoteInner.style.animation = 'slide-up 0.5s ease-out';
           
           // Update the quote text
-          updateQuoteDisplay(quotes[currentQuote]);
+          updateQuoteDisplay(translatedQuotes[currentQuoteIndex]);
         }, 4500);
       }
       
       // Function to update quote display with text
       function updateQuoteDisplay(quote) {
-        quoteText.textContent = quote.text;
+        if (quote && quoteText) {
+          quoteText.textContent = quote;
+        }
       }
+      
+      // Function to update quotes when language changes
+      function updateQuoteRotation(lang) {
+        // Update quotes array based on new language
+        if (window.translations && window.translations[lang] && window.translations[lang].quotes) {
+          translatedQuotes = window.translations[lang].quotes;
+          
+          // Update current quote immediately
+          if (translatedQuotes.length > 0 && currentQuoteIndex < translatedQuotes.length) {
+            updateQuoteDisplay(translatedQuotes[currentQuoteIndex]);
+          }
+        }
+      }
+      
+      // Make function available globally for the language manager
+      window.updateQuoteRotation = updateQuoteRotation;
+      
+      // Load quotes for current language
+      loadTranslatedQuotes();
+      
+      // Set fixed timing for quotes and job title to appear
+      setTimeout(() => {
+        if (quoteFlipperElem) quoteFlipperElem.classList.add('visible');
+        if (roleSubtitleElem) roleSubtitleElem.classList.add('visible');
+        
+        // Start quote rotation immediately after they're visible
+        if (translatedQuotes.length > 0) {
+          startQuoteRotation();
+        }
+      }, 12000);
     });
   </script>
 </body>

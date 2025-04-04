@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.2",
     "jsonresume-theme-even": "^0.23.0",
-    "resumed": "^4.1.0"
+    "resumed": "^4.1.0",
+    "tailwindcss": "^4.1.2"
   }
 }

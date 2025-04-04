@@ -1,3 +1,4 @@
+// Typewriter animation with language support
 class Typewriter {
   constructor(element, options = {}) {
     this.element = element;
@@ -6,6 +7,7 @@ class Typewriter {
     this.emoticonsDelay = options.emoticonsDelay || 400;
     this.queue = [];
     this.isRunning = false;
+    this.language = options.language || 'en';
     
     // Actions that can be scheduled
     this.actions = {
@@ -167,6 +169,14 @@ class Typewriter {
     }
     return this;
   }
+
+  // Clear the animation queue
+  clear() {
+    this.queue = [];
+    this.isRunning = false;
+    this.element.innerHTML = '';
+    return this;
+  }
 }
 
 // Extend the Typewriter class to dispatch an event when the animation completes
@@ -182,54 +192,154 @@ Typewriter.prototype.executeNextAction = async function () {
   await originalExecuteNextAction.call(this);
 };
 
-// Initialize typewriter when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Global variables for typewriter
+let currentTypewriter = null;
+// Removed the emoticonAnimationInterval variable as we're removing the infinite loop
+
+// Removed the startRepeatingEmoticonAnimation function as we no longer need the infinite emoticon loop
+
+// Initialize or reset typewriter with language-specific text
+function initTypewriter(lang = null) {
+  // Get language from parameter or use the current language from window
+  const language = lang || window.currentLanguage || 'en';
+  // Update the global language state maintained by the language manager
+  if (window.currentLanguage !== language) {
+    window.currentLanguage = language;
+  }
+  
   const typewriterElement = document.getElementById('typewriter');
   
-  if (typewriterElement) {
-    // Create typewriter with the custom animation sequence
-    const typewriter = new Typewriter(typewriterElement, {
-      speed: 70
-    });
-    
-    // Define the animation sequence
-    typewriter
-      .type('Hola!')
-      .wait(600)
-      .delete()
-      .wait(100)
-      .type('This is Miguel,')
-      .nextLine()
-      .nextLine()
-      .wait(400)
-      .type('Él quiere trabajar!', 3) // Type this text twice as fast
-      .wait(1200)
-      .delete(19) // Delete the second line
-      .type('Please, take a look... ')
-      .wait(400)
-      .nextLine()
-      .setEmoticon('(„• ᴗ •„)')
-      .wait(600)
-      .setEmoticon('(„• ᴗ ᵔ„)')
-      .wait(600)
-      .setEmoticon('(„• ᴗ •„)')
-      .wait(700)
-      .delete(10) // Delete the emoticon
-      .start();
-
-    // Listen for the typewriter completion event
-    typewriterElement.addEventListener('typewriterComplete', () => {
-      // Show quotes and subtitle when typewriter animation completes
-      const quoteFlipperElem = document.getElementById('quote-flipper');
-      const roleSubtitleElem = document.querySelector('.role-subtitle');
-      
-      quoteFlipperElem.classList.add('visible');
-      roleSubtitleElem.classList.add('visible');
-      
-      // This function will now be called from the main index.html script
-      // where quotes are preloaded - no need to fetch quotes here
-    });
-  } else {
+  if (!typewriterElement) {
     console.error('Typewriter element not found.');
+    return;
   }
+  
+  // Reset any existing typewriter
+  if (currentTypewriter) {
+    currentTypewriter.clear();
+  }
+  
+  // Create a new typewriter instance
+  currentTypewriter = new Typewriter(typewriterElement, {
+    speed: 70,
+    language: language
+  });
+  
+  // Default greetings in case translations aren't available
+  let greetings = {
+    initial: 'Hi!',
+    intro: "This is Miguel:",
+    jobSearch: "He is looking for his first IT job!",
+    scholarship: "And he's got a 3 months Full Scholarship for that",
+    callToAction: "find out more down below.",
+    welcome: "welcome..."
+  };
+  
+  // Check if translations are available globally and override defaults
+  if (window.translations && window.translations[language]) {
+    const t = window.translations[language];
+    
+    // Use translations if available, otherwise keep defaults
+    greetings.initial = t['hero_greeting_initial'] || greetings.initial;
+    greetings.intro = t['hero_greeting_intro'] || greetings.intro;
+    greetings.jobSearch = t['hero_greeting_jobSearch'] || greetings.jobSearch;
+    greetings.scholarship = t['hero_greeting_scholarship'] || greetings.scholarship;
+    greetings.callToAction = t['hero_greeting_callToAction'] || greetings.callToAction;
+    greetings.welcome = t['hero_greeting_welcome'] || greetings.welcome;
+  } else {
+    console.warn('Translations not available, using defaults');
+  }
+  
+  // Clear the element to prevent duplication
+  typewriterElement.textContent = '';
+  
+  // Define the animation sequence with improved spacing
+  currentTypewriter
+    // Step 1: Type initial greeting, wait, then erase
+    .type(greetings.initial)
+    .wait(800)
+    .delete()
+    .wait(300)
+    
+    // Type intro and stay, add two line breaks for better spacing
+    .type(greetings.intro)
+    .wait(500)
+    .nextLine()
+    .nextLine()
+    
+    // Step 2: Type job search message and stay, add two line breaks
+    .type(greetings.jobSearch)
+    .wait(1000)
+    .nextLine()
+    .nextLine()
+    
+    // Step 3: Type scholarship info, wait longer, then erase
+    .type(greetings.scholarship)
+    .wait(1500)
+    .delete()
+    
+    // Step 4: Type call to action, wait, erase
+    .type(greetings.callToAction)
+    .wait(1200)
+    .delete()
+    
+    // Then welcome message
+    .type(greetings.welcome)
+    .wait(800)
+    
+    // Add a line break before emoticon so it appears on its own line
+    .nextLine()
+    
+    // Emoticon animation with proper pauses - keeping this one-time animation
+    .setEmoticon('(„• ᴗ •„)')
+    .wait(600)
+    .setEmoticon('(„• ᴗ ᵔ„)')
+    .wait(600)
+    .setEmoticon('(„• ᴗ •„)')
+    .wait(1200)
+    // Delete the emoticon at the end
+    .delete(10)
+    .wait(300)
+    
+    // Start the animation
+    .start();
+
+  // Listen for the typewriter completion event
+  typewriterElement.addEventListener('typewriterComplete', () => {
+    // Show quotes and subtitle when typewriter animation completes
+    const quoteFlipperElem = document.getElementById('quote-flipper');
+    const roleSubtitleElem = document.querySelector('.role-subtitle');
+    
+    if (quoteFlipperElem) quoteFlipperElem.classList.add('visible');
+    if (roleSubtitleElem) roleSubtitleElem.classList.add('visible');
+  });
+}
+
+// Make initTypewriter available globally
+window.initTypewriter = initTypewriter;
+
+// Initialize typewriter when DOM is loaded with retry mechanism
+document.addEventListener('DOMContentLoaded', () => {
+  let attempts = 0;
+  const maxAttempts = 5;
+  
+  function attemptInit() {
+    if (attempts >= maxAttempts) {
+      console.error('Failed to initialize typewriter after multiple attempts');
+      return;
+    }
+    
+    attempts++;
+    
+    // Check if translations are available or if element exists
+    if (window.translations && document.getElementById('typewriter')) {
+      initTypewriter();
+    } else {
+      // Retry after a delay
+      setTimeout(attemptInit, 500);
+    }
+  }
+  
+  // Start attempt sequence
+  attemptInit();
 });

@@ -256,37 +256,36 @@ function initTypewriter(lang = null) {
   // Define the animation sequence with improved spacing
   currentTypewriter
     // Step 1: Type initial greeting, wait, then erase
-    .type(greetings.initial)
+    .type(greetings.initial, 3)
     .wait(800)
     .delete()
     .wait(300)
     
     // Type intro and stay, add two line breaks for better spacing
-    .type(greetings.intro)
+    .type(greetings.intro, 3)
     .wait(500)
     .nextLine()
     .nextLine()
     
     // Step 2: Type job search message and stay, add two line breaks
-    .type(greetings.jobSearch)
+    .type(greetings.jobSearch, 3)
     .wait(1000)
     .nextLine()
     .nextLine()
     
     // Step 3: Type scholarship info, wait longer, then erase
-    .type(greetings.scholarship)
+    .type(greetings.scholarship, 3)
     .wait(1500)
     .delete()
     
     // Step 4: Type call to action, wait, erase
-    .type(greetings.callToAction)
+    .type(greetings.callToAction, 3)
     .wait(1200)
     .delete()
     
     // Then welcome message
-    .type(greetings.welcome)
+    .type(greetings.welcome, 3)
     .wait(800)
-    
     // Add a line break before emoticon so it appears on its own line
     .nextLine()
     

@@ -81,7 +81,7 @@ window.translations = {
     "hero_greeting_jobSearch": "¡Está buscando su primer trabajo en IT!",
     "hero_greeting_scholarship": "y él tiene una Beca Completa de 3 meses para ello",
     "hero_greeting_callToAction": "infórmate en la sección de Proyectos, abajo.",
-    "hero_greeting_welcome": "Se bienvenido...",
+    "hero_greeting_welcome": "Sean bienvenidos...",
     "hero_quote": "La mente es un set de LEGO esperando su modelo.",
     "hero_role": "Entusiasta de Datos y Explorador de Machine Learning",
     

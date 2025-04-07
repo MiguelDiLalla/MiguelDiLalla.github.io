@@ -9,25 +9,26 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Floating 3D image animation */
+/* Floating 3D image animation - Exaggerated version */
 @keyframes floatAndRotate {
   0%   { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-  25%  { transform: translateY(-5px) rotateX(3deg) rotateY(-3deg); }
+  25%  { transform: translateY(-10px) rotateX(6deg) rotateY(-6deg); }
   50%  { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-  75%  { transform: translateY(5px) rotateX(-2deg) rotateY(2deg); }
+  75%  { transform: translateY(10px) rotateX(-5deg) rotateY(5deg); }
   100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
 }
 
 .floating-3d {
-  animation: floatAndRotate 6s ease-in-out infinite;
+  animation: floatAndRotate 4s ease-in-out infinite;
   transform-style: preserve-3d;
-  perspective: 1000px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  perspective: 800px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
 }
 
 .floating-3d:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
 }
 
 .floating-image-wrapper {
@@ -65,4 +66,17 @@ svg.clip-paths {
   position: absolute;
   width: 0;
   height: 0;
+}
+
+/* Smooth transition for opacity */
+.transition-opacity {
+  transition-property: opacity;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+.opacity-0 {
+  opacity: 0;
 }

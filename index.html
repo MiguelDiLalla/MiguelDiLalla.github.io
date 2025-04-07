@@ -221,7 +221,7 @@
     }
 
     #quote-text {
-      color: #d39e00; /* Tailwind yellow-600 */
+      color: #a16207; /* Tailwind yellow-700 */
     }
 
     @keyframes slide-up {
@@ -464,18 +464,56 @@
   </header>
 
   <!-- Home (Hero Section) -->
-  <section id="hero" class="min-h-screen flex items-center px-4 pt-28 md:pt-20">
-    <div class="max-w-6xl mx-auto w-full flex flex-col items-center justify-center gap-8 md:gap-12">
+  <section id="hero" class="min-h-screen flex items-center px-4 pt-28 md:pt-20 relative">
+    <!-- Background image with responsive gradient mask -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <div class="relative w-full h-full">
+        <!-- Background images - each with absolute positioning -->
+        <img 
+          id="bg-image-1"
+          src="/assets/images/profile/profile-backgorund/COEX-line-1.webp" 
+          alt="Background Pattern 1" 
+          class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1500 ease-in-out"
+        />
+        <img 
+          id="bg-image-2"
+          src="/assets/images/profile/profile-backgorund/COEX-line-2.webp" 
+          alt="Background Pattern 2" 
+          class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1500 ease-in-out"
+        />
+        <img 
+          id="bg-image-3"
+          src="/assets/images/profile/profile-backgorund/COEX-line-3.webp" 
+          alt="Background Pattern 3" 
+          class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1500 ease-in-out"
+        />
+        <img 
+          id="bg-image-4"
+          src="/assets/images/profile/profile-backgorund/COEX-line-4.webp" 
+          alt="Background Pattern 3" 
+          class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1500 ease-in-out"
+        />
+        
+        <!-- Gradient mask overlay - responsive direction based on screen size -->
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#ffcf00] via-[#ffcf00]/80 to-transparent z-10"></div>
+      </div>
+    </div>
+    
+    <!-- Rest of the hero section content -->
+    <div class="max-w-6xl mx-auto w-full flex flex-col items-center justify-center gap-8 md:gap-12 relative z-10">
       <!-- Mobile Layout: Image on top, text below -->
       <div class="flex flex-col md:flex-row w-full items-center">
         <!-- Image: Shown at top on mobile, on right side for desktop -->
         <div class="w-full order-1 md:order-2 md:w-1/2 flex justify-center mb-6 md:mb-0">
           <div class="floating-image-wrapper">
-            <img
-              src="/assets/images/profile/photo1.jpg"
-              alt="Miguel Di Lalla"
-              class="rounded-xl w-40 h-40 md:w-60 md:h-60 object-cover shadow-lg floating-3d"
-            />
+            <div id="profile-image-container" class="relative w-40 h-40 md:w-60 md:h-60">
+              <img
+                id="profile-image"
+                src="/assets/images/profile/portraits/photo1.webp"
+                alt="Miguel Di Lalla"
+                class="rounded-xl w-40 h-40 md:w-60 md:h-60 object-cover shadow-lg floating-3d absolute top-0 left-0"
+              />
+            </div>
           </div>
         </div>
         
@@ -767,6 +805,8 @@
   <script src="/assets/js/gifHover.js"></script>
   <script src="/assets/js/scrollspy.js"></script>
   <script src="/assets/js/skills.js"></script>
+  <script src="/assets/js/profileImageRotation.js"></script>
+  <script src="/assets/js/backgroundRotation.js"></script>
   <script>
     // Main page initialization and animations
     document.addEventListener('DOMContentLoaded', () => {

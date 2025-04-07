@@ -112,7 +112,7 @@
     }
     
     .typing-text {
-      overflow: hidden;
+      /* overflow: hidden; */
       white-space: nowrap;
       width: 0;
     }
@@ -571,17 +571,26 @@
               <h3 class="font-title text-2xl font-bold" data-i18n="about_title">Bio</h3>
               <p id="bio-subtitle" class="text-sm font-sans italic mt-1 h-5" data-i18n="bio_subtitle">Also available as podcast (o˘◡˘o)</p>
             </div>
-            <div class="flex gap-2">
-              <button id="audio-rewind" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Rewind 10 seconds">
-                <i class="fas fa-backward-step"></i>
-              </button>
-              <button id="audio-play" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Play/Pause">
-                <i class="fas fa-play"></i>
-              </button>
-              <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Toggle playback speed" data-i18n="bio_speed">x1</button>
+            <div class="flex flex-col items-end gap-1">
+              <!-- Audio control buttons -->
+              <div class="flex gap-2">
+                <button id="audio-rewind" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Rewind 10 seconds">
+                  <i class="fas fa-backward-step"></i>
+                </button>
+                <button id="audio-play" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Play/Pause">
+                  <i class="fas fa-play"></i>
+                </button>
+                <button id="audio-speed" class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition shadow-sm flex items-center justify-center w-10 h-10" title="Toggle playback speed" data-i18n="bio_speed">x1</button>
+              </div>
+              <!-- Time display now below buttons -->
+              <div class="text-xs font-mono bg-[#ffcf00] px-2 py-1 rounded text-right w-fit">
+                <span id="audio-current-time">0:00</span>
+                <span class="mx-1">/</span>
+                <span id="audio-duration">0:00</span>
+              </div>
             </div>
           </div>
-          
+
           <!-- Bio Panel -->
           <div class="bg-white rounded-xl h-[400px] overflow-y-scroll p-6 shadow-lg">
             <div id="bio-text" class="prose text-justify">[Biography Text Placeholder]</div>
@@ -687,24 +696,24 @@
         <!-- Left: Animated typing text -->
         <div class="w-full md:w-1/2 space-y-8">
           <div>
-            <h2 class="typing-text main text-3xl md:text-4xl lg:text-5xl font-title font-bold" data-i18n="contact_thanks">
+            <h2 class="typing-text main text-3xl md:text-4xl lg:text-5xl font-title font-bold break-words" data-i18n="contact_thanks">
               Thanks for reading!
             </h2>
             <div id="emoticon-container" class="h-8 mt-2 text-xl md:text-2xl text-[#ffcf00]"></div>
           </div>
           
           <div class="space-y-4">
-            <p class="typing-text secondary text-lg md:text-xl" data-i18n="contact_line1">
+            <p class="typing-text secondary text-lg md:text-xl break-words" data-i18n="contact_line1">
               We humans grow with each conversation... reach out!
             </p>
-            <p class="typing-text tertiary text-lg md:text-xl italic" data-i18n="contact_line2">
+            <p class="typing-text tertiary text-lg md:text-xl italic break-words" data-i18n="contact_line2">
               Si mi historia resonó contigo... hablemos!
             </p>
             
-            <!-- Added cursor that appears after all text is displayed -->
-            <p class="typing-text call-to-action pl-4 text-lg md:text-xl typing-cursor" data-i18n="contact_cta">
+            <!-- Added cursor that appears after all text is displayed
+            <p class="typing-text call-to-action pl-4 text-lg md:text-xl typing-cursor break-words" data-i18n="contact_cta">
               Let's connect and create something amazing together!
-            </p>
+            </p> -->
           </div>
         </div>
         
@@ -773,9 +782,16 @@
   </section>
 
   <!-- Floating audio control button (initially hidden) -->
-  <button id="floating-audio-control" class="p-3 bg-red-600 rounded-full text-white hover:bg-red-700 transition shadow-lg flex items-center justify-center w-12 h-12">
-    <i class="fas fa-volume-mute text-lg"></i>
-  </button>
+  <div id="floating-audio-control" class="flex items-center bg-white/90 dark:bg-gray-800/90 rounded-full px-3 py-2 shadow-lg">
+    <button class="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 transition text-white">
+      <i class="fas fa-pause"></i>
+    </button>
+    <div class="ml-2 text-xs font-mono">
+      <span id="floating-audio-time">0:00</span>
+      <span class="mx-1">/</span>
+      <span id="floating-audio-duration">0:00</span>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="/assets/js/languageManager.js"></script>

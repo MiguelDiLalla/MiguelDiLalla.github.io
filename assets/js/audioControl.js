@@ -41,11 +41,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const rewindButton = document.getElementById('audio-rewind');
   const floatingAudioControl = document.getElementById('floating-audio-control');
 
+  // Added time display updates
+  const currentTimeDisplay = document.getElementById('audio-current-time');
+  const durationDisplay = document.getElementById('audio-duration');
+  const floatingTimeDisplay = document.getElementById('floating-audio-time');
+  const floatingDurationDisplay = document.getElementById('floating-audio-duration');
+
   // Track the states
   let isPlaying = false;
   let speedIndex = 0;
   const speeds = [1, 1.5, 2];
   const speedLabels = ['x1', 'x1.5', 'x2'];
+
+  /**
+   * Format time in MM:SS format
+   */
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  /**
+   * Update all time displays
+   */
+  function updateTimeDisplays() {
+    const currentTime = formatTime(audio.currentTime);
+    const duration = formatTime(audio.duration || 0);
+
+    currentTimeDisplay.textContent = currentTime;
+    durationDisplay.textContent = duration;
+    floatingTimeDisplay.textContent = currentTime;
+    floatingDurationDisplay.textContent = duration;
+  }
 
   /**
    * Toggle play/pause functionality
@@ -133,6 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
       playButton.innerHTML = '<i class="fas fa-play"></i>';
     }, 2000);
     floatingAudioControl.classList.remove('visible');
+  });
+
+  // When metadata is loaded, update the duration display
+  audio.addEventListener('loadedmetadata', () => {
+    updateTimeDisplays();
+  });
+
+  // Update time display during playback
+  audio.addEventListener('timeupdate', () => {
+    updateTimeDisplays();
   });
 
   // Ensure floating button is hidden initially

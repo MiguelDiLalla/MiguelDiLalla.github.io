@@ -1,0 +1,152 @@
+[
+  {
+    "skill": "Python",
+    "level": "avanzado",
+    "category": "Programación"
+  },
+  {
+    "skill": "HTML",
+    "level": "intermedio",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "Tailwind CSS",
+    "level": "intermedio",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "JavaScript",
+    "level": "intermedio",
+    "category": "Programación"
+  },
+  {
+    "skill": "Service Workers (PWA)",
+    "level": "básico",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "YOLOv8",
+    "level": "intermedio",
+    "category": "Machine Learning"
+  },
+  {
+    "skill": "Albumentations",
+    "level": "básico",
+    "category": "Machine Learning"
+  },
+  {
+    "skill": "Streamlit",
+    "level": "intermedio",
+    "category": "Machine Learning"
+  },
+  {
+    "skill": "Click (Python CLI)",
+    "level": "intermedio",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "Rich",
+    "level": "intermedio",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "Project Storytelling",
+    "level": "avanzado",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "Modular Design",
+    "level": "intermedio",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "Iterative Research",
+    "level": "intermedio",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "Developer Accessibility",
+    "level": "intermedio",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "pytest",
+    "level": "about_to_learn",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "Bash",
+    "level": "about_to_learn",
+    "category": "Programación"
+  },
+  {
+    "skill": "Docker",
+    "level": "about_to_learn",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "FastAPI",
+    "level": "about_to_learn",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "Gradio",
+    "level": "about_to_learn",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "React (Intro)",
+    "level": "about_to_learn",
+    "category": "Desarrollo Web"
+  },
+  {
+    "skill": "Technical Writing",
+    "level": "about_to_learn",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "Product Thinking for Developers",
+    "level": "about_to_learn",
+    "category": "Prácticas Profesionales"
+  },
+  {
+    "skill": "AutoCAD",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Autodesk Inventor",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Blender",
+    "level": "básico",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Adobe Photoshop",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Adobe Illustrator",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Scenic Arts",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Conceptual Illustration",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Rollerblading",
+    "level": "avanzado",
+    "category": "Creatividad y Otras Disciplinas"
+  }
+]

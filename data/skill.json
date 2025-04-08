@@ -20,5 +20,13 @@
   { "skill": "Gradio", "level": "about_to_learn", "category": "Frontend for ML", "visualize_as": "ml_tool" },
   { "skill": "React (Intro)", "level": "about_to_learn", "category": "Frontend Framework", "visualize_as": "core_skill" },
   { "skill": "Technical Writing", "level": "about_to_learn", "category": "Professional Practice", "visualize_as": "soft_skill" },
-  { "skill": "Product Thinking for Developers", "level": "about_to_learn", "category": "Professional Practice", "visualize_as": "soft_skill" }
+  { "skill": "Product Thinking for Developers", "level": "about_to_learn", "category": "Professional Practice", "visualize_as": "soft_skill" },
+  { "skill": "AutoCAD", "level": "intermedio", "category": "CAD Software Proficiency", "visualize_as": "tech_skill" },
+  { "skill": "Autodesk Inventor", "level": "intermedio", "category": "CAD Software Proficiency", "visualize_as": "tech_skill" },
+  { "skill": "Blender", "level": "básico", "category": "CAD Software Proficiency", "visualize_as": "tech_skill" },
+  { "skill": "Adobe Photoshop", "level": "intermedio", "category": "CAD Software Proficiency", "visualize_as": "tech_skill" },
+  { "skill": "Adobe Illustrator", "level": "intermedio", "category": "CAD Software Proficiency", "visualize_as": "tech_skill" },
+  { "skill": "Scenic Arts", "level": "intermedio", "category": "Developed Hobbies", "visualize_as": "soft_skill" },
+  { "skill": "Conceptual Illustration", "level": "intermedio", "category": "Developed Hobbies", "visualize_as": "soft_skill" },
+  { "skill": "Rollerblading", "level": "avanzado", "category": "Developed Hobbies", "visualize_as": "soft_skill" }
 ]

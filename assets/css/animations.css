@@ -42,6 +42,12 @@
   }
 }
 
+/* Typing animation for contact section */
+@keyframes typing-main {
+  from { width: 0; opacity: 1; }
+  to { width: 100%; opacity: 1; }
+}
+
 /* Utility classes */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in;
@@ -70,4 +76,16 @@
 .floating-tilting-container:hover {
   transform: translateY(-5px) rotateX(2deg) rotateY(5deg);
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.typing-text {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  opacity: 0;
+}
+
+.typing-text.animate-main {
+  animation: typing-main 2.5s steps(30, end) forwards;
+  opacity: 1;
 }

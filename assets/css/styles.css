@@ -80,3 +80,28 @@ svg.clip-paths {
 .opacity-0 {
   opacity: 0;
 }
+
+#bio-subtitle {
+  margin-bottom: 1rem; /* Add spacing below the subtitle */
+  word-wrap: break-word; /* Ensure long text wraps properly */
+}
+
+@media (max-width: 768px) {
+  #bio-subtitle {
+    margin-bottom: 1.5rem; /* Increase spacing for smaller screens */
+    font-size: 0.875rem; /* Adjust font size for better readability */
+  }
+}
+
+#hero-quote {
+  padding: 2rem 1rem; /* Add padding around the quote */
+  line-height: 1.5; /* Ensure proper line spacing */
+  word-wrap: break-word; /* Prevent long words from breaking the layout */
+}
+
+@media (max-width: 768px) {
+  #hero-quote {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+    padding: 1.5rem 1rem; /* Reduce padding slightly for smaller screens */
+  }
+}

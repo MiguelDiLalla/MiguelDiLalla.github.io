@@ -87,18 +87,24 @@ def create_folder_tree(use_gitignore=True):
                 filtered_files = [f for f in sorted(files) 
                                 if not should_ignore(os.path.join(root, f), current_dir, ignore_patterns)]
                 
-                subindent = '│   ' * (level + 1)
-                for i, file in enumerate(filtered_files):
-                    try:
-                        file_path = os.path.join(root, file)
-                        last_mod = os.path.getmtime(file_path)
-                        if i == len(filtered_files) - 1 and len(dirs) == 0:
-                            f.write(f"{subindent[:-4]}└── 📄 {file} ({get_time_diff(last_mod)})\n")
-                        else:
-                            f.write(f"{subindent}├── 📄 {file} ({get_time_diff(last_mod)})\n")
-                        file_count += 1
-                    except Exception as e:
-                        print(f"Error processing file {file}: {e}")
+                # Only proceed if there are files to process
+                if filtered_files:
+                    subindent = '│   ' * (level + 1)
+                    for i, file in enumerate(filtered_files):
+                        try:
+                            file_path = os.path.join(root, file)
+                            last_mod = os.path.getmtime(file_path)
+                            
+                            # Check if this is the last file in the filtered list
+                            if i == len(filtered_files) - 1:
+                                # Last file uses └── symbol with correct indentation
+                                f.write(f"{subindent}└── 📄 {file} ({get_time_diff(last_mod)})\n")
+                            else:
+                                # Other files use ├── symbol
+                                f.write(f"{subindent}├── 📄 {file} ({get_time_diff(last_mod)})\n")
+                            file_count += 1
+                        except Exception as e:
+                            print(f"Error processing file {file}: {e}")
         
         print(f"\nScan complete!")
         print(f"Found {dir_count} directories and {file_count} files")

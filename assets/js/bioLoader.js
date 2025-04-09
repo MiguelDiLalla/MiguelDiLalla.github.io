@@ -117,10 +117,10 @@ function convertMarkdownToHTML(markdown) {
     return block
       // Headers with IDs for navigation
       .replace(/^# (.*$)/gm, (_, h1) => `<h1 id="${slugify(h1)}">${h1}</h1>`)
-      .replace(/^## (.*$)/gm, (_, h2) => `<h2 id="${slugify(h2)}">${h2}</h2>`)
+      .replace(/^## (.*$)/gm, (_, h2) => `<h2 id="${slugify(h2)}" class="text-gray-400">${h2}</h2>`)
       // Special handling for encapsulated titles with added spacing
       .replace(/^## --(.*)--$/gm, (_, h2) => 
-        `<h2 id="${slugify(h2)}" class="encapsulated-title my-8 py-3 border-y-2">${h2}</h2>`)
+        `<h2 id="${slugify(h2)}" class="encapsulated-title my-8 py-3 border-y-2 text-gray-400">${h2}</h2>`)
       .replace(/^### --(.*)--$/gm, (_, h3) => 
         `<h3 id="${slugify(h3)}" class="encapsulated-title my-6 py-2 border-y">${h3}</h3>`)
       .replace(/^### (.*$)/gm, (_, h3) => `<h3 id="${slugify(h3)}" class="mt-8 mb-4">${h3}</h3>`)

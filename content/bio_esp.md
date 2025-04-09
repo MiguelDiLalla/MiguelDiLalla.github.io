@@ -1,5 +1,6 @@
 # Miguel Di Lalla
-## Una mente autodidacta con alma de constructor
+
+## Aprendiz Perpetuo con Vocación Creadora
 
 > *"La tecnología, como el arte, florece cuando quien la crea vive con amplitud."* ✨
 

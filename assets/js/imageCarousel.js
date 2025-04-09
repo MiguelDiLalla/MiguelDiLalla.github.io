@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   // Constants for the collage
   const IMAGE_PATH = '/assets/images/collage/';
-  const TOTAL_IMAGES = 42;
+  const TOTAL_IMAGES = 42; // Confirmed correct number of images
   const ROWS = 3;
   
   // Speed ranges for animations (in seconds)
@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Create array of all available image paths (image_01.webp to image_42.webp)
   const imagePaths = [];
   for (let i = 1; i <= TOTAL_IMAGES; i++) {
-    // Format the number with leading zero if needed (01, 02, ... 42)
+    // Format the number with leading zero if needed (01, 02, ... 37)
     const imageNumber = i.toString().padStart(2, '0');
-    imagePaths.push(`image_${imageNumber}.webp`); // Changed to .webp extension
+    imagePaths.push(`image_${imageNumber}.webp`);
   }
 
   // Shuffle the image array to get random distribution
@@ -96,6 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const getRandomDuration = () => {
     return Math.floor(Math.random() * (MAX_SPEED - MIN_SPEED + 1)) + MIN_SPEED;
   };
+  
+  // Track number of successfully loaded images
+  let loadedImageCount = 0;
+  let failedImageCount = 0;
+  const minRequiredImages = 10; // Minimum number of images needed for a good visual effect
   
   // For each row, add the images to the scroll-track (duplicating them for seamless looping)
   rows.forEach((row, idx) => {
@@ -127,14 +132,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create image elements and add to track
     allImages.forEach(imgPath => {
       const img = document.createElement('img');
-      img.src = `${IMAGE_PATH}${imgPath}`;
       img.alt = 'Role model';
       img.className = 'collage-img';
-      img.loading = 'lazy'; // Add lazy loading for better performance
-      img.decoding = 'async'; // Add async decoding for better performance
+      img.loading = 'lazy';
+      img.decoding = 'async';
       
-      // Add image to the scroll track
+      // Set up error handling before setting src
+      img.onerror = function() {
+        console.warn(`Image not found: ${imgPath}`);
+        if (img.parentNode) {
+          img.parentNode.removeChild(img); // Ensure the broken image is removed from the DOM
+        }
+        failedImageCount++;
+        
+        // Check if we have enough images for a good effect
+        if (failedImageCount > TOTAL_IMAGES - minRequiredImages) {
+          console.warn('Too many missing images in carousel. Consider repopulating the collage folder.');
+        }
+      };
+      
+      // Set up success handling
+      img.onload = function() {
+        loadedImageCount++;
+        if (loadedImageCount % 10 === 0) {
+          console.log(`Loaded ${loadedImageCount} collage images successfully`);
+        }
+      };
+      
+      // Add image to the scroll track first, then set src
       track.appendChild(img);
+      
+      // Set src after error handler is defined and element is in DOM
+      img.src = `${IMAGE_PATH}${imgPath}`;
     });
   });
 

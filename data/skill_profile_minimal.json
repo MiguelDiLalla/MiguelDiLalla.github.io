@@ -32,17 +32,47 @@
   {
     "skill": "YOLOv8",
     "level": "intermedio",
-    "category": "IA-Aplicada"
+    "category": "Data Tools"
   },
   {
     "skill": "Albumentations",
     "level": "básico",
-    "category": "IA-Aplicada"
+    "category": "Data Tools"
   },
   {
     "skill": "Streamlit",
     "level": "intermedio",
-    "category": "IA-Aplicada"
+    "category": "Data Tools"
+  },
+  {
+    "skill": "pandas",
+    "level": "avanzado",
+    "category": "Data Tools"
+  },
+  {
+    "skill": "NumPy",
+    "level": "avanzado",
+    "category": "Data Tools"
+  },
+  {
+    "skill": "scikit-learn",
+    "level": "intermedio",
+    "category": "Data Tools"
+  },
+  {
+    "skill": "Matplotlib",
+    "level": "intermedio",
+    "category": "Data Tools"
+  },
+  {
+    "skill": "Seaborn",
+    "level": "intermedio",
+    "category": "Data Tools"
+  },
+  {
+    "skill": "Tableau",
+    "level": "básico",
+    "category": "Data Tools"
   },
   {
     "skill": "Click (Python CLI)",
@@ -90,6 +120,11 @@
     "category": "Herramientas Técnicas"
   },
   {
+    "skill": "Data Analitics",
+    "level": "avanzado",
+    "category": "Herramientas Técnicas"
+  },
+  {
     "skill": "Git/GitHub",
     "level": "intermedio",
     "category": "Herramientas Técnicas"
@@ -107,12 +142,12 @@
   {
     "skill": "FastAPI",
     "level": "about_to_learn",
-    "category": "IA-Aplicada"
+    "category": "Data Tools"
   },
   {
     "skill": "Gradio",
     "level": "about_to_learn",
-    "category": "IA-Aplicada"
+    "category": "Data Tools"
   },
   {
     "skill": "React",

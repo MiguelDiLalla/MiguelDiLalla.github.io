@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miguel Di Lalla — CV</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Georgia&family=Open+Sans&display=swap');
@@ -38,7 +39,7 @@
       font-weight: bold;
     }
 
-    .section {
+    section {
       margin-bottom: 18px;
     }
 
@@ -47,13 +48,13 @@
       margin-bottom: 8px;
     }
 
-    .header-icons {
+    .social-links {
       text-align: center;
       margin-top: 6px;
       font-size: 14px;
     }
 
-    .header-icons a {
+    .social-links a {
       margin: 0 10px;
     }
 
@@ -64,239 +65,180 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <h1>Miguel Di Lalla</h1>
-  <div class="header-center">
-    Desarrollador Junior en Ciencia de Datos y Aprendizaje Automático<br>
-    migueljdilallap@gmail.com — Santa Cruz de Tenerife, ES
-  </div>
-  <div class="header-icons">
-    
-      <a href="https://github.com/MiguelDiLalla" target="_blank">
+  <header>
+    <h1>Miguel Di Lalla</h1>
+    <p class="header-center">
+      Desarrollador Junior en Ciencia de Datos y Aprendizaje Automático<br>
+      migueljdilallap@gmail.com — Santa Cruz de Tenerife, ES
+    </p>
+    <nav class="social-links">
+      <a href="https://github.com/MiguelDiLalla" target="_blank" rel="noopener" aria-label="GitHub profile">
         <i class="fa-brands fa-github"></i>
       </a>
-    
-      <a href="https://linkedin.com/in/MiguelDiLalla" target="_blank">
+      <a href="https://linkedin.com/in/MiguelDiLalla" target="_blank" rel="noopener" aria-label="LinkedIn profile">
         <i class="fa-brands fa-linkedin"></i>
       </a>
-    
-      <a href="https://migueldilalla.github.io/" title="Back to Homepage">
+      <a href="https://migueldilalla.github.io/" title="Back to Homepage" aria-label="Back to Homepage">
         <i class="fa-solid fa-house"></i>
       </a>
-    
-  </div>
+    </nav>
+  </header>
 
-  <div class="section">
-    <h2>Resumen</h2>
-    <p>Autodidacta técnico con sólida base en Python, visión por computador y experiencia práctica en CLI y prototipado web. Apasionado por el diseño accesible y la narración técnica. En transición desde la hospitalidad a la tecnología, actualmente en búsqueda de oportunidades para aplicar y expandir mi conocimiento.</p>
-  </div>
+  <main>
+    <section>
+      <h2>Resumen</h2>
+      <p>
+        Aprendiz autodidacta con base científica y mentalidad de creador. Tras completar 6 semestres de ingeniería y formarme en ciencia de datos (Hack A Boss), desarrollé dos proyectos destacados: una app de visión por computador con YOLOv8 y una app web lúdica para enfoque personal (FlowLoops). Domino Python, CLI tools y prototipado con Vanilla JS. Busco mi primera experiencia profesional en IT para seguir creciendo y aportar con visión, estructura y entusiasmo.
+      </p>
+    </section>
 
-  <div class="section">
-    <h2>Educación</h2>
-    
-      <div class="edu">
-        <div class="label">HACK A BOSS — Bootcamp de Ciencia de Datos</div>
-        <div><em>Certificación en Data Science</em> (2024-04 — 2024-07)</div>
-        
-        <ul>
-          
+    <section>
+      <h2>Educación</h2>
+      <div class="education-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+        <article class="edu">
+          <h3 class="label">Hack A Boss — Bootcamp de Ciencia de Datos</h3>
+          <p><em>Certificación en Data Science</em> (2024-04 — 2024-07)</p>
+          <ul>
             <li>Big Data</li>
-          
             <li>Streamlit</li>
-          
             <li>Bases de Datos</li>
-          
             <li>Machine Learning y Deep Learning</li>
-          
             <li>Python para Ciencia de Datos</li>
-          
             <li>Matemáticas y Estadística</li>
-          
-            <li>Proyecto Final (5 semanas)</li>
-          
-        </ul>
-        
+            <li>Proyecto Final</li>
+          </ul>
+        </article>
+      
+        <article class="edu">
+          <h3 class="label">Coursera — Google Career Certificates</h3>
+          <p><em>Google Data Analytics Professional Certificate</em> (Finalizado en Mayo 2023)</p>
+          <ul>
+            <li>SQL, Tableau, R y hojas de cálculo</li>
+            <li>Preparación, limpieza, análisis y visualización de datos</li>
+            <li>Capstone project con caso de estudio</li>
+          </ul>
+        </article>
+      
+        <article class="edu">
+          <h3 class="label">Coursera — Yale University</h3>
+          <p><em>The Science of Well-Being</em> (Finalizado en Sep 2020)</p>
+          <ul>
+            <li>Psicología positiva y hábitos de bienestar</li>
+            <li>Curso dictado por la profesora Laurie Santos</li>
+          </ul>
+        </article>
+      
+        <article class="edu">
+          <h3 class="label">Universidad Central de Venezuela</h3>
+          <p><em>Pregrado (6 semestres) en Ingeniería Metalúrgica</em> (2017 — 2020)</p>
+          <ul>
+            <li>Cálculo I, II y III</li>
+            <li>Álgebra vectorial y cálculo numérico</li>
+            <li>Físico-química (teoría y laboratorios)</li>
+            <li>Mecánica, física de fluidos y electricidad</li>
+            <li>Introducción a la ciencia de materiales</li>
+            <li>Geometría descriptiva y diseño asistido (CAD)</li>
+            <li>Fundamentos de programación con Pascal</li>
+          </ul>
+        </article>
+      
+        <article class="edu">
+          <h3 class="label">ARTS Digital Institute — Caracas, Venezuela</h3>
+          <p><em>Formación técnica en software creativo y CAD</em> (2016 — 2019)</p>
+          <ul>
+            <li>Adobe: Photoshop, Illustrator, After Effects</li>
+            <li>Autodesk: AutoCAD, Inventor, 3ds Max + V-Ray</li>
+          </ul>
+        </article>
       </div>
-    
-      <div class="edu">
-        <div class="label">Universidad Central de Venezuela</div>
-        <div><em>Pregrado (6 semestres) en Ingeniería Metalúrgica</em> (2015 — 2017)</div>
-        
-      </div>
-    
-  </div>
+    </section>
 
-  <div class="section">
-    <h2>Habilidades</h2>
-    
-      <div class="skill-group">
-        <div class="label">Web Development</div>
-        <ul>
-          
-            <li>HTML</li>
-          
-            <li>Service Workers (PWA)</li>
-          
-            <li>Tailwind CSS</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Programming Language</div>
-        <ul>
-          
-            <li>JavaScript</li>
-          
+    <section>
+      <h2>Habilidades</h2>
+      <div class="skills-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div class="skill-group">
+          <h3 class="label">Programación</h3>
+          <ul>
             <li>Python</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Computer Vision / ML</div>
-        <ul>
-          
+            <li>JavaScript</li>
+            <li>R</li>
+          </ul>
+        </div>
+        
+        <div class="skill-group">
+          <h3 class="label">Desarrollo Web</h3>
+          <ul>
+            <li>HTML</li>
+            <li>Tailwind CSS</li>
+            <li>Service Workers (PWA)</li>
+          </ul>
+        </div>
+        
+        <div class="skill-group">
+          <h3 class="label">Data Tools</h3>
+          <ul>
             <li>YOLOv8</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">ML Tool</div>
-        <ul>
-          
             <li>Albumentations</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Data App Framework</div>
-        <ul>
-          
             <li>Streamlit</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Tooling</div>
-        <ul>
-          
+            <li>pandas</li>
+            <li>NumPy</li>
+            <li>scikit-learn</li>
+            <li>Matplotlib</li>
+            <li>Seaborn</li>
+            <li>Tableau</li>
+          </ul>
+        </div>
+        
+        <div class="skill-group">
+          <h3 class="label">Herramientas Técnicas</h3>
+          <ul>
             <li>Click (Python CLI)</li>
-          
             <li>Rich</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Professional Practice</div>
-        <ul>
-          
-            <li>Iterative Research</li>
-          
-            <li>Product Thinking for Developers</li>
-          
+            <li>Git/GitHub</li>
+            <li>Visual Studio Code</li>
+            <li>Markdown</li>
+          </ul>
+        </div>
+        
+        <div class="skill-group">
+          <h3 class="label">Prácticas Profesionales</h3>
+          <ul>
             <li>Project Storytelling</li>
-          
-            <li>Technical Writing</li>
-          
-        </ul>
+            <li>PEP8 &amp; Code Organization</li>
+            <li>Iterative Research</li>
+            <li>User-Centered Design</li>
+            <li>Documentation</li>
+            <li>Product-Aware Mindset</li>
+          </ul>
+        </div>
+        
+        <div class="skill-group">
+          <h3 class="label">Creatividad y Otras Disciplinas</h3>
+          <ul>
+            <li>AutoCAD</li>
+            <li>Autodesk Inventor</li>
+            <li>Autodesk 3dsMAX</li>
+            <li>Blender</li>
+            <li>Adobe Photoshop</li>
+            <li>Adobe Illustrator</li>
+            <li>Scenic Arts</li>
+            <li>Conceptual Illustration</li>
+          </ul>
+        </div>
       </div>
-    
-      <div class="skill-group">
-        <div class="label">Engineering Practice</div>
-        <ul>
-          
-            <li>Modular Design</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">UX / Culture</div>
-        <ul>
-          
-            <li>Developer Accessibility</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Programming Paradigm</div>
-        <ul>
-          
-            <li>Object-Oriented Programming (OOP)</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Testing Framework</div>
-        <ul>
-          
-            <li>pytest</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Scripting Language</div>
-        <ul>
-          
-            <li>Bash</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Containerization</div>
-        <ul>
-          
-            <li>Docker</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Backend Framework</div>
-        <ul>
-          
-            <li>FastAPI</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Frontend for ML</div>
-        <ul>
-          
-            <li>Gradio</li>
-          
-        </ul>
-      </div>
-    
-      <div class="skill-group">
-        <div class="label">Frontend Framework</div>
-        <ul>
-          
-            <li>React (Intro)</li>
-          
-        </ul>
-      </div>
-    
-  </div>
+    </section>
 
-  <div class="section">
-    <h2>Idiomas</h2>
-    <ul>
-      
+    <section>
+      <h2>Idiomas</h2>
+      <ul>
         <li>Español — Nativo</li>
-      
         <li>Inglés — Profesional</li>
-      
-    </ul>
-  </div>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <!-- Optional: Add copyright or additional contact information here -->
+  </footer>
 </body>
 </html>

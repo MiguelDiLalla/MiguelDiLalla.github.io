@@ -111,7 +111,7 @@ function getLevelColorForCategory(level, category) {
       básico: 'bg-purple-100',
       about_to_learn: 'bg-gray-100'
     },
-    "Machine Learning": {
+    "IA-Aplicada": {
       avanzado: 'bg-green-400',
       intermedio: 'bg-green-200',
       básico: 'bg-green-100',
@@ -148,7 +148,7 @@ function getCategoryBorderClass(category) {
   const categoryColorMap = {
     "Programación": "border-blue-500",
     "Desarrollo Web": "border-purple-500",
-    "Machine Learning": "border-green-500",
+    "IA-Aplicada": "border-green-500",
     "Herramientas Técnicas": "border-orange-500",
     "Prácticas Profesionales": "border-indigo-500",
     "Creatividad y Otras Disciplinas": "border-pink-500"
@@ -181,7 +181,7 @@ function getColorVariations(level, category) {
       básico: ['#f3e8ff', '#e9d5ff', '#d8b4fe', '#f3e8ff'],
       about_to_learn: ['#f3f4f6', '#f9fafb', '#f3f4f6']
     },
-    "Machine Learning": {
+    "IA-Aplicada": {
       avanzado: ['#4ade80', '#22c55e', '#16a34a', '#4ade80'], // green variations
       intermedio: ['#bbf7d0', '#86efac', '#4ade80', '#bbf7d0'],
       básico: ['#dcfce7', '#bbf7d0', '#86efac', '#dcfce7'],

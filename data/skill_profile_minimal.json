@@ -20,6 +20,11 @@
     "category": "Programación"
   },
   {
+    "skill": "R",
+    "level": "intermedio",
+    "category": "Programación"
+  },
+  {
     "skill": "Service Workers (PWA)",
     "level": "básico",
     "category": "Desarrollo Web"
@@ -27,17 +32,17 @@
   {
     "skill": "YOLOv8",
     "level": "intermedio",
-    "category": "Machine Learning"
+    "category": "IA-Aplicada"
   },
   {
     "skill": "Albumentations",
     "level": "básico",
-    "category": "Machine Learning"
+    "category": "IA-Aplicada"
   },
   {
     "skill": "Streamlit",
     "level": "intermedio",
-    "category": "Machine Learning"
+    "category": "IA-Aplicada"
   },
   {
     "skill": "Click (Python CLI)",
@@ -55,7 +60,7 @@
     "category": "Prácticas Profesionales"
   },
   {
-    "skill": "Modular Design",
+    "skill": "PEP8 & Code Organization",
     "level": "intermedio",
     "category": "Prácticas Profesionales"
   },
@@ -65,7 +70,7 @@
     "category": "Prácticas Profesionales"
   },
   {
-    "skill": "Developer Accessibility",
+    "skill": "User-Centered Design",
     "level": "intermedio",
     "category": "Prácticas Profesionales"
   },
@@ -85,37 +90,57 @@
     "category": "Herramientas Técnicas"
   },
   {
+    "skill": "Git/GitHub",
+    "level": "intermedio",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "Visual Studio Code",
+    "level": "intermedio",
+    "category": "Herramientas Técnicas"
+  },
+  {
+    "skill": "Markdown",
+    "level": "intermedio",
+    "category": "Herramientas Técnicas"
+  },
+  {
     "skill": "FastAPI",
     "level": "about_to_learn",
-    "category": "Desarrollo Web"
+    "category": "IA-Aplicada"
   },
   {
     "skill": "Gradio",
     "level": "about_to_learn",
-    "category": "Desarrollo Web"
+    "category": "IA-Aplicada"
   },
   {
-    "skill": "React (Intro)",
+    "skill": "React",
     "level": "about_to_learn",
     "category": "Desarrollo Web"
   },
   {
-    "skill": "Technical Writing",
-    "level": "about_to_learn",
+    "skill": "Documentation",
+    "level": "intermedio",
     "category": "Prácticas Profesionales"
   },
   {
-    "skill": "Product Thinking for Developers",
-    "level": "about_to_learn",
+    "skill": "Product-Aware Mindset",
+    "level": "intermedio",
     "category": "Prácticas Profesionales"
   },
   {
     "skill": "AutoCAD",
-    "level": "intermedio",
+    "level": "avanzado",
     "category": "Creatividad y Otras Disciplinas"
   },
   {
     "skill": "Autodesk Inventor",
+    "level": "intermedio",
+    "category": "Creatividad y Otras Disciplinas"
+  },
+  {
+    "skill": "Autodesk 3dsMAX",
     "level": "intermedio",
     "category": "Creatividad y Otras Disciplinas"
   },
@@ -141,11 +166,6 @@
   },
   {
     "skill": "Conceptual Illustration",
-    "level": "intermedio",
-    "category": "Creatividad y Otras Disciplinas"
-  },
-  {
-    "skill": "Rollerblading",
     "level": "avanzado",
     "category": "Creatividad y Otras Disciplinas"
   }

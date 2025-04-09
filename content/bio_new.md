@@ -2,7 +2,7 @@
 
 ## A Self-Taught Mind with a Builder's Soul
 
-> *"Technology, like art, flourishes when its creator lives broadly."* ✨
+> *"I build to understand. And I understand to keep building."* ✨
 
 ---
 

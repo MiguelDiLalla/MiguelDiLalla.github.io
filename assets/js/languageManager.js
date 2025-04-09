@@ -22,9 +22,12 @@ window.translations = {
     "quotes": [
       "I study with the tools of the future to earn my place in the present.",
       "The classroom has always been my habitat. It's where I breathe best.",
-      "Technology, like art, flourishes when its creator lives broadly.",
       "If I can recognize a LEGO piece instantly, can a machine learn to do the same?",
-      "What I offer isn't just knowledge—I offer direction, enthusiasm, and a grounded will to grow."
+      "What I offer isn't just knowledge—I offer direction, enthusiasm, and a grounded will to grow.",
+      "FlowLoops is my answer to time… without pressure, without a clock, just rhythm.",
+      "I build to understand. And I understand to keep building.",
+      "My creativity doesn't distract from the technical. It sharpens it.",
+      "Sometimes, focusing isn't about holding tight—it's about letting go with intention."
     ],
     
     // About Section
@@ -89,9 +92,12 @@ window.translations = {
     "quotes": [
       "Estudio con las herramientas del futuro para ganarme mi lugar en el presente.",
       "El aula siempre ha sido mi hábitat. Es donde respiro mejor.",
-      "La tecnología, como el arte, florece cuando su creador vive ampliamente.",
       "Si puedo reconocer una pieza de LEGO instantáneamente, ¿puede una máquina aprender a hacer lo mismo?",
-      "Lo que ofrezco no es solo conocimiento—ofrezco dirección, entusiasmo y una voluntad firme de crecer."
+      "Lo que ofrezco no es solo conocimiento—ofrezco dirección, entusiasmo y una voluntad firme de crecer.",
+      "Construyo para comprender. Y comprendo para seguir construyendo.",
+      "FlowLoops es mi respuesta al tiempo… sin presión, sin reloj, solo ritmo.",
+      "Mi creatividad no distrae de lo técnico. Lo afila.",
+      "A veces, enfocarse no es apretar fuerte—es soltar con intención."
     ],
     
     // About Section

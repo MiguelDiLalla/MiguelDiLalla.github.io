@@ -2,7 +2,7 @@
 
 ## Aprendiz Perpetuo con Vocación Creadora
 
-> *"La tecnología, como el arte, florece cuando quien la crea vive con amplitud."* ✨
+> *"Construyo para comprender. Y comprendo para seguir construyendo."* ✨
 
 ---
 

@@ -149,9 +149,17 @@ function initializeLanguage() {
     currentLanguage = savedLang;
   }
   
+  // Update the global currentLanguage variable
+  window.currentLanguage = currentLanguage;
+  
   // 3. Apply language and update UI
   applyLanguage(currentLanguage);
   updateLanguageToggle(currentLanguage);
+  
+  // 4. Dispatch event for bio loader and other components
+  window.dispatchEvent(new CustomEvent('languageChanged', {
+    detail: { language: currentLanguage }
+  }));
 }
 
 // Change language function
@@ -164,6 +172,11 @@ function changeLanguage(lang) {
   
   // Store preference
   localStorage.setItem('preferredLanguage', lang);
+  
+  // Dispatch event for bio loader and other components
+  window.dispatchEvent(new CustomEvent('languageChanged', {
+    detail: { language: lang }
+  }));
 }
 
 // Apply translations efficiently
@@ -264,6 +277,8 @@ window.getQuotes = getQuotes;
 
 // Current language tracking
 let currentLanguage = 'en';
+// Make currentLanguage accessible globally
+window.currentLanguage = currentLanguage;
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

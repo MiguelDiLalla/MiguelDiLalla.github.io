@@ -8,27 +8,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const bioText = document.getElementById('bio-text');
   if (!bioText) return;
 
-  // Fetch the markdown bio file
-  fetch('/content/bio.md')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(markdown => {
-      // If marked.js is available, use it to parse markdown
-      if (typeof marked !== 'undefined') {
-        bioText.innerHTML = marked.parse(markdown);
-      } else {
-        // Basic fallback formatting if marked.js isn't loaded
-        bioText.innerHTML = convertMarkdownToHTML(markdown);
-      }
-    })
-    .catch(error => {
-      console.error('Error loading bio markdown:', error);
-      bioText.innerHTML = '<p>Unable to load biography content.</p>';
-    });
+  // Initial load based on current language
+  // First check the language manager's current language if available
+  const initialLang = window.currentLanguage || localStorage.getItem('preferredLanguage') || document.documentElement.lang || 'en';
+  loadBioForLanguage(initialLang);
+  
+  // Listen for language changes
+  window.addEventListener('languageChanged', (e) => {
+    loadBioForLanguage(e.detail.language);
+  });
+  
+  // Function to load bio for specific language
+  function loadBioForLanguage(lang) {
+    // Determine which file to load based on language
+    const bioFile = lang === 'es' ? '/content/bio_esp.md' : '/content/bio_new.md';
+    
+    // Fetch the markdown bio file
+    fetch(bioFile)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(markdown => {
+        // If marked.js is available, use it to parse markdown
+        if (typeof marked !== 'undefined') {
+          bioText.innerHTML = marked.parse(markdown);
+        } else {
+          // Basic fallback formatting if marked.js isn't loaded
+          bioText.innerHTML = convertMarkdownToHTML(markdown);
+        }
+      })
+      .catch(error => {
+        console.error(`Error loading bio markdown for ${lang}:`, error);
+        bioText.innerHTML = '<p>Unable to load biography content.</p>';
+      });
+  }
 });
 
 /**
@@ -88,16 +104,30 @@ function convertMarkdownToHTML(markdown) {
           .join('')}
       </ul>`;
     }
+    
+    // Handle badges to prevent stacking
+    if (block.match(/\[\!\[.*?\]\(.*?\)\]/g)) {
+      // Create a wrapper div for badges
+      return `<div class="badge-container flex flex-wrap gap-2 my-3">
+        ${block.replace(/\[\!\[(.*?)\]\((.*?)\)\]\((.*?)\)/g, 
+          '<a href="$3" class="inline-block m-1" target="_blank"><img src="$2" alt="$1"></a>')}
+      </div>`;
+    }
 
     return block
       // Headers with IDs for navigation
       .replace(/^# (.*$)/gm, (_, h1) => `<h1 id="${slugify(h1)}">${h1}</h1>`)
       .replace(/^## (.*$)/gm, (_, h2) => `<h2 id="${slugify(h2)}">${h2}</h2>`)
+      // Special handling for encapsulated titles with added spacing
+      .replace(/^## --(.*)--$/gm, (_, h2) => 
+        `<h2 id="${slugify(h2)}" class="encapsulated-title my-8 py-3 border-y-2">${h2}</h2>`)
+      .replace(/^### --(.*)--$/gm, (_, h3) => 
+        `<h3 id="${slugify(h3)}" class="encapsulated-title my-6 py-2 border-y">${h3}</h3>`)
       .replace(/^### (.*$)/gm, (_, h3) => `<h3 id="${slugify(h3)}" class="mt-8 mb-4">${h3}</h3>`)
 
-      // Links and Images
+      // Links and Images - modified to handle badge displays better
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-      .replace(/!\[([^\]]+)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
+      .replace(/!\[([^\]]+)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="inline-block">')
 
       // Inline Code
       .replace(/`([^`]+)`/g, '<code>$1</code>')

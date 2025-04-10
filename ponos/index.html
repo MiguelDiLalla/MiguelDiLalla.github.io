@@ -32,35 +32,20 @@
   <style>
     /* Cover letter specific styles */
     .letter-content {
-      max-width: 100%;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 0 1rem;
-    }
-    
-    @media (min-width: 768px) {
-      .letter-content {
-        max-width: 90%;
-        padding: 0 2rem;
-      }
-    }
-    
-    @media (min-width: 1280px) {
-      .letter-content {
-        max-width: 85%;
-        padding: 0 3rem;
-      }
     }
     
     .letter-content h1 {
       font-family: 'Montagu Slab', serif;
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       margin-bottom: 1.5rem;
       font-weight: 700;
     }
     
     .letter-content h2 {
       font-family: 'Montagu Slab', serif;
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       margin-top: 2rem;
       margin-bottom: 1rem;
       font-weight: 600;
@@ -68,7 +53,7 @@
     
     .letter-content h3 {
       font-family: 'Montagu Slab', serif;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
       font-weight: 600;
@@ -147,10 +132,6 @@
     
     main {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
     
     footer {
@@ -158,27 +139,6 @@
       bottom: 0;
       width: 100%;
       z-index: 10;
-    }
-    
-    /* Hero-style container for desktop */
-    @media (min-width: 1024px) {
-      .hero-container {
-        width: 100%;
-        max-width: 1400px;
-        padding: 0 2rem;
-        margin: 0 auto;
-      }
-      
-      .letter-content {
-        max-width: 100%;
-        padding: 0;
-      }
-      
-      .letter-content > div {
-        font-size: 150%;
-        max-width: 80ch;
-        margin: 0 auto;
-      }
     }
   </style>
 </head>
@@ -228,7 +188,7 @@
 
   <!-- Cover Letter Content Section -->
   <main class="pt-28 pb-16 px-4 md:px-8">
-    <div class="mx-auto hero-container">
+    <div class="max-w-4xl mx-auto">
       <!-- Letter Content Container - Now directly on the background -->
       <div id="letter-content" class="letter-content">
         <!-- Content will be loaded and animated by letter-parser.js -->

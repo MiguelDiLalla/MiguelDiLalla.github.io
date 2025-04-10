@@ -1,0 +1,92 @@
+{
+  "spring-hoteles": {
+    "color_primary": "#9cb3f7",
+    "color_secondary": "#202c50",
+    "font_color": "#ffffff",
+    "reclutador": "Rosmery",
+    "empresa": "Spring Hoteles",
+    "logo": "/assets/logos/spring-hotels.webp",
+    "markdown": "/assets/coverletters/spring-hotels.md"
+  },
+  "gmv": {
+    "color_primary": "#e0e0e0",
+    "color_secondary": "#ca0024",
+    "font_color": "#000000",
+    "reclutador": "Juan Carlos",
+    "empresa": "GMV",
+    "logo": "/assets/logos/gmv.webp",
+    "markdown": "/assets/coverletters/gmv.md"
+  },
+  "eave": {
+    "color_primary": "#150035",
+    "color_secondary": "#3aa1ff",
+    "font_color": "#ffffff",
+    "reclutador": "Rocio",
+    "empresa": "EAVE",
+    "logo": "/assets/logos/eave.webp",
+    "markdown": "/assets/coverletters/eave.md"
+  },
+  "unica-consultores": {
+    "color_primary": "#5d3048",
+    "color_secondary": "#ffffff",
+    "font_color": "#ffffff",
+    "reclutador": "Montse",
+    "empresa": "Unica Consultores",
+    "logo": "/assets/logos/unica-consultores.webp",
+    "markdown": "/assets/coverletters/unica-consultores.md"
+  },
+  "activacanarias": {
+    "color_primary": "#cae2c1",
+    "color_secondary": "#254f4c",
+    "font_color": "#000000",
+    "reclutador": "Estefania",
+    "empresa": "Activa Canarias",
+    "logo": "/assets/logos/activacanarias.webp",
+    "markdown": "/assets/coverletters/activa-canarias.md"
+  },
+  "coarco": {
+    "color_primary": "#084881",
+    "color_secondary": "#ff0000",
+    "font_color": "#ffffff",
+    "reclutador": "Noemy",
+    "empresa": "Coarco",
+    "logo": "/assets/logos/coarco.webp",
+    "markdown": "/assets/coverletters/coarco.md"
+  },
+  "conCiencia": {
+    "color_primary": "#0087be",
+    "color_secondary": "#FFFFFF",
+    "font_color": "#333332",
+    "reclutador": "Sara",
+    "empresa": "Viajando ConCiencia",
+    "logo": "/assets/logos/conCiencia.webp",
+    "markdown": "/assets/coverletters/conciencia.md"
+  },
+  "insiteca": {
+    "color_primary": "#dd5f3d",
+    "color_secondary": "#cfcdc1",
+    "font_color": "#424842",
+    "reclutador": "Alejandro",
+    "empresa": "Insiteca",
+    "logo": "/assets/logos/insiteca.webp",
+    "markdown": "/assets/coverletters/insiteca.md"
+  },
+  "perezmoreno": {
+    "color_primary": "#00004a",
+    "color_secondary": "#ffda0f",
+    "font_color": "#ffffff",
+    "reclutador": "Yurena",
+    "empresa": "Grupo Perez Moreno",
+    "logo": "/assets/logos/perezmoreno.webp",
+    "markdown": "/assets/coverletters/perezmoreno.md"
+  },
+  "ventajon": {
+    "color_primary": "#113f96",
+    "color_secondary": "#cd0026",
+    "font_color": "#fedc00",
+    "reclutador": "Gemma",
+    "empresa": "Ventajon",
+    "logo": "/assets/logos/ventajon.webp",
+    "markdown": "/assets/coverletters/ventajon.md"
+  }
+}

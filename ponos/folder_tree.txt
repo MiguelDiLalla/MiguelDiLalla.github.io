@@ -1,0 +1,9 @@
+Folder tree generated on: 2025-04-10 16:10:23
+Root: c:\Users\User\Projects_Unprotected\MiguelDiLalla.github.io\ponos
+Ignoring: .git/**
+
+│   ├── 📄 GenerateFolderTree.py (2 days ago)
+│   ├── 📄 config.json (34 minutes ago)
+│   ├── 📄 folder_tree.txt (just now)
+│   ├── 📄 index.html (2 minutes ago)
+│   └── 📄 template.js (just now)

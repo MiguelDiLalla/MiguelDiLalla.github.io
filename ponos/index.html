@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cover Letter | Miguel Di Lalla</title>
+  <link rel="icon" href="/assets/images/profile/ico-simple.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Montagu+Slab:opsz,wght@16..144,100..700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'title': ['"Montagu Slab"', 'serif'],
+            'sans': ['"Lexend Deca"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link href="/assets/css/fonts.css" rel="stylesheet" />
+  <link href="/assets/css/styles.css" rel="stylesheet" />
+  <link href="/assets/css/animations.css" rel="stylesheet" />
+  
+  <style>
+    /* Cover letter specific styles */
+    .letter-content {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    @media (min-width: 768px) {
+      .letter-content {
+        max-width: 90%;
+        padding: 0 2rem;
+      }
+    }
+    
+    @media (min-width: 1280px) {
+      .letter-content {
+        max-width: 85%;
+        padding: 0 3rem;
+      }
+    }
+    
+    .letter-content h1 {
+      font-family: 'Montagu Slab', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .letter-content h2 {
+      font-family: 'Montagu Slab', serif;
+      font-size: 2.2rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .letter-content h3 {
+      font-family: 'Montagu Slab', serif;
+      font-size: 1.8rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .letter-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .letter-content ul, .letter-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .letter-content ul {
+      list-style-type: disc;
+    }
+    
+    .letter-content ol {
+      list-style-type: decimal;
+    }
+    
+    .letter-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .letter-content blockquote {
+      border-left: 4px solid #f87171; /* Tailwind red-400 */
+      padding-left: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: #4b5563;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Navigation logo styles */
+    .nav-logo {
+      max-height: 28px;
+      max-width: 100px;
+      object-fit: contain;
+    }
+    
+    /* Separator style */
+    .separator {
+      display: inline-block;
+      margin: 0 8px;
+      opacity: 0.7;
+    }
+    
+    /* Text cursor animation */
+    .blinking-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+    }
+    
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    /* Page structure for fixed footer */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    footer {
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+    }
+    
+    /* Hero-style container for desktop */
+    @media (min-width: 1024px) {
+      .hero-container {
+        width: 100%;
+        max-width: 1400px;
+        padding: 0 2rem;
+        margin: 0 auto;
+      }
+      
+      .letter-content {
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .letter-content > div {
+        font-size: 150%;
+        max-width: 80ch;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body id="page-body" class="bg-gray-100 text-gray-800 font-sans min-h-screen">
+  <!-- Navigation -->
+  <header id="page-header" class="fixed top-0 left-0 w-full shadow-md z-50">
+    <nav class="max-w-5xl mx-auto px-6 py-4">
+      <!-- Mobile Navigation (stacked) -->
+      <div class="flex flex-col md:hidden items-center gap-2">
+        <div class="flex items-center justify-center w-full">
+          <a href="/" class="text-xl font-bold hover:text-red-400 font-title">Miguel Di Lalla</a>
+          <div id="mobile-logo-container" class="flex items-center hidden">
+            <span class="separator">×</span>
+            <img id="nav-logo-mobile" src="" alt="Company Logo" class="nav-logo hidden ml-1">
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-full">
+          <ul class="flex gap-4 font-semibold text-sm">
+            <li><a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="hover:text-red-400">LinkedIn</a></li>
+            <li><a href="https://github.com/MiguelDiLalla" target="_blank" class="hover:text-red-400">GitHub</a></li>
+            <li><a href="/content/resume.pdf" target="_blank" class="hover:text-red-400">CV</a></li>
+            <li><a href="/" class="hover:text-red-400">Home</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Desktop Navigation (side by side) -->
+      <div class="hidden md:flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="/" class="text-xl font-bold hover:text-red-400 font-title">Miguel Di Lalla</a>
+          <div id="desktop-logo-container" class="flex items-center hidden">
+            <span class="separator">×</span>
+            <img id="nav-logo-desktop" src="" alt="Company Logo" class="nav-logo hidden ml-1">
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <ul class="flex gap-6 font-semibold">
+            <li><a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="hover:text-red-400">LinkedIn</a></li>
+            <li><a href="https://github.com/MiguelDiLalla" target="_blank" class="hover:text-red-400">GitHub</a></li>
+            <li><a href="/content/resume.pdf" target="_blank" class="hover:text-red-400">CV</a></li>
+            <li><a href="/" class="hover:text-red-400">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Cover Letter Content Section -->
+  <main class="pt-28 pb-16 px-4 md:px-8">
+    <div class="mx-auto hero-container">
+      <!-- Letter Content Container - Now directly on the background -->
+      <div id="letter-content" class="letter-content">
+        <!-- Content will be loaded and animated by letter-parser.js -->
+        <div class="flex justify-center py-10">
+          <div class="animate-pulse flex space-x-4">
+            <div class="flex-1 space-y-6 py-1">
+              <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div class="space-y-3">
+                <div class="h-4 bg-gray-200 rounded"></div>
+                <div class="h-4 bg-gray-200 rounded"></div>
+                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+              </div>
+              <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="mt-10 flex flex-wrap justify-between gap-4">
+        <a href="/" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md">
+          <i class="fas fa-arrow-left mr-2"></i> Back to Home
+        </a>
+        <a href="/content/resume.pdf" target="_blank" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md">
+          <i class="fas fa-file-pdf mr-2"></i> View Resume
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 bg-red-400 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p>© 2025 Miguel Di Lalla. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Load the scripts in the correct order -->
+  <script src="template.js"></script>
+  <script src="letter-typewriting.js"></script>
+  <script src="letter-parser.js"></script>
+</body>
+</html>

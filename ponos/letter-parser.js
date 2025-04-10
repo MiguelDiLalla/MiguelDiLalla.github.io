@@ -147,6 +147,9 @@ function parseMarkdownSections(markdown) {
       // Process the content for this section
       let processedContent = content;
       
+      // Convert line breaks to <br> tags
+      processedContent = processedContent.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+      
       // Convert markdown links to HTML
       processedContent = processedContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, 
         '<a href="$2" target="_blank" class="underline hover:text-red-400 transition-colors">$1</a>');
@@ -177,35 +180,46 @@ function parseMarkdownSections(markdown) {
 async function startTypewriterSequence(sectionContents, sections, buttonContainer) {
   // Create a new instance of our Typewriter class
   const typewriter = new Typewriter({
-    typingSpeed: 50,
-    eraseSpeed: 30
+    typingSpeed: 17, // 3x faster than the original 50ms
+    eraseSpeed: 10  // 3x faster than the original 30ms
   });
   
   // Initial wait for page to load completely
   await typewriter.wait(2000);
   
   // 1. Type the SALUDO section and wait
-  await typewriter.type(sections.SALUDO, sectionContents.SALUDO, 50, true);
+  await typewriter.type(sections.SALUDO, sectionContents.SALUDO, 17, true);
   await typewriter.wait(2000);
   
-  // 2. Type the INTRODUCCIÓN section, wait, then erase it
-  await typewriter.type(sections.INTRODUCCIÓN, sectionContents.INTRODUCCIÓN, 50);
+  // 2. Style and type the INTRODUCCIÓN section with yellow color (no black background)
+  sections.INTRODUCCIÓN.innerHTML = '<span style="color: #ffcf00;"></span>';
+  sections.INTRODUCCIÓN.classList.remove('opacity-0');
+  
+  // Get the span element to type into
+  const introSpan = sections.INTRODUCCIÓN.querySelector('span');
+  
+  // Type the INTRODUCCIÓN text inside the yellow span
+  await typewriter.type(introSpan, sectionContents.INTRODUCCIÓN, 17);
   await typewriter.wait(2000);
   await typewriter.erase(sections.INTRODUCCIÓN);
   
-  // 3. Type the CUERPO section and wait
-  await typewriter.type(sections.CUERPO, sectionContents.CUERPO, 40);
-  await typewriter.wait(7000);
+  // 3. Type the CUERPO section and wait (with specific typing speed)
+  await typewriter.type(sections.CUERPO, sectionContents.CUERPO, 34);
+  await typewriter.wait(3000); // Reduced from 7000ms to 3000ms
   
-  // 4. Prepare the DESPEDIDA section with styling but empty content
-  sections.DESPEDIDA.innerHTML = '<mark style="background-color: black; color: #ffcf00; padding: 0 0.25rem;"></mark>';
+  // 4. Prepare the DESPEDIDA section with dynamic styling based on company colors
+  // Access the company data from the global window object where template.js stores it
+  const primaryColor = window.companyData?.color_primary || '#ffcf00'; // Default to yellow if not set
+  const secondaryColor = window.companyData?.color_secondary || '#000000'; // Default to black if not set
+  
+  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${primaryColor}; padding: 0 0.25rem;"></mark>`;
   sections.DESPEDIDA.classList.remove('opacity-0');
   
   // Get the mark element to type into
   const despedidaMark = sections.DESPEDIDA.querySelector('mark');
   
-  // Type the DESPEDIDA text inside the mark element
-  await typewriter.type(despedidaMark, sectionContents.DESPEDIDA, 50);
+  // Type the DESPEDIDA text inside the mark element (using 17ms speed)
+  await typewriter.type(despedidaMark, sectionContents.DESPEDIDA, 17);
   
   // Wait a moment before showing buttons
   await typewriter.wait(500);

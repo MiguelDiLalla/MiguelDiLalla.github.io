@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Function to apply company-specific settings
   function applyCompanySettings(company) {
+    // Store company data in window object for access by other scripts
+    window.companyData = company;
+    
     // 1. Set page background and text colors
     const pageBody = document.getElementById('page-body');
     const pageHeader = document.getElementById('page-header');

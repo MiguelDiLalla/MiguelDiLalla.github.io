@@ -7,7 +7,7 @@ Estimado Alejandro, Un cordial saludo!
 <!-- CUERPO -->
 --
 
-Mi nombre es Miguel Di Lalla, tengo 26 años y actualmente me encuentro en transición profesional, formándome en ciencia de datos y aprendizaje automático con el objetivo de incorporarme al sector IT. Gracias a la beca PONOS, tengo la posibilidad de realizar prácticas por tres meses a coste cero para la empresa anfitriona.
+Mi nombre es Miguel Di Lalla, tengo 26 años y actualmente me encuentro en transición profesional, formándome en ciencia de datos y aprendizaje automático con el objetivo de incorporarme al sector IT. Gracias a la beca PONOS, tengo la posibilidad de realizar prácticas por tres meses a coste cero para la empresa anfitriona. (modificar)
 
 Me pareció muy valiosa tu perspectiva sobre el impacto de la burocracia técnica en el trabajo diario de los ingenieros. Creo que integrar herramientas de ciencia de datos y automatización para la generación de documentación legal y memorias descriptivas puede marcar una diferencia real en la eficiencia de los equipos. Si fuese seleccionado para realizar mi práctica con ustedes, me encantaría asumir este tipo de reto como proyecto principal.
 

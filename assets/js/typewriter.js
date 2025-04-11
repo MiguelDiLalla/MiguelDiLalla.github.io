@@ -5,6 +5,7 @@ class Typewriter {
     this.speed = options.speed || 100;
     this.lineDelay = options.lineDelay || 1000;
     this.emoticonsDelay = options.emoticonsDelay || 400;
+    this.fadeDuration = options.fadeDuration || 500; // Duration for fade animations
     this.queue = [];
     this.isRunning = false;
     this.language = options.language || 'en';
@@ -13,6 +14,7 @@ class Typewriter {
     this.actions = {
       TYPE: 'type',
       DELETE: 'delete',
+      FADE_OUT: 'fade_out', // New action for fading out text
       WAIT: 'wait',
       NEXT_LINE: 'next_line',
       REPLACE_LINE: 'replace_line',
@@ -31,9 +33,19 @@ class Typewriter {
   }
 
   // Add text deletion to the queue (can specify number of characters)
+  // This is maintained for backwards compatibility
   delete(charCount = null) {
     this.queue.push({
-      action: this.actions.DELETE,
+      action: this.actions.FADE_OUT, // Changed to use fade_out instead
+      value: charCount
+    });
+    return this;
+  }
+
+  // Add text fade out to the queue (gracefully fade out text)
+  fadeOut(charCount = null) {
+    this.queue.push({
+      action: this.actions.FADE_OUT,
       value: charCount
     });
     return this;
@@ -89,8 +101,9 @@ class Typewriter {
       case this.actions.TYPE:
         await this.executeTypeAction(action, lines, currentLine);
         break;
-      case this.actions.DELETE:
-        await this.executeDeleteAction(action, lines, currentLine);
+      case this.actions.DELETE: // Legacy support redirects to fade out
+      case this.actions.FADE_OUT:
+        await this.executeFadeOutAction(action, lines, currentLine);
         break;
       case this.actions.WAIT:
         await new Promise(resolve => setTimeout(resolve, action.value));
@@ -144,19 +157,41 @@ class Typewriter {
     }
   }
 
-  // Execute a DELETE action
-  async executeDeleteAction(action, lines, currentLine) {
+  // Execute a FADE_OUT action
+  async executeFadeOutAction(action, lines, currentLine) {
     const charCount = action.value === null ? lines[currentLine].length : action.value;
     
-    for (let i = 0; i < charCount; i++) {
+    if (lines[currentLine] && lines[currentLine].length > 0) {
+      // Create a temporary span for the text to be faded out
+      const textToFade = lines[currentLine].substring(lines[currentLine].length - charCount);
+      const remainingText = lines[currentLine].substring(0, lines[currentLine].length - charCount);
+      
+      // Create a temporary span for the fading effect
+      const fadeSpan = document.createElement('span');
+      fadeSpan.textContent = textToFade;
+      fadeSpan.style.transition = `opacity ${this.fadeDuration}ms ease`;
+      fadeSpan.style.opacity = '1';
+      
+      // Update the line with the remaining text and the fade span
+      lines[currentLine] = remainingText;
+      this.element.innerHTML = lines.join('<br>');
+      this.element.appendChild(fadeSpan);
+      
+      // Add a half-second delay before starting the fade out
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Trigger the fade out animation
       await new Promise(resolve => {
         setTimeout(() => {
-          if (lines[currentLine] && lines[currentLine].length > 0) {
-            lines[currentLine] = lines[currentLine].substring(0, lines[currentLine].length - 1);
-            this.element.innerHTML = lines.join('<br>');
-          }
-          resolve();
-        }, this.speed / 2); // Deleting is typically faster
+          fadeSpan.style.opacity = '0';
+          setTimeout(() => {
+            // Remove the fade span after the animation completes
+            if (fadeSpan.parentNode) {
+              fadeSpan.parentNode.removeChild(fadeSpan);
+            }
+            resolve();
+          }, this.fadeDuration);
+        }, 10); // Small delay to ensure the transition applies
       });
     }
   }

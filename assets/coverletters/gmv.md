@@ -3,7 +3,7 @@ Estimado Juan Carlos,
 Saludos cordiales desde Tenerife.
 
 <!-- INTRODUCCIÓN -->
-Hace ya más de cinco años que soy oyente de Coffee Break. Fue a través del podcast que te conocí, y escuchar tus experiencias en la industria es parte de mi inspiración a querer formar parte de ella.
+ - Hace ya más de cinco años que soy oyente de Coffee Break. Fue a través del podcast que te conocí, y escuchar tus experiencias en la industria es parte de mi inspiración a querer formar parte de ella.
 
 <!-- CUERPO -->
 --

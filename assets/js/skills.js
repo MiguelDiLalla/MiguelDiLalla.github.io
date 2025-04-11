@@ -36,18 +36,23 @@ document.addEventListener('DOMContentLoaded', async function() {
       header.textContent = category;
       categoryPanel.appendChild(header);
 
-      // Skills container
+      // Skills container - using flex for vertical layout
       const skillsContainer = document.createElement('div');
-      skillsContainer.className = 'flex flex-col gap-2';
+      skillsContainer.className = 'flex flex-col gap-2'; // Vertical flex with gap
       skillsContainer.dataset.category = category;
 
-      // Add each skill in this category
-      skillsByCategory[category].forEach(skill => {
+      // Shuffle the skills array for this category to randomize order
+      const shuffledSkills = [...skillsByCategory[category]];
+      shuffleArray(shuffledSkills);
+
+      // Add each skill in this category with the shuffled order
+      shuffledSkills.forEach(skill => {
         const skillElement = createSkillElement(skill, category);
-        // Hide skills initially for typewriter effect
-        skillElement.classList.add('opacity-0', 'transform', 'translate-y-4');
+        // Hide skills initially for appearance animation
+        skillElement.classList.add('opacity-0');
         skillElement.dataset.level = skill.level;
         skillElement.dataset.category = category;
+        
         skillsContainer.appendChild(skillElement);
       });
 
@@ -63,10 +68,19 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+// Fisher-Yates shuffle algorithm to randomize array order
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 // Create individual skill element 
 function createSkillElement(skill, category) {
   const skillElement = document.createElement('div');
-  skillElement.className = 'skill-item py-2 px-3 rounded-lg flex justify-between items-center';
+  skillElement.className = 'skill-item py-2 px-3 rounded-lg flex justify-between items-center transform transition-all duration-300 cursor-pointer hover:scale-105';
 
   // Apply background color based on level and category
   const colorClass = getLevelColorForCategory(skill.level, category);
@@ -245,24 +259,24 @@ function animateCategoryPanels() {
     duration: 800,
     delay: anime.stagger(150),
     complete: function() {
-      // After all panels are visible, start typewriter for skills
-      animateSkillsTypewriter();
+      // After all panels are visible, start animations for skills
+      animateSkillsAppearing();
     }
   });
 }
 
-// Animate skills with typewriter effect
-function animateSkillsTypewriter() {
+// Animate skills with random appearing effect
+function animateSkillsAppearing() {
   const skillItems = document.querySelectorAll('.skill-item');
   
-  // Typewriter effect: skills appear one by one within each category
+  // Random appearing effect
   anime({
     targets: '.skill-item',
     opacity: [0, 1],
-    translateY: [20, 0],
-    easing: 'easeOutExpo',
-    duration: 600,
-    delay: anime.stagger(80),
+    scale: [0.8, 1],
+    easing: 'easeOutElastic(1, .6)',
+    duration: 800,
+    delay: anime.stagger(60, {from: 'random'}), // Random order appearance
     complete: function() {
       // After all skills are visible, start the color transitions
       animateSkillColors();
@@ -274,7 +288,7 @@ function animateSkillsTypewriter() {
 function animateSkillColors() {
   const skillItems = document.querySelectorAll('.skill-item');
   
-  skillItems.forEach((item, index) => {
+  skillItems.forEach((item) => {
     const level = item.dataset.level;
     const category = item.dataset.category;
     

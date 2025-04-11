@@ -172,6 +172,98 @@ function parseMarkdownSections(markdown) {
 }
 
 /**
+ * Calculates the brightness of a color and returns a contrasting color
+ * @param {string} primaryColor - The primary color in hex format
+ * @param {string} secondaryColor - The secondary color in hex format
+ * @return {string} - A color with contrasting brightness based on the secondary color
+ */
+function getContrastingColor(primaryColor, secondaryColor) {
+  // Add debugging to find issues
+  console.log('Calculating contrast for:', {primaryColor, secondaryColor});
+  
+  // Check and normalize inputs (handle potential null values or format issues)
+  if (!primaryColor || !secondaryColor) {
+    console.error('Missing color input:', {primaryColor, secondaryColor});
+    return secondaryColor || '#ffcf00'; // Fallback to default if missing
+  }
+  
+  // Ensure colors have # prefix
+  primaryColor = primaryColor.startsWith('#') ? primaryColor : '#' + primaryColor;
+  secondaryColor = secondaryColor.startsWith('#') ? secondaryColor : '#' + secondaryColor;
+  
+  // Convert hex to RGB
+  const hexToRgb = (hex) => {
+    try {
+      const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      const fullHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    } catch (e) {
+      console.error('Error parsing color:', hex, e);
+      return { r: 0, g: 0, b: 0 };
+    }
+  };
+
+  // Calculate brightness (0-255) using common formula
+  const getBrightness = (color) => {
+    const rgb = hexToRgb(color);
+    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+  };
+
+  // Convert RGB to hex
+  const rgbToHex = (r, g, b) => {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  };
+
+  // Calculate brightness of primary color
+  const primaryBrightness = getBrightness(primaryColor);
+  
+  // Get the RGB values of secondary color
+  const secondaryRgb = hexToRgb(secondaryColor);
+  
+  // Calculate the brightness of the secondary color
+  const secondaryBrightness = getBrightness(secondaryColor);
+  
+  console.log('Brightness values:', {primaryBrightness, secondaryBrightness});
+
+  // Determine the brightness adjustment factor
+  // If primary is bright, darken the secondary. If primary is dark, lighten it.
+  const isBright = primaryBrightness > 128;
+  
+  // For coarco specific fix - the red secondary color needs more adjustment
+  let brightnessAdjustment = 100;
+  if (secondaryColor.toLowerCase() === '#ff0000' && primaryColor.toLowerCase() === '#084881') {
+    brightnessAdjustment = 150; // Use stronger adjustment for this specific case
+    console.log('Applying special adjustment for coarco colors');
+  }
+  
+  const targetBrightness = isBright ? 
+    Math.max(0, secondaryBrightness - brightnessAdjustment) : 
+    Math.min(255, secondaryBrightness + brightnessAdjustment);
+  
+  console.log('Target brightness:', targetBrightness);
+  
+  // Better calculation for adjustment factor to prevent division by zero
+  const adjustmentFactor = secondaryBrightness === 0 ? 
+    (isBright ? 0 : 1) : 
+    targetBrightness / secondaryBrightness;
+  
+  // Create new RGB values with adjusted brightness
+  let r = Math.min(255, Math.max(0, Math.round(secondaryRgb.r * adjustmentFactor)));
+  let g = Math.min(255, Math.max(0, Math.round(secondaryRgb.g * adjustmentFactor)));
+  let b = Math.min(255, Math.max(0, Math.round(secondaryRgb.b * adjustmentFactor)));
+  
+  const resultColor = rgbToHex(r, g, b);
+  console.log('Result color:', resultColor);
+  
+  return resultColor;
+}
+
+/**
  * Start the sequence of typewriter animations
  * @param {object} sectionContents - Object with section contents
  * @param {object} sectionElements - Object with section DOM elements
@@ -192,12 +284,15 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   await typewriter.type(sections.SALUDO, sectionContents.SALUDO, 17, true);
   await typewriter.wait(2000);
   
-  // 2. Style and type the INTRODUCCIÓN section with company's secondary color
+  // 2. Style and type the INTRODUCCIÓN section with a contrasting color based on company colors
   const secondaryColor = companyData?.color_secondary || '#ffcf00'; // Default to yellow if not set
   const primaryColor = companyData?.color_primary || '#ffffff'; // Default text color
   const fontColor = companyData?.font_color || '#000000'; // Default font color
   
-  sections.INTRODUCCIÓN.innerHTML = `<span style="color: ${secondaryColor};"></span>`;
+  // Calculate a contrasting color for better readability
+  const introColor = getContrastingColor(primaryColor, secondaryColor);
+  
+  sections.INTRODUCCIÓN.innerHTML = `<span style="color: ${introColor};"></span>`;
   sections.INTRODUCCIÓN.classList.remove('opacity-0');
   
   // Get the span element to type into
@@ -210,17 +305,17 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   
   // 3. Type the CUERPO section and wait (with specific typing speed)
   await typewriter.type(sections.CUERPO, sectionContents.CUERPO, 34);
-  await typewriter.wait(3000); // Reduced from 7000ms to 3000ms
+  await typewriter.wait(2000); // Reduced from 7000ms to 2000ms
   
   // 4. Prepare the DESPEDIDA section with dynamic styling based on company colors
-  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${fontColor === '#ffffff' ? primaryColor : fontColor}; padding: 0 0.25rem;"></mark>`;
+  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${fontColor}; padding: 0 0.25rem;"></mark>`;
   sections.DESPEDIDA.classList.remove('opacity-0');
   
   // Get the mark element to type into
   const despedidaMark = sections.DESPEDIDA.querySelector('mark');
   
-  // Type the DESPEDIDA text inside the mark element (using 17ms speed)
-  await typewriter.type(despedidaMark, sectionContents.DESPEDIDA, 17);
+  // Type the DESPEDIDA text inside the mark element (using 30ms speed)
+  await typewriter.type(despedidaMark, sectionContents.DESPEDIDA, 30);
   
   // Wait a moment before showing buttons
   await typewriter.wait(500);

@@ -20,4 +20,4 @@ Por los momentos queda a tu dispocicion mi CV y esta web (totalmente desarrollad
 <!-- DESPEDIDA -->
 Valoraria mucho cualquier comentario o sugerencia que me ayude a mejorar mi perfil.
 
-Muchas gracias por tu tiempo. El primer boton te llavara al lobby de mi web. El segundo te permirá descargar mi CV. 
+Muchas gracias por tu tiempo. El primer boton te llavará al lobby de mi web. El segundo te permirá descargar mi CV. 

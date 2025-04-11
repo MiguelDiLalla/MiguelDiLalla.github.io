@@ -3,10 +3,12 @@
  * 
  * This script provides sophisticated typewriter animations with:
  * - Character-by-character typing with configurable speed
- * - HTML tag preservation during typing/erasing
+ * - HTML tag preservation during typing/fading
+ * - Support for markdown formatting (**bold**, *italic*, etc.)
  * - Cursor blinking effect
  * - Pause/wait capability between animations
- * - Text erasing animation
+ * - Text graceful fade out animation
+ * - Automatic smooth scrolling to keep typed text in view
  */
 
 class Typewriter {
@@ -17,8 +19,10 @@ class Typewriter {
   constructor(options = {}) {
     this.options = {
       typingSpeed: options.typingSpeed || 50,
-      eraseSpeed: options.eraseSpeed || 30,
+      fadeOutSpeed: options.fadeOutSpeed || 30, // Renamed from eraseSpeed
+      fadeDuration: options.fadeDuration || 500, // Duration for fade animations
       blinkCursorClass: options.blinkCursorClass || 'blinking-cursor',
+      scrollPadding: options.scrollPadding || 150, // Padding for auto-scrolling
       ...options
     };
   }
@@ -38,23 +42,29 @@ class Typewriter {
       element.classList.add(this.options.blinkCursorClass);
       element.innerHTML = '';
       
+      // Process markdown formatting before typing
+      const processedText = this._processMarkdown(text);
+      
       const type = () => {
-        if (i < text.length) {
+        if (i < processedText.length) {
           // Check if we're typing an HTML tag
-          if (text.charAt(i) === '<') {
+          if (processedText.charAt(i) === '<') {
             // Find the end of the tag
-            const closeTag = text.indexOf('>', i);
+            const closeTag = processedText.indexOf('>', i);
             if (closeTag !== -1) {
-              element.innerHTML += text.substring(i, closeTag + 1);
+              element.innerHTML += processedText.substring(i, closeTag + 1);
               i = closeTag + 1;
             } else {
-              element.innerHTML += text.charAt(i);
+              element.innerHTML += processedText.charAt(i);
               i++;
             }
           } else {
-            element.innerHTML += text.charAt(i);
+            element.innerHTML += processedText.charAt(i);
             i++;
           }
+          
+          // Auto-scroll to keep the typing area in view
+          this._scrollIntoView(element);
           
           setTimeout(type, speed);
         } else {
@@ -71,48 +81,82 @@ class Typewriter {
   }
 
   /**
-   * Erase text from an element with typewriter effect
-   * @param {HTMLElement} element - The element to erase from
-   * @param {number} speed - Optional override erasing speed
-   * @return {Promise} - Resolves when erasing is complete
+   * Process markdown formatting to convert to HTML
+   * @param {string} text - The text to process
+   * @return {string} - The processed text with HTML tags
+   * @private
    */
-  erase(element, speed = this.options.eraseSpeed) {
+  _processMarkdown(text) {
+    // Process bold text: **text** or __text__
+    let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    processedText = processedText.replace(/__(.*?)__/g, '<strong>$1</strong>');
+    
+    // Process italic text: *text* or _text_
+    processedText = processedText.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+    processedText = processedText.replace(/_([^_]+)_/g, '<em>$1</em>');
+    
+    // Process strikethrough: ~~text~~
+    processedText = processedText.replace(/~~(.*?)~~/g, '<del>$1</del>');
+    
+    return processedText;
+  }
+
+  /**
+   * Auto-scroll to keep the typing element in view
+   * @param {HTMLElement} element - The element to keep in view
+   * @private
+   */
+  _scrollIntoView(element) {
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const elementBottom = rect.bottom;
+    
+    // If the bottom of the element is below or near the viewport bottom,
+    // smoothly scroll to keep it in view with some padding
+    if (elementBottom > windowHeight - this.options.scrollPadding) {
+      const scrollAmount = elementBottom - windowHeight + this.options.scrollPadding;
+      window.scrollBy({
+        top: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  /**
+   * Gracefully fade out text from an element
+   * @param {HTMLElement} element - The element to fade text from
+   * @param {number} speed - Optional override fade speed
+   * @return {Promise} - Resolves when fading is complete
+   */
+  erase(element, speed = this.options.fadeOutSpeed) {
     return new Promise(resolve => {
-      let text = element.innerHTML;
-      let i = text.length;
+      const text = element.innerHTML;
       
+      // Create a temporary container
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'relative';
+      tempContainer.style.display = 'inline-block';
+      tempContainer.innerHTML = text;
+      tempContainer.style.transition = `opacity ${this.options.fadeDuration}ms ease`;
+      tempContainer.style.opacity = '1';
+      
+      // Replace the element's content with the container
+      element.innerHTML = '';
+      element.appendChild(tempContainer);
       element.classList.add(this.options.blinkCursorClass);
       
-      const erase = () => {
-        if (i > 0) {
-          // Handle HTML tags during erasure
-          if (text.charAt(i - 1) === '>') {
-            // Find the opening tag
-            const openTag = text.lastIndexOf('<', i);
-            if (openTag !== -1) {
-              text = text.substring(0, openTag);
-              element.innerHTML = text;
-              i = openTag;
-            } else {
-              text = text.substring(0, i - 1);
-              element.innerHTML = text;
-              i--;
-            }
-          } else {
-            text = text.substring(0, i - 1);
-            element.innerHTML = text;
-            i--;
-          }
-          
-          setTimeout(erase, speed);
-        } else {
+      // Add a half-second delay before starting the fade out
+      setTimeout(() => {
+        // Start the fade out animation
+        tempContainer.style.opacity = '0';
+        
+        // Remove the container after the animation completes
+        setTimeout(() => {
           element.innerHTML = '';
           element.classList.remove(this.options.blinkCursorClass);
           resolve();
-        }
-      };
-      
-      erase();
+        }, this.options.fadeDuration);
+      }, 500); // Half-second delay before the fade begins
     });
   }
 

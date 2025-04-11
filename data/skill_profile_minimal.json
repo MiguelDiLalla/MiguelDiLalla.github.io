@@ -45,7 +45,7 @@
     "category": "Data Tools"
   },
   {
-    "skill": "pandas",
+    "skill": "Pandas",
     "level": "avanzado",
     "category": "Data Tools"
   },
@@ -55,7 +55,7 @@
     "category": "Data Tools"
   },
   {
-    "skill": "scikit-learn",
+    "skill": "Scikit-learn",
     "level": "intermedio",
     "category": "Data Tools"
   },
@@ -105,7 +105,7 @@
     "category": "Prácticas Profesionales"
   },
   {
-    "skill": "pytest",
+    "skill": "Pytest",
     "level": "about_to_learn",
     "category": "Herramientas Técnicas"
   },
@@ -120,7 +120,7 @@
     "category": "Herramientas Técnicas"
   },
   {
-    "skill": "Data Analitics",
+    "skill": "Data Analytics",
     "level": "avanzado",
     "category": "Herramientas Técnicas"
   },

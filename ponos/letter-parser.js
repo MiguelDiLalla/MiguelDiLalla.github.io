@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const sectionContents = parseMarkdownSections(markdown);
         
         // Start the typewriter animation sequence
-        startTypewriterSequence(sectionContents, sections, buttonContainer);
+        startTypewriterSequence(sectionContents, sections, buttonContainer, companyData);
       })
       .catch(error => {
         console.error('Error loading cover letter content:', error);
@@ -176,8 +176,9 @@ function parseMarkdownSections(markdown) {
  * @param {object} sectionContents - Object with section contents
  * @param {object} sectionElements - Object with section DOM elements
  * @param {HTMLElement} buttonContainer - Container for the buttons
+ * @param {object} companyData - Company data from template.js
  */
-async function startTypewriterSequence(sectionContents, sections, buttonContainer) {
+async function startTypewriterSequence(sectionContents, sections, buttonContainer, companyData) {
   // Create a new instance of our Typewriter class
   const typewriter = new Typewriter({
     typingSpeed: 17, // 3x faster than the original 50ms
@@ -191,16 +192,20 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   await typewriter.type(sections.SALUDO, sectionContents.SALUDO, 17, true);
   await typewriter.wait(2000);
   
-  // 2. Style and type the INTRODUCCIÓN section with yellow color (no black background)
-  sections.INTRODUCCIÓN.innerHTML = '<span style="color: #ffcf00;"></span>';
+  // 2. Style and type the INTRODUCCIÓN section with company's secondary color
+  const secondaryColor = companyData?.color_secondary || '#ffcf00'; // Default to yellow if not set
+  const primaryColor = companyData?.color_primary || '#ffffff'; // Default text color
+  const fontColor = companyData?.font_color || '#000000'; // Default font color
+  
+  sections.INTRODUCCIÓN.innerHTML = `<span style="color: ${secondaryColor};"></span>`;
   sections.INTRODUCCIÓN.classList.remove('opacity-0');
   
   // Get the span element to type into
   const introSpan = sections.INTRODUCCIÓN.querySelector('span');
   
-  // Type the INTRODUCCIÓN text inside the yellow span
+  // Type the INTRODUCCIÓN text inside the colored span
   await typewriter.type(introSpan, sectionContents.INTRODUCCIÓN, 17);
-  await typewriter.wait(2000);
+  await typewriter.wait(5000);
   await typewriter.erase(sections.INTRODUCCIÓN);
   
   // 3. Type the CUERPO section and wait (with specific typing speed)
@@ -208,11 +213,7 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   await typewriter.wait(3000); // Reduced from 7000ms to 3000ms
   
   // 4. Prepare the DESPEDIDA section with dynamic styling based on company colors
-  // Access the company data from the global window object where template.js stores it
-  const primaryColor = window.companyData?.color_primary || '#ffcf00'; // Default to yellow if not set
-  const secondaryColor = window.companyData?.color_secondary || '#000000'; // Default to black if not set
-  
-  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${primaryColor}; padding: 0 0.25rem;"></mark>`;
+  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${fontColor === '#ffffff' ? primaryColor : fontColor}; padding: 0 0.25rem;"></mark>`;
   sections.DESPEDIDA.classList.remove('opacity-0');
   
   // Get the mark element to type into

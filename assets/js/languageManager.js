@@ -10,11 +10,11 @@ window.translations = {
     
     // Hero Section
     "hero_greeting_initial": "Hi!",
-    "hero_greeting_intro": "This is Miguel:",
-    "hero_greeting_jobSearch": "He is looking for his first IT job!",
-    "hero_greeting_scholarship": "and he's got a 3 months Full Scholarship for that",
+    "hero_greeting_intro": "I'm Miguel",
+    "hero_greeting_jobSearch": "I'm looking for my first IT job!",
+    "hero_greeting_scholarship": "and I've got a 3 months Full Scholarship",
     "hero_greeting_callToAction": "find out more down below...",
-    "hero_greeting_welcome": "Welcome!",
+    "hero_greeting_welcome": "Be welcome!",
     "hero_quote": "The mind is a LEGO set waiting for its model.",
     "hero_role": "Data Enthusiast & Machine-Learning Explorer",
     
@@ -80,11 +80,11 @@ window.translations = {
     
     // Hero Section
     "hero_greeting_initial": "¡Hola!",
-    "hero_greeting_intro": "Este es Miguel:",
-    "hero_greeting_jobSearch": "¡Está buscando su primer trabajo en IT!",
-    "hero_greeting_scholarship": "y él tiene una Beca Completa de 3 meses para ello",
+    "hero_greeting_intro": "Soy Miguel",
+    "hero_greeting_jobSearch": "¡Estoy buscando mi primer trabajo en IT!",
+    "hero_greeting_scholarship": "y tengo una Beca Completa de 3 meses para ello",
     "hero_greeting_callToAction": "infórmate en la sección de Proyectos, abajo.",
-    "hero_greeting_welcome": "Sean bienvenidos...",
+    "hero_greeting_welcome": "¡Os doy la bienvenida!",
     "hero_quote": "La mente es un set de LEGO esperando su modelo.",
     "hero_role": "Entusiasta de Datos y Explorador de Machine Learning",
     

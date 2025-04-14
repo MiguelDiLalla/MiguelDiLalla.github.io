@@ -937,7 +937,14 @@
       const loadingScreen = document.getElementById('loading-screen');
       if (loadingScreen) {
         loadingScreen.style.opacity = '0';
-        setTimeout(() => loadingScreen.remove(), 500); // Remove after fade-out
+        setTimeout(() => {
+          loadingScreen.remove();
+          
+          // Start hero animations only after loading screen is removed
+          if (window.startHeroAnimations) {
+            window.startHeroAnimations();
+          }
+        }, 500); // Remove after fade-out
       }
     });
 
@@ -960,6 +967,7 @@
       // Flag to track if animation has played
       let hasAnimationPlayed = false;
       let hasPeekingAnimationPlayed = false;
+      let heroAnimationsStarted = false;
       
       // Function to check if element is in viewport
       function isElementInViewport(el) {
@@ -1142,11 +1150,6 @@
         populateRoleModels();
       });
       
-      // Start emoticon animation
-      if (emoticonContainer) {
-        startEmoticonAnimation();
-      }
-
       // Quote Slider Animation - updated to use translated quotes from language manager
       const quoteText = document.getElementById("quote-text");
       const quoteInner = document.getElementById("quote-inner");
@@ -1214,8 +1217,17 @@
       // Load quotes for current language
       loadTranslatedQuotes();
       
-      // Set fixed timing for quotes and job title to appear
-      setTimeout(() => {
+      // Define a function to start hero animations
+      window.startHeroAnimations = function() {
+        if (heroAnimationsStarted) return;
+        heroAnimationsStarted = true;
+        
+        // Start emoticon animation
+        if (emoticonContainer) {
+          startEmoticonAnimation();
+        }
+        
+        // Show quotes and job title
         if (quoteFlipperElem) quoteFlipperElem.classList.add('visible');
         if (roleSubtitleElem) roleSubtitleElem.classList.add('visible');
         
@@ -1223,7 +1235,18 @@
         if (translatedQuotes.length > 0) {
           startQuoteRotation();
         }
-      }, 12000);
+        
+        // Initialize typewriter animation for the hero section
+        if (window.initTypewriter) {
+          window.initTypewriter();
+        }
+      };
+      
+      // Only start hero animations automatically if loading screen is already gone
+      const loadingScreen = document.getElementById('loading-screen');
+      if (!loadingScreen) {
+        window.startHeroAnimations();
+      }
     });
   </script>
 </body>

@@ -462,11 +462,6 @@
   </style>
 </head>
 <body class="bg-[#ffcf00] text-black font-sans scroll-smooth">
-  <!-- Add a loading screen overlay -->
-  <div id="loading-screen" class="fixed inset-0 bg-[#ffcf00] flex items-center justify-center z-50">
-    <img src="/assets/images/profile/ico-simple.jpg" alt="Loading Icon" class="w-16 h-16 animate-pulse">
-  </div>
-
   <!-- Hidden SVG definitions for clip paths -->
   <svg class="clip-paths" aria-hidden="true">
     <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
@@ -932,22 +927,6 @@
   <script src="/assets/js/profileImageRotation.js"></script>
   <script src="/assets/js/backgroundRotation.js"></script>
   <script>
-    // Hide the loading screen once the page is fully loaded
-    window.addEventListener('load', () => {
-      const loadingScreen = document.getElementById('loading-screen');
-      if (loadingScreen) {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-          loadingScreen.remove();
-          
-          // Start hero animations only after loading screen is removed
-          if (window.startHeroAnimations) {
-            window.startHeroAnimations();
-          }
-        }, 500); // Remove after fade-out
-      }
-    });
-
     // Main page initialization and animations
     document.addEventListener('DOMContentLoaded', () => {
       // Variables for quote rotation
@@ -968,6 +947,11 @@
       let hasAnimationPlayed = false;
       let hasPeekingAnimationPlayed = false;
       let heroAnimationsStarted = false;
+      
+      // Start hero animations immediately rather than waiting for loading screen removal
+      setTimeout(() => {
+        window.startHeroAnimations();
+      }, 100);
       
       // Function to check if element is in viewport
       function isElementInViewport(el) {
@@ -1241,12 +1225,6 @@
           window.initTypewriter();
         }
       };
-      
-      // Only start hero animations automatically if loading screen is already gone
-      const loadingScreen = document.getElementById('loading-screen');
-      if (!loadingScreen) {
-        window.startHeroAnimations();
-      }
     });
   </script>
 </body>

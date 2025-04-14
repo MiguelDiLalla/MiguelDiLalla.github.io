@@ -229,9 +229,6 @@ Typewriter.prototype.executeNextAction = async function () {
 
 // Global variables for typewriter
 let currentTypewriter = null;
-// Removed the emoticonAnimationInterval variable as we're removing the infinite loop
-
-// Removed the startRepeatingEmoticonAnimation function as we no longer need the infinite emoticon loop
 
 // Initialize or reset typewriter with language-specific text
 function initTypewriter(lang = null) {
@@ -352,28 +349,6 @@ function initTypewriter(lang = null) {
 // Make initTypewriter available globally
 window.initTypewriter = initTypewriter;
 
-// Initialize typewriter when DOM is loaded with retry mechanism
-document.addEventListener('DOMContentLoaded', () => {
-  let attempts = 0;
-  const maxAttempts = 5;
-  
-  function attemptInit() {
-    if (attempts >= maxAttempts) {
-      console.error('Failed to initialize typewriter after multiple attempts');
-      return;
-    }
-    
-    attempts++;
-    
-    // Check if translations are available or if element exists
-    if (window.translations && document.getElementById('typewriter')) {
-      initTypewriter();
-    } else {
-      // Retry after a delay
-      setTimeout(attemptInit, 500);
-    }
-  }
-  
-  // Start attempt sequence
-  attemptInit();
-});
+// Modified: Remove automatic initialization on DOMContentLoaded
+// Now the typewriter will only start when explicitly called by startHeroAnimations
+// This prevents the typewriter from running when the loading screen is still visible

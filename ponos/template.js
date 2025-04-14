@@ -113,16 +113,30 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Function to display fallback message when something goes wrong
   function showFallbackMessage(message) {
+    // Set the body and header background to yellow (#ffcf00) and text to black
+    const pageBody = document.getElementById('page-body');
+    const pageHeader = document.getElementById('page-header');
+    pageBody.style.backgroundColor = '#ffcf00';
+    pageHeader.style.backgroundColor = '#ffcf00';
+    pageBody.style.color = '#000000';
+    
+    // Set up the footer to use black background
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.style.backgroundColor = '#000000';
+      footer.style.color = '#ffffff';
+    }
+    
     document.getElementById('letter-content').innerHTML = `
       <div class="p-6 text-center">
-        <h2 class="text-2xl font-bold mb-4">Oops! Something went wrong</h2>
+        <h2 class="text-2xl font-bold mb-4 font-title">Oops! Something went wrong</h2>
         <p class="mb-4">${message}</p>
         <p class="mb-4">If you believe this is an error, please contact me directly.</p>
         <div class="mt-6 flex justify-center gap-4">
-          <a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition">
+          <a href="https://www.linkedin.com/in/MiguelDiLalla" target="_blank" class="px-6 py-2 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition">
             <i class="fab fa-linkedin mr-2"></i> LinkedIn
           </a>
-          <a href="mailto:migueldilalla@gmail.com" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition">
+          <a href="mailto:migueljdilallap@gmail.com" class="px-6 py-2 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition">
             <i class="fas fa-envelope mr-2"></i> Email
           </a>
         </div>

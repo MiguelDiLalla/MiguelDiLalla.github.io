@@ -1,30 +1,31 @@
 <!-- SALUDO -->
-Estimado Alejandro, Un cordial saludo!
+Estimado Alejandro,
+¡Un cordial saludo!
 
 <!-- INTRODUCCIÓN -->
- - Fue un gusto hablar contigo y enterarme sobre la labor de INSITECA el viernes durante la feria de empleo. Soy el chico de la tarjeta amarilla con la Beca del programa de prácticas **PONOS**.
+Te encuentras ahora en un apartado privado y personalizado de mi Página Web 
+que he programado para realizar una presentación formal e interactiva de mi perfil profesional:
 
+(Tiempo estimado de lectura: 2 minutos)
 <!-- CUERPO -->
 --
 
-Mi nombre es Miguel Di Lalla, tengo 26 años y actualmente me encuentro en transición profesional, formándome en ciencia de datos y aprendizaje automático con el objetivo de incorporarme al sector IT. Gracias a la beca PONOS, tengo la posibilidad de realizar prácticas por tres meses a coste cero para la empresa anfitriona. (modificar)
+Mi nombre es Miguel Di Lalla, tengo 26 años y soy científico de datos, Técnico de Machine Learning y manager de Inteligencia Artificial. Me identifico como un profesional creativo, asertivo y de rápido aprendizaje. Actualmente estoy buscando una primera oportunidad laboral dentro de departamentos de IT en empresas locales y para ello cuento con una beca de inserción patrocinada por el Cabildo de Tenerife.
 
-Me pareció muy valiosa tu perspectiva sobre el impacto de la burocracia técnica en el trabajo diario de los ingenieros. Creo que integrar herramientas de ciencia de datos y automatización para la generación de documentación legal y memorias descriptivas puede marcar una diferencia real en la eficiencia de los equipos. Si fuese seleccionado para realizar mi práctica con ustedes, me encantaría asumir este tipo de reto como proyecto principal.
+Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes escénicas. El último curso que realicé fue un bootcamp en Big Data e IA. Esta última experiencia formativa dio origen a los proyectos que hoy pongo a su disposición para evaluar el estado actual de mis habilidades:
 
-Aunque hoy mi perfil es de programador, tengo una base sólida en ingeniería. Cursé seis semestres de Ingeniería Metalúrgica antes de emigrar a España, y mi formación original me hace sentir familiaridad con los entornos y problemas del sector. Además, en mi página web podrás ver reflejadas habilidades en softwares como AutoCAD, Inventor y 3ds Max, junto con proyectos recientes en visión artificial y desarrollo de aplicaciones web.
+- El entero desarrollo de la presente Página Web (Mi carta de presentación)
 
-Siento que Insiteca es un espacio donde podría aportar desde una combinación poco común: alguien con mirada de ingeniero, pero con herramientas digitales y orientado a la automatización.
+- Una pipeline básica de clasificación de objetos basado en YOLOv8 (Ultralytics)
+
+- Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
+
+Cuando me acerqué al stand de Insiteca, pudiste compartirme el interés de la empresa por soluciones enriquecidas con técnicas de Machine Learning que optimicen el tiempo que sus profesionales dedican a la generación de documentos. Ese es precisamente el tipo de herramientas que estoy formado para desarrollar, y que pueden convertir mis prácticas en una experiencia altamente enriquecedora para ambas partes.
 
 --
 
 <!-- DESPEDIDA -->
-Te comparto el acceso al lobby privado de mi portal web, donde encontrarás:
+A continuación tendrás acceso a: Mi CV, Biografía Formativa, Proyectos, métodos de Contacto e información sobre cómo tu empresa puede ponerme a prueba durante 3 meses ¡a coste cero!
 
-- Mi biografía profesional, resumen de habilidades y proyectos destacados.
-- Enlace directo para descargar mi CV.
-- Información detallada sobre la beca PONOS.
-
-Estaré encantado de recibir cualquier sugerencia o comentario. Gracias por tu tiempo y por la conversación tan amena del otro día.
-
-Ojalá coincidamos nuevamente muy pronto.
+Muchísimas gracias por tu tiempo. Bienvenido a mi portal web:
 

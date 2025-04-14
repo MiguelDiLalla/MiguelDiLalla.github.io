@@ -25,6 +25,14 @@ class Typewriter {
       scrollPadding: options.scrollPadding || 150, // Padding for auto-scrolling
       ...options
     };
+    
+    // Flag to track if animations should be skipped
+    this.skipAnimations = false;
+    
+    // Listen for the skip-animations event
+    window.addEventListener('skip-animations', () => {
+      this.skipAnimations = true;
+    });
   }
 
   /**
@@ -45,8 +53,30 @@ class Typewriter {
       // Process markdown formatting before typing
       const processedText = this._processMarkdown(text);
       
+      // If animations should be skipped, immediately show the full text
+      if (this.skipAnimations) {
+        element.innerHTML = processedText;
+        if (lineBreak) {
+          element.innerHTML += '<br><br>';
+        }
+        element.classList.remove(this.options.blinkCursorClass);
+        resolve();
+        return;
+      }
+      
       const type = () => {
         if (i < processedText.length) {
+          // Check if the skip flag was set during typing
+          if (this.skipAnimations) {
+            element.innerHTML = processedText;
+            if (lineBreak) {
+              element.innerHTML += '<br><br>';
+            }
+            element.classList.remove(this.options.blinkCursorClass);
+            resolve();
+            return;
+          }
+          
           // Check if we're typing an HTML tag
           if (processedText.charAt(i) === '<') {
             // Find the end of the tag
@@ -130,6 +160,14 @@ class Typewriter {
    */
   erase(element, speed = this.options.fadeOutSpeed) {
     return new Promise(resolve => {
+      // If animations should be skipped, skip the fade out
+      if (this.skipAnimations) {
+        element.innerHTML = '';
+        element.classList.remove(this.options.blinkCursorClass);
+        resolve();
+        return;
+      }
+      
       const text = element.innerHTML;
       
       // Create a temporary container
@@ -147,6 +185,14 @@ class Typewriter {
       
       // Add a half-second delay before starting the fade out
       setTimeout(() => {
+        // Check again if animations should be skipped
+        if (this.skipAnimations) {
+          element.innerHTML = '';
+          element.classList.remove(this.options.blinkCursorClass);
+          resolve();
+          return;
+        }
+        
         // Start the fade out animation
         tempContainer.style.opacity = '0';
         
@@ -166,7 +212,15 @@ class Typewriter {
    * @return {Promise} - Resolves after waiting
    */
   wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => {
+      // If animations should be skipped, don't wait
+      if (this.skipAnimations) {
+        resolve();
+        return;
+      }
+      
+      setTimeout(resolve, ms);
+    });
   }
 
   /**
@@ -178,6 +232,17 @@ class Typewriter {
    */
   fade(element, show = true, animationClass = 'animate-fade-in') {
     return new Promise(resolve => {
+      // If animations should be skipped, immediately show/hide
+      if (this.skipAnimations) {
+        if (show) {
+          element.classList.remove('opacity-0');
+        } else {
+          element.classList.add('opacity-0');
+        }
+        resolve();
+        return;
+      }
+      
       if (show) {
         element.classList.remove('opacity-0');
         element.classList.add(animationClass);

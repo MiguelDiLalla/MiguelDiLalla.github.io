@@ -8,11 +8,33 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize skip animation button
+  setupSkipAnimationButton();
+
   // Wait for template.js to complete its work before starting animations
   window.addEventListener('template-loaded', function(e) {
     const companyData = e.detail;
     initializeCoverLetter(companyData);
   });
+
+  // Setup skip animation button functionality
+  function setupSkipAnimationButton() {
+    const skipButton = document.getElementById('skip-animation-button');
+    
+    if (skipButton) {
+      // Check for company color to style the button
+      skipButton.addEventListener('click', function() {
+        // Create and dispatch a custom event to skip animations
+        window.dispatchEvent(new CustomEvent('skip-animations'));
+        
+        // Hide the skip button after clicking
+        skipButton.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          skipButton.style.display = 'none';
+        }, 300);
+      });
+    }
+  }
 
   function initializeCoverLetter(companyData) {
     // Parse the URL to get the company key
@@ -22,6 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!companyKey) {
       console.error('No company specified in URL');
       return;
+    }
+
+    // Style the skip button with company colors if available
+    const skipButton = document.getElementById('skip-animation-button');
+    if (skipButton && companyData && companyData.color_secondary) {
+      skipButton.style.backgroundColor = companyData.color_secondary;
+      skipButton.style.color = companyData.font_color === '#ffffff' ? '#ffffff' : '#000000';
     }
 
     // Font settings for different sections
@@ -67,31 +96,93 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create the buttons
     buttonContainer.innerHTML = `
-      <a href="/" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Home
+      <a href="/" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md hover-effect">
+        <i class="fas fa-arrow-left mr-2"></i> Pagina Principal
       </a>
-      <a href="/content/resume.pdf" target="_blank" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md">
-        <i class="fas fa-file-pdf mr-2"></i> View Resume
-      </a>
+      <div class="relative" id="share-dropdown-container-dynamic">
+        <button id="share-button-dynamic" class="px-6 py-2 bg-red-400 text-white rounded-full font-semibold hover:bg-red-500 transition shadow-md flex items-center hover-effect">
+          <i class="fas fa-share-alt mr-2"></i> Compartir
+        </button>
+        <div id="share-dropdown-dynamic" class="absolute right-0 bottom-full mb-2 w-64 bg-red-400 text-white shadow-lg rounded-md py-2 z-10 hidden">
+          <a href="#" id="email-share-dynamic" class="flex items-center px-4 py-2 hover:bg-red-500 transition">
+            <i class="fas fa-envelope mr-3 text-blue-500"></i>
+            <span>Compartir por email</span>
+          </a>
+          <a href="#" id="whatsapp-share-dynamic" class="flex items-center px-4 py-2 hover:bg-red-500 transition">
+            <i class="fab fa-whatsapp mr-3 text-green-500"></i>
+            <span>Compartir por WhatsApp</span>
+          </a>
+          <button id="copy-link-dynamic" class="w-full text-left flex items-center px-4 py-2 hover:bg-red-500 transition">
+            <i class="fas fa-link mr-3 text-gray-300"></i>
+            <span>Copiar enlace</span>
+          </button>
+        </div>
+      </div>
     `;
     
     // Apply company colors to buttons
     if (companyData && companyData.color_secondary) {
-      const buttons = buttonContainer.querySelectorAll('a');
-      buttons.forEach(button => {
+      const mainButtons = buttonContainer.querySelectorAll('a:not([id]), button#share-button-dynamic');
+      mainButtons.forEach(button => {
         button.classList.remove('bg-red-400', 'hover:bg-red-500');
         button.style.backgroundColor = companyData.color_secondary;
         button.style.color = companyData.font_color === '#ffffff' ? '#ffffff' : '#000000';
+        
+        // Add hover effect that will change text color to primary color on hover
+        button.addEventListener('mouseenter', () => {
+          button.style.color = companyData.color_primary || '#000000';
+        });
+        
+        // Reset color on mouse leave
+        button.addEventListener('mouseleave', () => {
+          button.style.color = companyData.font_color === '#ffffff' ? '#ffffff' : '#000000';
+        });
       });
+      
+      // Apply company colors to the share dropdown menu
+      const shareDropdown = buttonContainer.querySelector('#share-dropdown-dynamic');
+      if (shareDropdown) {
+        shareDropdown.classList.remove('bg-red-400');
+        shareDropdown.style.backgroundColor = companyData.color_secondary;
+        shareDropdown.style.color = companyData.color_primary || '#000000';
+        
+        // Apply hover colors to dropdown items
+        const dropdownItems = shareDropdown.querySelectorAll('a, button');
+        dropdownItems.forEach(item => {
+          item.classList.remove('hover:bg-red-500');
+          item.classList.add('hover:opacity-80');
+          
+          // Add hover effect with primary color
+          item.addEventListener('mouseenter', () => {
+            const textSpan = item.querySelector('span');
+            if (textSpan) {
+              textSpan.style.color = companyData.color_primary || '#000000';
+              textSpan.style.fontWeight = 'bold';
+            }
+          });
+          
+          // Reset on mouse leave
+          item.addEventListener('mouseleave', () => {
+            const textSpan = item.querySelector('span');
+            if (textSpan) {
+              textSpan.style.color = companyData.color_primary || '#000000';
+              textSpan.style.fontWeight = 'normal';
+            }
+          });
+        });
+        
+        // Set the link icon color to the primary color
+        const linkIcon = shareDropdown.querySelector('.fa-link');
+        if (linkIcon) {
+          linkIcon.style.color = companyData.color_primary || '#000000';
+        }
+      }
     }
     
     letterContainer.appendChild(buttonContainer);
     
-    // Hide the original buttons
-    const originalButtonsContainer = document.querySelector('main > div > div.mt-10');
-    if (originalButtonsContainer) {
-      originalButtonsContainer.style.display = 'none';
-    }
+    // NO ocultamos los botones originales, ya que todavía los necesitamos para interacción directa
+    // Los botones generados dinámicamente se mostrarán cuando termine la animación
     
     // Fetch and parse the markdown content
     const markdownPath = companyData && companyData.markdown ? 
@@ -284,15 +375,13 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   await typewriter.type(sections.SALUDO, sectionContents.SALUDO, 17, true);
   await typewriter.wait(2000);
   
-  // 2. Style and type the INTRODUCCIÓN section with a contrasting color based on company colors
+  // 2. Style and type the INTRODUCCIÓN section with the secondary color
   const secondaryColor = companyData?.color_secondary || '#ffcf00'; // Default to yellow if not set
   const primaryColor = companyData?.color_primary || '#ffffff'; // Default text color
   const fontColor = companyData?.font_color || '#000000'; // Default font color
   
-  // Calculate a contrasting color for better readability
-  const introColor = getContrastingColor(primaryColor, secondaryColor);
-  
-  sections.INTRODUCCIÓN.innerHTML = `<span style="color: ${introColor};"></span>`;
+  // Use the secondary color directly for the INTRODUCCIÓN section
+  sections.INTRODUCCIÓN.innerHTML = `<span style="color: ${secondaryColor};"></span>`;
   sections.INTRODUCCIÓN.classList.remove('opacity-0');
   
   // Get the span element to type into
@@ -308,7 +397,8 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   await typewriter.wait(2000); // Reduced from 7000ms to 2000ms
   
   // 4. Prepare the DESPEDIDA section with dynamic styling based on company colors
-  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${fontColor}; padding: 0 0.25rem;"></mark>`;
+  // Use primaryColor for font and secondaryColor for background highlight
+  sections.DESPEDIDA.innerHTML = `<mark style="background-color: ${secondaryColor}; color: ${primaryColor}; padding: 0 0.25rem;"></mark>`;
   sections.DESPEDIDA.classList.remove('opacity-0');
   
   // Get the mark element to type into
@@ -322,4 +412,8 @@ async function startTypewriterSequence(sectionContents, sections, buttonContaine
   
   // Show the buttons with fade effect
   await typewriter.fade(buttonContainer, true);
+  
+  // Disparar un evento personalizado para indicar que la animación ha terminado
+  const animationCompletedEvent = new Event('letter-animation-completed');
+  window.dispatchEvent(animationCompletedEvent);
 }

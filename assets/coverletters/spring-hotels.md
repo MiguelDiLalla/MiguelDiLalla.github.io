@@ -1,23 +1,29 @@
 <!-- SALUDO -->
-Estimada Rosmery, Un Saludo!
+Estimada Rosmery, 
+¡Un cordial saludo!
 
 <!-- INTRODUCCIÓN -->
- - Nos conocimos el pasado viernes 4 de abril en el recinto ferial, soy el chico con rizos del programa de practicas PONOS.
+Te encuentras ahora en un apartado privado y personalizado de mi Página Web que he programado para realizar una presentación formal e interactiva de mi perfil profesional:
 
+(Tiempo estimado de lectura: 2 minutos)
 <!-- CUERPO -->
 --
 
-Mi nombre es Miguel Di Lalla y este es un apartado privado dentro de mi pagina web que he creado para ti.
+Mi nombre es Miguel Di Lalla, tengo 26 años y soy científico de datos, Técnico de Machine Learning y manager de Inteligencia Artificial. Me identifico como un profesional creativo, asertivo y de rápido aprendizaje. Actualmente estoy buscando una primera oportunidad laboral dentro de departamentos de IT en empresas locales y para ello cuento con una beca de inserción patrocinada por el Cabildo de Tenerife.
 
-El objetivo es presentarme. Tengo 26 años y recientemente he completado formaciones en ciencia de datos y aplicación de inteligencia artificial. Estoy buscando mi primera oportunidad de empleo en el sector IT y el hecho de que ya hayas integrado alumnado del programa PONOS en Spring Hotels me ha animado escribirte.
+Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes escénicas. El último curso que realicé fue un bootcamp en Big Data e IA. Esta última experiencia formativa dio origen a los proyectos que hoy pongo a su disposición para evaluar el estado actual de mis habilidades:
 
-Ya me he puesto en contacto con mi gestora de la beca y he compartido la direccion de email que me facilitaste, pronto estaran en contacto.
+- El entero desarrollo de la presente Página Web (Mi carta de presentación)
 
-Por los momentos queda a tu dispocicion mi CV y esta web (totalmente desarrollada por mi persona). En ella, tu y el resto del personal de reclutamiento tendran acceso a mi biografia, habilidades tecnico-profesionales y a un par de proyectos que he desarrollado como muestra de mis capacidades y sobre todo: potencial.
+- Una pipeline básica de clasificación de objetos basado en YOLOv8 (Ultralytics)
+
+- Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
+
+Ya he facilitado tu dirección de email a mi gestora PONOS, y me alegró saber que Spring Hoteles ya ha colaborado anteriormente con alumnos del programa. Aun así, quería hacerte llegar esta carta. Para mi perfil como científico de datos, sería extremadamente enriquecedor participar en la creación de soluciones digitales que impacten positivamente en las operaciones de sus tres hoteles y, en última instancia, en la experiencia de sus huéspedes.
 
 --
 
 <!-- DESPEDIDA -->
-Valoraria mucho cualquier comentario o sugerencia que me ayude a mejorar mi perfil.
+A continuación tendrás acceso a: Mi CV, Biografía Formativa, Proyectos, métodos de Contacto y una caja de comentarios a través de la cual sería un honor recibir feedback sobre tu experiencia navegando el sitio.
 
-Muchas gracias por tu tiempo. El primer boton te llavará al lobby de mi web. El segundo te permirá descargar mi CV. 
+Muchísimas gracias por tu tiempo. Bienvenida a mi portal web:

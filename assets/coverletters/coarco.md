@@ -1,35 +1,31 @@
 <!-- SALUDO -->
-Estimada Noemy,
-Un cordial saludo.
+Estimada Noemy, 
+¡Un cordial saludo!
 
 <!-- INTRODUCCIÓN -->
- - Nos conocimos el pasado viernes 4 de abril en el recinto ferial, soy el chico con rizos con la beca del programa de practicas **PONOS**. Me gustaría aprovechar esta oportunidad para presentarme formalmente y compartir un poco más sobre mí:
+Te encuentras ahora en un apartado privado y personalizado 
+de mi Página Web que he programado para realizar una 
+presentación formal e interactiva de mi perfil profesional:
 
+(Tiempo estimado de lectura: 2 minutos)
 <!-- CUERPO -->
 --
 
-Mi nombre es Miguel Di Lalla, tengo 26 años, y actualmente estoy participando en el programa de becas PONOS buscando mi primera oportunidad laboral en el sector IT.
+Mi nombre es Miguel Di Lalla, tengo 26 años y soy científico de datos, Técnico de Machine Learning y manager de Inteligencia Artificial. Me identifico como un profesional creativo, asertivo y de rápido aprendizaje. Actualmente estoy buscando una primera oportunidad laboral dentro de departamentos de IT en empresas locales y para ello cuento con una beca de inserción patrocinada por el Cabildo de Tenerife.
 
-Me sorprendió gratamente que Coarco tuviese un creciente departamento de IT. Me encantaría tener la oportunidad de participar en la creación de nuevas soluciones tecnológicas para ustedes.
+Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes escénicas. El último curso que realicé fue un bootcamp en Big Data e IA. Esta última experiencia formativa dio origen a los proyectos que hoy pongo a su disposición para evaluar el estado actual de mis habilidades:
 
-Durante el último año, me he dedicado intensamente a la formación en ciencia de datos y aprendizaje automático, desarrollando competencias que podrían ser valiosas para una empresa que busca modernizarse e innovar en sus procesos de distribución.
+- El entero desarrollo de la presente Página Web (Mi carta de presentación)
 
-Entre mis proyectos insignia podran encontrar:
+- Una pipeline básica de clasificación de objetos basado en YOLOv8 (Ultralytics)
 
-- El desarrollo completo de esta página web (mi carta de presentación)
-- Un sistema de clasificación de objetos mediante visión artificial basado en YOLOv8
-- Una aplicación web de gestión del tiempo con enfoque lúdico
+- Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-Comprendo que una distribuidora para ferreterías como Coarco maneja grandes volúmenes de datos relacionados con inventario, logística y ventas, áreas donde la ciencia de datos puede aportar soluciones significativas para optimizar operaciones, prever tendencias y tomar decisiones basadas en el mejor procesado de la información.
-
-Me entusiasma la posibilidad de enfrentarme a retos del mundo de la logística. Es el tipo de sistemas sobre los cuales los programadores amamos trabajar.
+He investigado su labor como cooperativa y me sorprendió gratamente el interés que me comunicaste durante la feria en hacer crecer sus servicios digitales. Para mi perfil, sería una gran oportunidad enfrentarme al desarrollo de soluciones enfocadas en logística, distribución y prestación de servicios. Específicamente, mis habilidades como científico de datos me permitirían aportar valor mediante, aunque no limitado a: visualización de métricas logísticas, automatización de procesos internos y herramientas de análisis para toma de decisiones operativas.
 
 --
 
 <!-- DESPEDIDA -->
-A continuacion podras acceder el lobby de mi portal web, donde usted y su equipo podrán:
+A continuación tendrás acceso a: Mi CV, Biografía Formativa, Proyectos, métodos de Contacto e información sobre cómo tu empresa puede ponerme a prueba durante 3 meses ¡a coste cero!
 
-- Evaluar el estado actual de mis conocimientos y habilidades
-- Obtener informacion respecto a la Beca PONOS. 
-
-Gracias a esta, tendrían la oportunidad de contar con un miembro **Muy motivado** y ponerme a prueba durante 3 meses a **Coste Cero** para la Cooperativa.
+Muchísimas gracias por tu tiempo. Bienvenida a mi portal web:

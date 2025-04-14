@@ -1,33 +1,31 @@
 <!-- SALUDO -->
 Estimado Juan Carlos,
-Saludos cordiales desde Tenerife.
+¡Saludos cordiales desde Tenerife!
 
 <!-- INTRODUCCIÓN -->
- - Hace ya más de cinco años que soy oyente de Coffee Break. Fue a través del podcast que te conocí, y escuchar tus experiencias en la industria es parte de mi inspiración a querer formar parte de ella.
+Estás ahora dentro de un apartado privado y personalizado de mi Web personal. En él he programado una presentación formal e interactiva de mi perfil profesional.
+
+Es parte de una campaña de autocandidatura que estoy dirigiendo a múltiples empresas locales con departamentos activos de IT.
+
+(Tiempo estimado de lectura: 2 minutos)
 
 <!-- CUERPO -->
 --
 
-Mi nombre es Miguel Di Lalla, tengo 26 años, y a principios de este año te escuché decir en el podcast algo como: “~(En GMV) Siempre buscamos jóvenes entusiastas y listos para aprender, pues nosotros mismos los formamos”. Esa frase se me quedó grabada.
+Mi nombre es Miguel Di Lalla, tengo 26 años y soy científico de datos, Técnico de Machine Learning y manager de Inteligencia Artificial. Me identifico como un profesional creativo, asertivo y de rápido aprendizaje. Actualmente estoy buscando una primera oportunidad laboral dentro de departamentos de IT en empresas locales y para ello cuento con una beca de inserción patrocinada por el Cabildo de Tenerife.
 
-Desde hace un año me encuentro en una transición profesional, formándome en ciencia de datos y aprendizaje automático con el objetivo de alcanzar una "Entry Level Position" en IT aquí en Europa.
+Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes escénicas. El último curso que realicé fue un bootcamp en Big Data e IA. Esta última experiencia formativa dio origen a los proyectos que hoy pongo a su disposición para evaluar el estado actual de mis habilidades:
 
-Emigré hace ya cuatro años a España, justo después de la pandemia, y he podido independizarme como adulto gracias a trabajos en el sector hostelero. Pero lo mío es, desde siempre, la tecnología, la ingeniería y la ciencia.
+- El entero desarrollo de la presente Página Web (Mi carta de presentación)
 
-En 2019 completaba con éxito mi sexto semestre de Ingeniería Metalúrgica. Hoy, gracias a las diversas iniciativas de impulso joven y digitalización en la UE, he podido acceder a cursos de introducción al Big Data y Machine Learning. En los últimos meses me he dedicado a desarrollar un par de proyectos personales que demuestran mis aptitudes actuales y mi potencial:
+- Una pipeline básica de clasificación de objetos basado en YOLOv8 (Ultralytics)
 
-- Esta página web (mi carta de presentación)
+- Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-- Un pequeño pipeline de clasificación de objetos basado en YOLOv8 (Ultralytics)
-
-- Una web app TimeTracker tipo Pomodoro con un enfoque lúdico y sin presión
-
-Gracias a un programa de inserción laboral para jóvenes (PONOS), cuento con una beca para prácticas. Justo ahora me encuentro enviando estas cartas a futuros empleadores con quienes tuve contacto durante una reciente feria de empleo celebrada en la capital.
-
-Sé que actualmente no cuento con experiencia laboral previa en el sector, y que aspirar a trabajar en GMV es un objetivo mas bien a mediano plazo. Por eso mismo, el propósito de esta comunicación es simplemente presentarme, compartir mi historia, y (si viene a bien) hacerte una pregunta:
+Sé que actualmente no cuento con experiencia laboral previa en el sector, y que aspirar a trabajar en GMV es un objetivo más bien a mediano-largo plazo. Por eso mismo, el propósito de esta comunicación es simplemente presentarme, compartir mi historia, y (si viene a bien) hacerte una pregunta:
 
 <!-- DESPEDIDA -->
-¿Qué tecnologías o frameworks podria yo aprender en los próximos meses para hacerme  un candidato un poco mas atractivo para GMV (y otras empresas del sector)?
+¿Qué tecnologías o frameworks podría yo aprender en los próximos 6 meses para hacerme un candidato un poco más atractivo para GMV (y otras empresas del sector)?
 
 --
 

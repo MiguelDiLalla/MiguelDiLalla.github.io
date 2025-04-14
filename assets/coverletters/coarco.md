@@ -1,5 +1,5 @@
 <!-- SALUDO -->
-Estimada Noemy, 
+Estimada Noemí, 
 ¡Un cordial saludo!
 
 <!-- INTRODUCCIÓN -->

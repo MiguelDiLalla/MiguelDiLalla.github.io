@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // 3. Apply the company style and content
       applyCompanySettings(config[companyKey]);
       
-      // 4. Dispatch event for letter-parser.js to start animations
+      // 4. Update SEO elements based on company data
+      updateSEO(config[companyKey], companyKey);
+      
+      // 5. Dispatch event for letter-parser.js to start animations
       window.dispatchEvent(new CustomEvent('template-loaded', { 
         detail: config[companyKey]
       }));
@@ -114,6 +117,76 @@ document.addEventListener('DOMContentLoaded', function() {
     // Don't clear the content here - let letter-parser.js handle it
   }
   
+  // Function to dynamically update SEO elements based on company data
+  function updateSEO(company, companyKey) {
+    // Update page title
+    const companyName = company.empresa || companyKey.charAt(0).toUpperCase() + companyKey.slice(1);
+    document.title = `Cover Letter for ${companyName} | Miguel Di Lalla`;
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 
+        `Professional cover letter by Miguel Di Lalla for ${companyName} - showcasing relevant skills and experience in data science and machine learning.`);
+    }
+    
+    // Update Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    
+    if (ogTitle) {
+      ogTitle.setAttribute('content', `Cover Letter for ${companyName} | Miguel Di Lalla`);
+    }
+    
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 
+        `View my professional cover letter for ${companyName}, showcasing how my skills and experience align with the company's needs.`);
+    }
+    
+    if (ogUrl) {
+      ogUrl.setAttribute('content', `https://migueldilalla.github.io/ponos/?to=${companyKey}`);
+    }
+    
+    // Update Twitter Card tags
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', `Cover Letter for ${companyName} | Miguel Di Lalla`);
+    }
+    
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', 
+        `Professional cover letter tailored for ${companyName} by Miguel Di Lalla - Data scientist and ML engineer.`);
+    }
+    
+    // Update canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', `https://migueldilalla.github.io/ponos/?to=${companyKey}`);
+    }
+    
+    // Update JSON-LD structured data
+    try {
+      const scriptElement = document.querySelector('script[type="application/ld+json"]');
+      if (scriptElement) {
+        const structuredData = JSON.parse(scriptElement.textContent);
+        
+        // Update the about section with company-specific info
+        if (structuredData.about) {
+          structuredData.about.name = `Cover Letter for ${companyName}`;
+          structuredData.about.description = `Professional cover letter tailored for ${companyName}, highlighting relevant skills, experience, and qualifications in data science and machine learning.`;
+        }
+        
+        // Update the script element with the modified data
+        scriptElement.textContent = JSON.stringify(structuredData, null, 2);
+      }
+    } catch (error) {
+      console.error('Error updating structured data:', error);
+    }
+  }
+  
   // Function to display fallback message when something goes wrong
   function showFallbackMessage(message) {
     // Set the body and header background to yellow (#ffcf00) and text to black
@@ -145,6 +218,14 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     `;
+    
+    // Also update the SEO elements for error page
+    document.title = "Cover Letter | Error | Miguel Di Lalla";
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Error loading cover letter for Miguel Di Lalla - Data scientist and machine learning engineer.');
+    }
   }
   
   // Function to hide the loading screen

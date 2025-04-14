@@ -1,162 +1,263 @@
 /**
- * Share Functions
- * Maneja la funcionalidad del menú desplegable de compartir y las opciones
- * para compartir por email, WhatsApp y copiar el enlace al portafolio
+ * Sharing Functions for Cover Letters
+ * 
+ * This script handles sharing through various channels:
+ * - Email sharing with proper subject and body
+ * - WhatsApp sharing with formatted message
+ * - Copy link to clipboard with proper URL parameters
+ * - Structured data management for better SEO
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Elementos del DOM
-  // Los botones originales (estáticos)
-  const shareButton = document.getElementById('share-button');
-  const shareDropdown = document.getElementById('share-dropdown');
-  const emailShare = document.getElementById('email-share');
-  const whatsappShare = document.getElementById('whatsapp-share');
-  const copyLink = document.getElementById('copy-link');
-  const staticButtons = document.getElementById('static-buttons');
-
-  // URL del portafolio principal (sin parámetros)
-  const portfolioUrl = 'https://migueldilalla.github.io/';
+  // Wait until letter animation is complete to set up share functionality
+  window.addEventListener('letter-animation-completed', setupSharing);
   
-  // Textos para compartir
-  const shareSubject = 'Te comparto el portafolio de Miguel Di Lalla';
-  const shareText = 'Dale un vistazo a este portafolio de Data Science y Machine Learning: ';
+  // Also set up the original share dropdown toggle
+  setupShareDropdown();
   
-  // Función para mostrar/ocultar el menú desplegable (para cualquier botón)
-  function toggleDropdown(dropdownElement) {
-    dropdownElement.classList.toggle('hidden');
-  }
-  
-  // Función para cerrar el menú si se hace clic fuera de él (para todos los dropdowns)
-  function closeDropdownOnClickOutside(event) {
-    // Cerrar dropdown estático si existe
-    if (shareDropdown && !event.target.closest('#share-dropdown-container')) {
-      shareDropdown.classList.add('hidden');
-    }
+  // Set up the original share dropdown functionality
+  function setupShareDropdown() {
+    const shareButton = document.getElementById('share-button');
+    const shareDropdown = document.getElementById('share-dropdown');
     
-    // Cerrar dropdown dinámico si existe
-    const dynamicDropdown = document.getElementById('share-dropdown-dynamic');
-    if (dynamicDropdown && !event.target.closest('#share-dropdown-container-dynamic')) {
-      dynamicDropdown.classList.add('hidden');
+    if (shareButton && shareDropdown) {
+      // Toggle dropdown visibility
+      shareButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        shareDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!shareButton.contains(e.target) && !shareDropdown.contains(e.target)) {
+          shareDropdown.classList.add('hidden');
+        }
+      });
     }
   }
   
-  // Función para compartir por email
-  function shareByEmail(event) {
-    event.preventDefault();
+  // Setup sharing functionality for dynamically created buttons
+  function setupSharing() {
+    // Get company data from window object (set by template.js)
+    const companyData = window.companyData || {};
+    const companyName = companyData.empresa || 'the company';
     
-    const mailtoUrl = `mailto:?subject=${encodeURIComponent(shareSubject)}&body=${encodeURIComponent(shareText + portfolioUrl)}`;
-    window.location.href = mailtoUrl;
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const companyKey = urlParams.get('to');
     
-    // Cerrar todos los menús desplegables
-    if (shareDropdown) shareDropdown.classList.add('hidden');
-    const dynamicDropdown = document.getElementById('share-dropdown-dynamic');
-    if (dynamicDropdown) dynamicDropdown.classList.add('hidden');
+    if (!companyKey) return; // Exit if no company key
+    
+    // 1. Setup dynamically created share button
+    const shareButtonDynamic = document.getElementById('share-button-dynamic');
+    const shareDropdownDynamic = document.getElementById('share-dropdown-dynamic');
+    
+    if (shareButtonDynamic && shareDropdownDynamic) {
+      // Toggle dropdown visibility
+      shareButtonDynamic.addEventListener('click', function(e) {
+        e.preventDefault();
+        shareDropdownDynamic.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!shareButtonDynamic.contains(e.target) && !shareDropdownDynamic.contains(e.target)) {
+          shareDropdownDynamic.classList.add('hidden');
+        }
+      });
+    }
+    
+    // 2. Setup email sharing
+    setupEmailShare('email-share', companyData, companyKey);
+    setupEmailShare('email-share-dynamic', companyData, companyKey);
+    
+    // 3. Setup WhatsApp sharing
+    setupWhatsAppShare('whatsapp-share', companyData, companyKey);
+    setupWhatsAppShare('whatsapp-share-dynamic', companyData, companyKey);
+    
+    // 4. Setup copy link functionality
+    setupCopyLink('copy-link', companyKey);
+    setupCopyLink('copy-link-dynamic', companyKey);
+    
+    // 5. Generate and add social-specific meta tags for better sharing
+    generateSocialMetaTags(companyData, companyKey);
   }
   
-  // Función para compartir por WhatsApp
-  function shareByWhatsapp(event) {
-    event.preventDefault();
+  /**
+   * Setup the email share link with company-specific content
+   */
+  function setupEmailShare(elementId, companyData, companyKey) {
+    const emailLink = document.getElementById(elementId);
+    if (!emailLink) return;
     
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + portfolioUrl)}`;
-    window.open(whatsappUrl, '_blank');
+    const companyName = companyData.empresa || companyKey.charAt(0).toUpperCase() + companyKey.slice(1);
+    const recipient = companyData.contact_email || '';
     
-    // Cerrar todos los menús desplegables
-    if (shareDropdown) shareDropdown.classList.add('hidden');
-    const dynamicDropdown = document.getElementById('share-dropdown-dynamic');
-    if (dynamicDropdown) dynamicDropdown.classList.add('hidden');
-  }
-  
-  // Función para copiar el enlace al portafolio
-  function copyLinkToClipboard() {
-    navigator.clipboard.writeText(portfolioUrl).then(() => {
-      // Mostrar notificación de éxito
-      showCopyNotification();
-    }).catch(err => {
-      console.error('Error al copiar: ', err);
+    // Create email subject and body
+    const emailSubject = `Cover Letter from Miguel Di Lalla for ${companyName}`;
+    const emailBody = `Hello ${companyName} team,\n\n`
+                    + `I'm sharing my cover letter for your consideration.\n\n`
+                    + `You can view it online at: ${window.location.href}\n\n`
+                    + `Best regards,\nMiguel Di Lalla`;
+    
+    // Create the mailto link
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Set the href attribute and click handler
+    emailLink.href = mailtoLink;
+    emailLink.addEventListener('click', function(e) {
+      // Track sharing event if analytics is available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'share', {
+          method: 'email',
+          content_type: 'cover_letter',
+          item_id: companyKey
+        });
+      }
+      
+      // Close dropdown after clicking
+      const dropdown = this.closest('#share-dropdown, #share-dropdown-dynamic');
+      if (dropdown) {
+        dropdown.classList.add('hidden');
+      }
     });
-    
-    // Cerrar todos los menús desplegables
-    if (shareDropdown) shareDropdown.classList.add('hidden');
-    const dynamicDropdown = document.getElementById('share-dropdown-dynamic');
-    if (dynamicDropdown) dynamicDropdown.classList.add('hidden');
   }
   
-  // Función para mostrar notificación de enlace copiado
-  function showCopyNotification() {
-    // Crear la notificación
-    const notification = document.createElement('div');
-    notification.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full shadow-lg z-50';
-    notification.textContent = '¡Enlace copiado al portapapeles!';
-    notification.style.opacity = '0';
-    notification.style.transition = 'opacity 0.3s ease';
+  /**
+   * Setup WhatsApp share with company-specific content
+   */
+  function setupWhatsAppShare(elementId, companyData, companyKey) {
+    const whatsappLink = document.getElementById(elementId);
+    if (!whatsappLink) return;
     
-    // Añadir la notificación al DOM
-    document.body.appendChild(notification);
+    const companyName = companyData.empresa || companyKey.charAt(0).toUpperCase() + companyKey.slice(1);
     
-    // Animar entrada
-    setTimeout(() => {
-      notification.style.opacity = '1';
-    }, 10);
+    // Create WhatsApp text
+    const whatsappText = `Check out Miguel Di Lalla's cover letter for ${companyName}: ${window.location.href}`;
     
-    // Eliminar la notificación después de 3 segundos
-    setTimeout(() => {
-      notification.style.opacity = '0';
-      setTimeout(() => {
-        document.body.removeChild(notification);
-      }, 300);
-    }, 3000);
+    // Create the WhatsApp link
+    const whatsappShareLink = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`;
+    
+    // Set the href attribute and click handler
+    whatsappLink.href = whatsappShareLink;
+    whatsappLink.target = '_blank';
+    whatsappLink.addEventListener('click', function(e) {
+      // Track sharing event if analytics is available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'share', {
+          method: 'whatsapp',
+          content_type: 'cover_letter',
+          item_id: companyKey
+        });
+      }
+      
+      // Close dropdown after clicking
+      const dropdown = this.closest('#share-dropdown, #share-dropdown-dynamic');
+      if (dropdown) {
+        dropdown.classList.add('hidden');
+      }
+    });
   }
   
-  // Escuchamos el evento de que la animación de la carta ha terminado
-  window.addEventListener('letter-animation-completed', function() {
-    // Mostrar los botones estáticos con una animación de fade in
-    if (staticButtons) {
-      staticButtons.style.transition = 'opacity 0.6s ease';
-      staticButtons.style.opacity = '1';
-    }
-  });
-  
-  // Manejo global de eventos para ambos conjuntos de botones (estático y dinámico)
-  document.addEventListener('click', function(event) {
-    const target = event.target;
+  /**
+   * Setup copy link functionality with better UX
+   */
+  function setupCopyLink(elementId, companyKey) {
+    const copyButton = document.getElementById(elementId);
+    if (!copyButton) return;
     
-    // Manejo de clics en botones de compartir (estático y dinámico)
-    if (target.id === 'share-button' || target.closest('#share-button')) {
-      if (shareDropdown) {
-        toggleDropdown(shareDropdown);
-        event.stopPropagation();
+    copyButton.addEventListener('click', function() {
+      // Create a canonical URL - use absolute paths for better sharing
+      const canonicalUrl = `${window.location.origin}${window.location.pathname}?to=${companyKey}`;
+      
+      // Copy to clipboard with fallback
+      navigator.clipboard.writeText(canonicalUrl).then(
+        function() {
+          // Success - Update button text temporarily
+          const originalText = copyButton.innerHTML;
+          copyButton.innerHTML = '<i class="fas fa-check mr-3 text-green-500"></i><span>Link copied!</span>';
+          
+          // Revert after 2 seconds
+          setTimeout(function() {
+            copyButton.innerHTML = originalText;
+          }, 2000);
+          
+          // Track copy event if analytics is available
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'copy', {
+              content_type: 'cover_letter_url',
+              item_id: companyKey
+            });
+          }
+        },
+        function() {
+          // Fallback for browsers that don't support clipboard API
+          const textArea = document.createElement('textarea');
+          textArea.value = canonicalUrl;
+          document.body.appendChild(textArea);
+          textArea.select();
+          
+          try {
+            document.execCommand('copy');
+            const originalText = copyButton.innerHTML;
+            copyButton.innerHTML = '<i class="fas fa-check mr-3 text-green-500"></i><span>Link copied!</span>';
+            setTimeout(function() {
+              copyButton.innerHTML = originalText;
+            }, 2000);
+          } catch (err) {
+            console.error('Could not copy text: ', err);
+            alert('Could not copy link. Please copy the URL manually from your browser address bar.');
+          }
+          
+          document.body.removeChild(textArea);
+        }
+      );
+      
+      // Close dropdown after clicking
+      const dropdown = this.closest('#share-dropdown, #share-dropdown-dynamic');
+      if (dropdown) {
+        dropdown.classList.add('hidden');
       }
-    } else if (target.id === 'share-button-dynamic' || target.closest('#share-button-dynamic')) {
-      const dynamicDropdown = document.getElementById('share-dropdown-dynamic');
-      if (dynamicDropdown) {
-        toggleDropdown(dynamicDropdown);
-        event.stopPropagation();
-      }
-    }
-    
-    // Manejo de clics en opciones de compartir (estático y dinámico)
-    const closestTarget = target.closest('a, button');
-    if (!closestTarget) return;
-    
-    // Opciones estáticas
-    if (closestTarget.id === 'email-share') {
-      shareByEmail(event);
-    } else if (closestTarget.id === 'whatsapp-share') {
-      shareByWhatsapp(event);
-    } else if (closestTarget.id === 'copy-link') {
-      copyLinkToClipboard();
-    }
-    
-    // Opciones dinámicas
-    if (closestTarget.id === 'email-share-dynamic') {
-      shareByEmail(event);
-    } else if (closestTarget.id === 'whatsapp-share-dynamic') {
-      shareByWhatsapp(event);
-    } else if (closestTarget.id === 'copy-link-dynamic') {
-      copyLinkToClipboard();
-    }
-  });
+    });
+  }
   
-  // Event listener para cerrar dropdowns al hacer clic fuera
-  document.addEventListener('click', closeDropdownOnClickOutside);
+  /**
+   * Generate social-specific meta tags for better sharing
+   */
+  function generateSocialMetaTags(companyData, companyKey) {
+    const companyName = companyData.empresa || companyKey.charAt(0).toUpperCase() + companyKey.slice(1);
+    
+    // Add LinkedIn-specific meta tags
+    addMetaTag('property', 'linkedin:owner', 'MiguelDiLalla');
+    
+    // Add article tags for better sharing
+    addMetaTag('property', 'og:article:author', 'Miguel Di Lalla');
+    addMetaTag('property', 'og:article:published_time', new Date().toISOString());
+    addMetaTag('property', 'og:article:tag', 'cover letter, portfolio, data science, machine learning');
+    
+    // Add Twitter creator tags
+    addMetaTag('name', 'twitter:creator', '@MiguelDiLalla');
+    
+    // Update Facebook app ID if you have one
+    // addMetaTag('property', 'fb:app_id', 'YOUR_FACEBOOK_APP_ID');
+  }
+  
+  /**
+   * Helper to create and add meta tags to the document head
+   */
+  function addMetaTag(attrName, attrValue, content) {
+    // Check if the meta tag already exists
+    const existingTag = document.querySelector(`meta[${attrName}="${attrValue}"]`);
+    
+    if (existingTag) {
+      // Update existing tag
+      existingTag.setAttribute('content', content);
+    } else {
+      // Create new tag
+      const metaTag = document.createElement('meta');
+      metaTag.setAttribute(attrName, attrValue);
+      metaTag.setAttribute('content', content);
+      document.head.appendChild(metaTag);
+    }
+  }
 });

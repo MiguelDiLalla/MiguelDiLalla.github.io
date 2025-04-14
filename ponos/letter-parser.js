@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('template-loaded', function(e) {
     const companyData = e.detail;
     initializeCoverLetter(companyData);
+    
+    // Hide the loading screen when we're ready to display content
+    hideLoadingScreen();
   });
 
   // Setup skip animation button functionality
@@ -33,6 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
           skipButton.style.display = 'none';
         }, 300);
       });
+    }
+  }
+  
+  // Function to hide the loading screen
+  function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      loadingScreen.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => loadingScreen.remove(), 500); // Remove after fade-out
     }
   }
 

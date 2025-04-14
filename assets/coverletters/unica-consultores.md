@@ -19,7 +19,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 
 - Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-Hablamos durante la feria de empleo de cómo un perfil como el mío podría formar parte de tus facilitadores de talleres de formación. Además creo que con mis habilidades actuales también podría aportar/construir soluciones y optimizaciones digitales para sus servicios de consultoría y coaching empresarial. 
+Hablamos durante la feria de empleo de cómo un perfil como el mío podría formar parte de tus facilitadores de talleres de formación. Además creo que con mis habilidades actuales también podría aportar construyendo soluciones y optimizaciones digitales para sus servicios de consultoría y coaching empresarial. 
 
 --
 

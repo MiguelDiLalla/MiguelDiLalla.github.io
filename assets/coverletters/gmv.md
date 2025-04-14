@@ -25,7 +25,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 Sé que actualmente no cuento con experiencia laboral previa en el sector, y que aspirar a trabajar en GMV es un objetivo más bien a mediano-largo plazo. Por eso mismo, el propósito de esta comunicación es simplemente presentarme, compartir mi historia, y (si viene a bien) hacerte una pregunta:
 
 <!-- DESPEDIDA -->
-¿Qué tecnologías o frameworks podría yo aprender en los próximos 6 meses para hacerme un candidato un poco más atractivo para GMV (y otras empresas del sector)?
+¿Qué tecnologías o frameworks consideras estratégicos para alguien que, como yo, busca prepararse para una futura candidatura en GMV?
 
 --
 

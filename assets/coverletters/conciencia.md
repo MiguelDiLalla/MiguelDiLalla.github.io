@@ -29,6 +29,6 @@ Habiendo navegado mi sitio web y las demos disponibles ¿Qué tecnologías y fra
 --
 
 
-El primer botón te llevaría al Home de mi web. Sinceramente, recibir feedback de un integrante de Coffee Break como tú sería un gran honor y motivación.
+El primer botón te llevaría al Home de mi web. Sinceramente, recibir feedback de un integrante de Coffee Break como tú sería una alegría enorme y una gran motivación.
 
 Muchísimas gracias por leer y por tu tiempo.

@@ -19,7 +19,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 
 - Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-He revisado la trayectoria del Grupo Pérez Moreno y estaría encantado de vivir estas primeras prácticas en su departamento de soluciones IT. Creo que mi perfil puede aportar y crecer en áreas como el desarrollo de herramientas internas, la automatización de procesos y la visualización de datos operativos. Me encantaría conocer más sobre los proyectos que están desarrollando actualmente y cómo mi energía y enfoque podrían contribuir.
+He revisado la trayectoria del Grupo Pérez Moreno y estaría encantado de vivir estas primeras prácticas en su departamento de soluciones IT. Creo que mi perfil puede aportar y crecer en áreas como el desarrollo de herramientas internas, la automatización de procesos y la visualización de datos operativos. Me encantaría conocer más sobre los proyectos que están desarrollando actualmente y cómo mi energía y enfoque podrían sumar valor al equipo.
 
 --
 

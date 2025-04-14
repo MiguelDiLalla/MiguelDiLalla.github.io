@@ -21,7 +21,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 
 - Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-He investigado su labor como cooperativa y me sorprendió gratamente el interés que me comunicaste durante la feria en hacer crecer sus servicios digitales. Para mi perfil, sería una gran oportunidad enfrentarme al desarrollo de soluciones enfocadas en logística, distribución y prestación de servicios. Específicamente, mis habilidades como científico de datos me permitirían aportar valor mediante, aunque no limitado a: visualización de métricas logísticas, automatización de procesos internos y herramientas de análisis para toma de decisiones operativas.
+He investigado su labor como cooperativa y me sorprendió gratamente el interés que me comunicaste durante la feria en hacer crecer sus servicios digitales. Para mi perfil, sería una gran oportunidad enfrentarme al desarrollo de soluciones enfocadas en logística, distribución y prestación de servicios. Específicamente, mis habilidades como científico de datos me permitirían aportar valor en áreas como: visualización de métricas logísticas, automatización de procesos internos y herramientas de análisis para toma de decisiones operativas.
 
 --
 

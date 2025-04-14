@@ -19,7 +19,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 
 - Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-Me he informado sobre la labor que desarrolla Activa Canarias y, como te comenté durante la feria de empleo, no solo me gustaría formar parte de su base de datos de profesionales, sino también integrarme en su propio equipo de soluciones IT. Estoy convencido de que servicios como la formación, la logística o la selección implican el manejo de grandes volúmenes de información, y que constantemente están explorando formas de optimizar y aprovechar esos datos. Justamente ese es el tipo de desafíos para los que me he estado formando.
+Me he informado sobre la labor que desarrolla Activa Canarias y, como te comenté durante la feria de empleo, no solo me gustaría formar parte de su base de datos de profesionales, sino también integrarme en su propio equipo de soluciones IT. Estoy convencido de que servicios como la formación, la logística o la selección implican el manejo de grandes volúmenes de información, y que constantemente están explorando formas de optimizarlos y sacarles el máximo provecho. Justamente ese es el tipo de desafíos para los que me he estado formando.
 --
 
 <!-- DESPEDIDA -->

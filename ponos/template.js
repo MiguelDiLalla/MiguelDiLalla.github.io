@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check if we have a company parameter
   if (!companyKey) {
     showFallbackMessage('No company specified. Please add a company parameter to the URL (e.g., ?to=gmv).');
+    hideLoadingScreen(); // Hide loading screen even if there's an error
     return;
   }
   
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Check if the company exists in our config
       if (!config[companyKey]) {
         showFallbackMessage(`Company "${companyKey}" not found in our database.`);
+        hideLoadingScreen(); // Hide loading screen when showing fallback message
         return;
       }
       
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
       console.error('Error loading company configuration:', error);
       showFallbackMessage('Error loading configuration. Please try again later.');
+      hideLoadingScreen(); // Hide loading screen if there's an error
     });
   
   // Function to apply company-specific settings
@@ -142,5 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     `;
+  }
+  
+  // Function to hide the loading screen
+  function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      loadingScreen.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => loadingScreen.remove(), 500); // Remove after fade-out
+    }
   }
 });

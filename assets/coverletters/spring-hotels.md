@@ -19,7 +19,7 @@ Poseo educación formal en Ingeniería, Diseño asistido por ordenador y artes e
 
 - Una WebApp para gestión de tiempo con enfoque minimalista y lúdico.
 
-Ya he facilitado tu dirección de email a mi gestora PONOS, y me alegró saber que Spring Hoteles ya ha colaborado anteriormente con alumnos del programa. Aun así, quería hacerte llegar esta carta. Para mi perfil como científico de datos, sería extremadamente enriquecedor participar en la creación de soluciones digitales que impacten positivamente en las operaciones de sus tres hoteles y, en última instancia, en la experiencia de sus huéspedes.
+Ya he facilitado tu dirección de email a mi gestora PONOS, y me alegró saber que Spring Hoteles ya ha colaborado anteriormente con alumnos del programa. Aun así, quería hacerte llegar esta carta. Para mi perfil como científico de datos, sería muy enriquecedor participar en la creación de soluciones digitales que impacten positivamente en las operaciones de sus tres hoteles y, en última instancia, en la experiencia de sus huéspedes.
 
 --
 

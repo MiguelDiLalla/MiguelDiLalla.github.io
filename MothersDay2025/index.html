@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta para mamá</title>
+  <!-- Load Gluten font -->
+  <link href="https://fonts.googleapis.com/css2?family=Gluten&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cadet-gray: #8da1b9ff;
+      --cadet-gray-2: #95adb6ff;
+      --thistle: #cbb3bfff;
+      --pale-dogwood: #dbc7beff;
+      --salmon-pink: #ef959cff;
+    }
+    /* Softly changing pastel background */
+    @keyframes bg-animation {
+      0%   { background-color: var(--cadet-gray); }
+      20%  { background-color: var(--cadet-gray-2); }
+      40%  { background-color: var(--thistle); }
+      60%  { background-color: var(--pale-dogwood); }
+      80%  { background-color: var(--salmon-pink); }
+      100% { background-color: var(--cadet-gray); }
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      animation: bg-animation 25s ease infinite;
+      overflow-x: hidden;
+    }
+    .gluten-letter {
+      font-family: "Gluten", cursive;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings: "slnt" 0;
+      color: #333;
+      padding: 2rem;
+      max-width: 800px;
+      line-height: 1.5;
+      font-size: 1.1rem;
+      text-align: left;
+      box-sizing: border-box;
+    }
+    #letter { white-space: pre-wrap; }
+    /* Carousel styles */
+    #carousel { display: none; margin-top: 2rem; }
+    #carousel img {
+      max-width: 80vw;
+      max-height: 60vh;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hidden template for typewriter -->
+  <div id="letter-template" style="display:none;" class="gluten-letter">
+<!-- Carta_a_mama markdown converted to HTML -->
+<h1>🌷 Carta para mamá: luz de origen, promesa de regreso</h1>
+<p><strong>Mami</strong>, hoy el Día de las Madres coincide con la víspera de mis primeras prácticas profesionales. También coincide con una sesión de fotos que hice hace unos días y que, presiento, representará mis veintes: una síntesis de lo que fui, de lo que soy y de lo que estoy empezando a construir.</p>
+<h2>🌼 Una promesa sencilla</h2>
+<p><em>🎁 Hoy mi regalo es prometerte que en menos de un año podré darte un abrazo de nuevo.</em></p>
+<p>Hace ya cuatro años, frente a la puerta de embarque, me despediste. Fueron las lágrimas más intensas que he sentido, y las lloré con orgullo: eran lágrimas por mi madre. Me entregaste, sin dramatismos, una única responsabilidad:<br><strong>Ser libre. Ser yo. Ser feliz.</strong><br>Y mira, mami… mira lo lejos que he llegado.</p>
+<h2>🌱 Lo que soy, viene de ti</h2>
+<p>Cada vez que alguien me dice algo bonito sobre mi forma de hablar, mi gentileza, mi pelo, mi autenticidad… yo pienso para mis adentros:<br><em>"Gracias. Es por mi mamá."</em></p>
+<p>Extraño escucharte contar tu día mientras me como un cachito de pan. Extraño sacarte de quicio, mostrarte mis dibujos, hornearte galletas, darte masajes (¡y sacarte eructos infinitos hasta de los pies!). Extraño ver películas—aunque sean "mis películas locas"—pasarte las pinzas mientras tendemos ropa, concluir por enésima vez lo brutico que salió mi papá (jajajaja), planificar cómo ayudar a José Alejandro, jalarte entre los buhoneros, cantar cumpleaños con torta de chocolate, mandarinas y refresco. Arroz con carne y plátano.</p>
+<p>Extraño decirte que no necesitas alisarte el pelo, decirte cuándo una prenda me gusta en ti y cuándo no, defender a los gatos cuando los regañas (jeje)...</p>
+<h2>💖 Te amo a diario</h2>
+<p>Mami, yo nunca lo digo, pero te amo todos los días y en cada hora. En cada decisión, en cada paso, en cada silencio donde me acuerdo de ti.</p>
+<p>🌅 Un futuro compartiendo contigo la paz que he hallado ya se asoma en el horizonte. Ten paciencia. No te rindas. Sigue construyendo desde el amor, la dedicación y la ternura. Tú, que eres un ícono de gracia, mereces felicidad.</p>
+<p>Eres las morocha, la hija de Maita, El Niño, La mas bella de todas, La Licenciada, La desquiciada, La mejor mama del mundo, Eleonora del Carmen Peña Echenique, mi mama!</p>
+<h2>📸 Hasta la próxima foto</h2>
+<p>Hoy, 11 de mayo de 2025, te pido la bendición. Digo Amén. Y deseo que la próxima sesión de fotos… la hagamos juntos. 🕊️💖</p>
+<p><strong>Con amor máximo,</strong></p>
+<p><strong>Miguel José Di Lalla Peña</strong></p>
+  </div>
+  <!-- Visible letter container -->
+  <div id="letter" class="gluten-letter"></div>
+  <!-- Carousel container -->
+  <div id="carousel">
+    <img id="carousel-img" src="" alt="Collage image">
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const template = document.getElementById('letter-template').innerHTML;
+      const letterEl = document.getElementById('letter');
+      let i = 0, speed = 40;
+      function type() {
+        if (i < template.length) {
+          const char = template.charAt(i);
+          letterEl.innerHTML += char === '\n' ? '<br>' : char;
+          i++;
+          setTimeout(type, speed);
+        } else {
+          startCarousel();
+        }
+      }
+      type();
+      function startCarousel() {
+        const images = [
+          'collagues/collage1.webp',
+          'collagues/collage2.webp',
+          'collagues/collage3.webp',
+          'collagues/collage4.webp',
+          'collagues/collage5.webp',
+          'collagues/collage6.webp'
+        ];
+        let idx = 0;
+        const imgEl = document.getElementById('carousel-img');
+        imgEl.src = images[idx];
+        document.getElementById('carousel').style.display = 'block';
+        setInterval(() => {
+          idx = (idx + 1) % images.length;
+          imgEl.src = images[idx];
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
